@@ -1,0 +1,39 @@
+<form [formGroup]="cursoForm" (ngSubmit)="enviarDatos()">
+    <div class="mb-3">
+        <label class="form-label">Nombre del curso</label>
+        <input type="text" class="form-control" formControlName="nombreCurso">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Horas</label>
+        <textarea class="form-control" cols="30" rows="10" formControlName="horas"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Tipo de curso</label>
+        <input type="text" class="form-control" formControlName="tipoCurso">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Imagen</label>
+        <input type="text" class="form-control" formControlName="img">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <input type="text" class="form-control" formControlName="descripcion">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Idioma</label>
+        <input type="text" class="form-control" formControlName="idioma">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Valoración</label>
+        <input type="text" class="form-control" formControlName="valoracion">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">País</label>
+        <input type="text" class="form-control" formControlName="pais">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Precio</label>
+        <input type="text" class="form-control" formControlName="precio">
+    </div>
+    <input type="submit" value="Enviar" class="btn btn-info">
+</form>

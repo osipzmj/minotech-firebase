@@ -1,0 +1,186 @@
+body {
+    box-sizing: border-box;
+    padding: 6%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+  }
+  
+  .principal-1 {
+    display: flex;
+    align-items: center;
+  }
+  
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #f0f0f0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s, transform 1s;
+  }
+  
+  .show {
+    opacity: 1;
+    transform: translateY(0);
+    text-align: justify;
+  }
+  
+  img {
+    max-width: 100%;
+    max-height: 50vh;
+    border: 1px solid #333;
+    border-radius: 10px;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  
+  .text-container {
+    text-align: center;
+    display: inline;
+    margin: 2%;
+  }
+  
+  h1, p {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s, transform 1s;
+  }
+  
+  h1.show, p.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .divider {
+    width: 100%;
+    height: 2px;
+    background-color: #333;
+    margin: 20px 0;
+  }
+  
+  section {
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s, transform 1s;
+  }
+  
+  .fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  #ini {
+    max-width: 40%;
+    height: auto;
+    margin: 3%;
+  }
+  
+  #t1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 350%;
+    padding: 1%;
+    text-align: center;
+  }
+  
+  #p1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 200%;
+  }
+  
+  #p2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 175%;
+  }
+  
+  .imgI {
+    max-width: 35%;
+    height: auto;
+    margin: 3%;
+  }
+  
+  .content {
+    transition: margin-left 0.4s ease-in-out; /* Agregado para suavizar la transición al abrir/cerrar el menú */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .principal-1 {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .imgI {
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  
+  
+  
+  /* ESTILOS DEL CARRUSEL */
+  
+  .carrusel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  
+  .swiper-container {
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    display: flex;
+  }
+  
+  .swiper-slide {
+    margin-right: 20px;
+    background-position: center;
+    background-size: cover;
+    width: 320px;
+    background-color: #c079d9;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .carrusel .picture {
+    width: 320px;
+    height: 320px;
+    overflow: hidden;
+    
+     img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .carrusel .detail {
+    padding: 25px 20px;
+    font-weight: 600;
+    text-align: center;
+    
+    h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+    
+    span {
+      display: block;
+      font-size: 16px;
+      color: #fff;
+    }
+  }

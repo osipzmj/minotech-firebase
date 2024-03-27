@@ -1,0 +1,70 @@
+/* Estilos para pantallas grandes */
+.curso-info-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.titulo-container {
+    text-align: center;
+}
+
+.titulo {
+    font-size: 24px;
+    color: #333;
+}
+
+.curso-detalle {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.curso-imagen {
+    width: 500px;
+    height: 300px;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.curso-texto {
+    flex: 1;
+}
+
+.curso-texto h3 {
+    margin-top: 0;
+}
+
+.curso-texto p {
+    margin-bottom: 10px;
+}
+
+.boton-detalles {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.boton-detalles:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para pantallas medianas y pequeñas */
+@media screen and (max-width: 768px) {
+    .curso-detalle {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .curso-imagen {
+        margin: 0 auto 20px auto;
+    }
+}

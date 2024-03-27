@@ -1,0 +1,166 @@
+header{
+    padding: 60px;
+    background: #c079d9;
+    font-family: 'Poppins', sans-serif;  
+}
+
+.logo-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+  }
+  
+  .logo {
+    width: 80%; /* Ajusta el tamaño del logo según sea necesario */
+    max-width: 250px; /* Establece un máximo para el tamaño del logo */
+  }
+.nav-bar{
+    width: 70%;
+    height: 2%;
+    background: #c079d9;
+}
+  
+.logo:hover{
+    cursor: pointer;
+}
+.desktop-menu{
+    margin-top: 10px;
+}
+.desktop-menu ul{
+    padding: 0;
+    margin: 0;
+}
+.desktop-menu ul li{
+    list-style-type: none;
+    color: white;
+    display: inline-block;
+    font-size: 18px;
+    margin-left: 26px;
+}
+
+.desktop-menu ul li:hover{
+    font-size: 19px;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+    transition: 0.4s ease-in-out;
+}
+
+.menu-icon{
+    display: none;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+@media screen and (min-width: 128px) and (max-width:900px){
+    .desktop-menu{
+        position: fixed;
+        right: -280px;
+        top: 150px;
+        background:#c079d9;
+        width: 260px;
+        height: 100%;
+        transition: 0.4s ease-in-out;
+        z-index: 1000;
+        margin-top: 40px; /* Ajusta el margen superior del menú para dispositivos móviles */
+    }
+    .desktop-menu ul li {
+        display: block;
+        text-align: left;
+        margin: 0;
+        padding: 10px 0 10px 26px;
+        border-bottom: 1px solid grey;
+    }
+    .container-main {
+        position: relative;
+        overflow-x: hidden; /* Evita la barra de desplazamiento horizontal */
+    }    
+    .menu-icon{
+        display: block;
+        color: white;
+        font-size: 40px;
+        padding-top: 10px;
+    }
+    .mobile_menu{
+        right: 0;
+        transition: 0.4s ease-in-out;
+    }
+    .logo-container {
+        padding: 5px; /* Ajusta el padding según sea necesario para dispositivos móviles */
+      }
+    
+      .logo {
+        width: 30%; /* Ajusta el tamaño del logo para dispositivos móviles */
+      }
+
+      .main-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow-x: hidden;
+      }
+      
+      .shifted .container {
+        margin-left: -260px; /* Ancho del menú desplegable */
+      }
+}
+.container-search {
+    position: absolute;
+    top: 100%; /* Coloca la barra de búsqueda debajo del encabezado */
+    right: 0; /* Alinea la barra de búsqueda en la esquina superior derecha */
+    margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+}
+
+input {
+    outline: none;
+    box-sizing: border-box;
+    height: 60px;
+    width: 0;
+    padding: 0 20px;
+    color: black;
+    border-radius: 50px;
+    font-size: 20px;
+    border: 1px solid cyan;
+    transition: all .7s ease;
+}
+
+::placeholder {
+    color: grey;
+}
+
+.btn {
+    position: absolute;
+    right: 0; /* Ajusta la posición del botón a la esquina superior derecha */
+    top: 0;
+    width: 80px;
+    height: 80px;
+    background: cyan;
+    line-height: 80px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.btn i {
+    font-size: 25px;
+    color: white;
+    line-height: 80px;
+    transition: all .7s ease;
+}
+
+.container-search:hover input {
+    width: 350px;
+}
+
+.container-search:hover i {
+    transform: rotate(-360deg);
+}
+
+.btn:hover {
+    background: cyan;
+}

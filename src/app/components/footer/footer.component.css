@@ -1,0 +1,43 @@
+footer {
+    background-color: #c079d9;
+    padding: 40px 0;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+.footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer h4 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+p{
+    font-size: 15px;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer ul li {
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+
+.social-links li a,
+.help-links li a {
+    color: white;
+    text-decoration: none;
+}
+
+.social-links li a:hover,
+.help-links li a:hover {
+    color: black; /* Color de resaltado al pasar el ratón */
+}

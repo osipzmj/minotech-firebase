@@ -1,0 +1,54 @@
+<div class="formRegistro">
+
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="register-form">
+        <div class="form-group">
+          <label for="username">Nombre de usuario</label>
+          <input id="username" class="form-control" type="text" formControlName="username">
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input id="email" class="form-control" type="email" formControlName="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input id="password" class="form-control" type="password" formControlName="password">
+        </div>
+      
+        <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+
+        
+      </form>
+      <div class="google">
+        <button class="google-login" (click)="signInWithGoogle()">
+            <img src="../../../assets/google-icon-logo.svg" alt="Google Icon" class="icon">
+            Iniciar sesión con Google
+          </button>
+    </div>
+    <div class="facebook">
+        <button class="google-login" (click)="signInWithFacebook()">
+            <img src="../../../assets/facebook-icon-logo.svg" alt="Google Icon" class="icon">
+            Iniciar sesión con Facebook
+          </button>
+    </div>
+</div>
+ 
+
+  <div class="modal" *ngIf="showModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Verifica tu cuenta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Te hemos enviado un correo electrónico. Por favor, revisa tu bandeja de entrada y sigue las instrucciones para verificar tu cuenta.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

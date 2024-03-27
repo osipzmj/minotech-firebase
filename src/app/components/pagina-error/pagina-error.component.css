@@ -1,0 +1,51 @@
+/* Estilos base */
+body {
+    font-family: Poppins;
+    font-weight: 500;
+
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+     
+  }
+  
+  img {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  p {
+    margin: 0 0 10px;
+    font-size: 25px;
+  }
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Reglas de medios para dispositivos móviles */
+  @media only screen and (max-width: 600px) {
+    .container {
+      max-width: 100%;
+      margin: 20px;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
+  
