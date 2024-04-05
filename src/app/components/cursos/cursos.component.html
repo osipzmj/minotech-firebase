@@ -77,15 +77,14 @@
       <br />
       Barra de busqueda-->
       <div class="container-tarjetas">
-        <div class="tarjeta" *ngFor="let curso of cursos">
+        <div class="tarjeta" (click)="abrirModal('miModal5')" *ngFor="let curso of cursos">
+          <img src="../../../assets/1.jpg" alt="">
             <div class="imagen" [ngStyle]="{ backgroundImage: 'url('+curso.img+')' }"></div>
-            <div class="info">
                 <h4>{{curso.nombreCurso}}</h4>
                 <p>{{curso.descripcion}}</p>
                 <p>Precio: {{curso.precio}}</p>
                 <p>Tipo: {{curso.tipoCurso}}</p>
-                <button class="btn btn-outline-danger" (click)="onClickDelete(curso)">Borrar</button>
-            </div>
+                <!-- <button class="btn btn-outline-danger" (click)="onClickDelete(curso)">Borrar</button> -->
         </div>
         <!-- <div
         class="tarjeta"

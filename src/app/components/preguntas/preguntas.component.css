@@ -1,0 +1,75 @@
+.container {
+    max-width: 100%;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    border-radius: 10px;
+  }
+  
+  .accordion {
+    border-radius: 8px;
+  }
+  
+  .accordion-item {
+    margin: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .accordion-item:last-child {
+    border-bottom: none;
+  }
+  
+  .accordion-button {
+    cursor: pointer;
+    padding: 15px 20px;
+    display: block;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .accordion-button:focus,
+  .accordion-button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .accordion-collapse {
+    display: none;
+    padding: 20px;
+    color: #666;
+    background-color: #fff;
+    line-height: 1.6;
+  }
+  
+  .accordion-collapse.show {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+      max-width: 90%;
+    }
+    
+    .accordion-button {
+      padding: 12px 15px;
+    }
+    
+    .accordion-collapse {
+      padding: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .accordion-button {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+  }
+  

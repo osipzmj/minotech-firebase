@@ -1,0 +1,18 @@
+/* Establece una altura mínima del viewport para que el footer siempre esté visible */
+html, body {
+    height: 100%;
+  }
+  
+  /* Estilo del contenedor principal */
+  .main-content {
+    min-height: calc(100% - 150px); /* Ajusta según la altura de tu footer */
+    padding-bottom: 150px; /* Ajusta según la altura de tu footer */
+  }
+  
+  /* Estilo del footer */
+  app-footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  

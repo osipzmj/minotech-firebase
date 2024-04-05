@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
@@ -18,6 +19,10 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { PaginaErrorComponent } from './components/pagina-error/pagina-error.component';
 import { from } from 'rxjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FilterPipe } from 'src/pipes/filter.pipe';
+import { PreguntasComponent } from './components/preguntas/preguntas.component';
+import { Storage } from '@angular/fire/storage'; // Importa AngularFireStorageModule
+
 //import { BotonesComponent } from './components/botones/botones.component';
 
 @NgModule({
@@ -32,18 +37,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     RegistroComponent,
     PaginaErrorComponent,
+    PreguntasComponent,
     //BotonesComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
+    Storage,
     NgbModule
   ],
-  providers: [],
+  providers: [FilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

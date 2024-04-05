@@ -1,74 +1,74 @@
 .register-form {
-    max-width: 320px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
- 
-  .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    text-align: center;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .btn:hover {
-    background-color: #0056b3;
-  }
-  
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
 
-  .formRegistro{
-    margin: 20px;
-  }
+.form-group {
+  margin-bottom: 20px;
+}
 
-  .google-login {
-    display: flex;
-    margin: 20px;
-    align-items: center;
-    justify-content: center;
-    width: 250px;
-    height: 40px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .google-login:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-  }
-  
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+
+.formRegistro{
+  margin: 20px;
+}
+
+.google-login {
+  display: flex;
+  margin: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 40px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.google-login:hover {
+  background-color: #f0f0f0;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
