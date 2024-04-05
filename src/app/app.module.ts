@@ -21,7 +21,7 @@ import { from } from 'rxjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from 'src/pipes/filter.pipe';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
-import { Storage } from '@angular/fire/storage'; // Importa AngularFireStorageModule
+//import { Storage } from '@angular/fire/storage'; // Importa AngularFireStorageModule
 
 //import { BotonesComponent } from './components/botones/botones.component';
 
@@ -49,7 +49,7 @@ import { Storage } from '@angular/fire/storage'; // Importa AngularFireStorageMo
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
-    Storage,
+    //Storage,
     NgbModule
   ],
   providers: [FilterPipe],

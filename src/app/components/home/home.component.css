@@ -142,17 +142,18 @@ body {
     width: 100%;
     padding-top: 0px;
     padding-bottom: 0px;
-    display: flex;
+    overflow: hidden;
   }
   
   .swiper-slide {
-    margin-right: 20px;
+    margin-right: 20px; /* Espacio entre las tarjetas */
     background-position: center;
     background-size: cover;
-    width: 320px;
+    width: 320px; /* Ancho de cada tarjeta */
     background-color: #c079d9;
     overflow: hidden;
     border-radius: 8px;
+    display: inline-block; /* Muestra las tarjetas en línea */
   }
   
   .carrusel .picture {
