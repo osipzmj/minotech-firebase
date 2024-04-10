@@ -21,6 +21,10 @@ import { from } from 'rxjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from 'src/pipes/filter.pipe';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
+import { register } from 'swiper/element/bundle';
+import { SwiperModule } from 'swiper/types';
+//import { NgxSwiperWrapperModule } from 'ngx-swiper-wrapper';
+//import Swiper from 'swiper';
 //import { Storage } from '@angular/fire/storage'; // Importa AngularFireStorageModule
 
 //import { BotonesComponent } from './components/botones/botones.component';
@@ -28,7 +32,6 @@ import { PreguntasComponent } from './components/preguntas/preguntas.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     CursosComponent,
     AgregarCursoComponent,
     NavegacionComponent,
@@ -38,7 +41,6 @@ import { PreguntasComponent } from './components/preguntas/preguntas.component';
     RegistroComponent,
     PaginaErrorComponent,
     PreguntasComponent,
-    //BotonesComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +52,13 @@ import { PreguntasComponent } from './components/preguntas/preguntas.component';
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     //Storage,
-    NgbModule
+   // NgxSwiperWrapperModule ,
+  //  Swiper,
+    NgbModule,
+    
   ],
   providers: [FilterPipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

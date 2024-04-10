@@ -131,57 +131,54 @@ body {
   
   /* ESTILOS DEL CARRUSEL */
   
-  .carrusel{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-  }
-  
-  .swiper-container {
-    width: 100%;
-    padding-top: 0px;
-    padding-bottom: 0px;
+  swiper-container {
+    width: 60%;
+    padding-top: 0;
+    padding-bottom: 0;
     overflow: hidden;
   }
   
-  .swiper-slide {
-    margin-right: 20px; /* Espacio entre las tarjetas */
+  swiper-slide {
+    margin-right: 2%; /* Espacio entre las tarjetas */
     background-position: center;
     background-size: cover;
-    width: 320px; /* Ancho de cada tarjeta */
+    width: 45%; /* Ancho de cada tarjeta */
     background-color: #c079d9;
     overflow: hidden;
     border-radius: 8px;
     display: inline-block; /* Muestra las tarjetas en línea */
   }
   
-  .carrusel .picture {
-    width: 320px;
-    height: 320px;
+  .picture {
+    width: 100%;
+    padding-top: 80%; /* Relación de aspecto 1:1 */
+    position: relative;
     overflow: hidden;
-    
-     img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
   }
   
-  .carrusel .detail {
-    padding: 25px 20px;
+  .picture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150%;
+    object-fit: cover;
+  }
+  
+  .detail {
+    padding: 1rem;
     font-weight: 600;
     text-align: center;
-    
-    h3 {
-      margin: 0;
-      font-size: 20px;
-    }
-    
-    span {
-      display: block;
-      font-size: 16px;
-      color: #fff;
-    }
   }
+  
+  .detail h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  
+  .detail span {
+    display: block;
+    font-size: 1rem;
+    color: #fff;
+  }
+  
