@@ -22,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from 'src/pipes/filter.pipe';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { Storage } from '@angular/fire/storage';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
+
     NgbModule,
     
   ],

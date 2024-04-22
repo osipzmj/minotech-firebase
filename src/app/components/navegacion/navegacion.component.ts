@@ -1,8 +1,10 @@
 import { ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { Component } from '@angular/core';
+import { User } from '@angular/fire/auth';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import Curso from 'src/app/interfaces/curso.interface';
+import { Usuario } from 'src/app/interfaces/usuario';
 import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 @Component({
@@ -14,6 +16,8 @@ export class NavegacionComponent implements OnInit{
 
   menuValue:boolean = false;
   menu_icon: string = 'bi bi-list';
+  rol: 'estandar' | 'admin' | null = null;
+  // isLoginIn: boolean = false;
 
   terminoBusqueda: string = '';
   resultados: Curso[] | undefined;
@@ -37,7 +41,15 @@ export class NavegacionComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.authService.stateUser();
+    this.authService.stateUser().subscribe((user: User | null) => {
+      if (user) {
+        this.isUserLoggedIn = true;
+        this.getDatosUser(user.uid); // Esta función debería eventualmente asignar 'estandar' o 'admin' a `rol`
+      } else {
+        this.isUserLoggedIn = false;
+        this.rol = 'admin' || 'estandar'; // Asegúrate que '' o null esté permitido según tu elección en la definición del tipo
+      }
+    });
   }
 
   abrirMenu(){
@@ -78,11 +90,13 @@ export class NavegacionComponent implements OnInit{
     this.router.navigate(['/login'])
   }
 
-  getDatosUser(uid: string){
+  getDatosUser(uid: string) {
     const path = "Usuarios";
-    const id = uid;
-    this._cursoService.getDatos(path, id).subscribe(res => {
-      console.log('datos ->', res)
-    })
-  }
+    this._cursoService.getDatos<Usuario>(path, uid).subscribe(user => {
+        console.log('datos ->', user);
+        if (user) {
+            this.rol = user.rol; // Utilizando el rol del usuario
+        }
+    });
+}
 }

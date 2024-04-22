@@ -8,16 +8,16 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Usuario } from '../interfaces/usuario';
 import { Observable } from 'rxjs';
 import { CursosService } from './cursos.service';
-import { NavegacionComponent } from '../components/navegacion/navegacion.component';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
-  isUserLoggedIn: boolean | undefined;
+  isUserLoggedIn: boolean = false;
 
-  constructor(private auth: Auth, private firestore: Firestore, private cursos: CursosService) {
+  constructor(private auth: Auth, private cursos: CursosService) {
 
    
    }
@@ -50,25 +50,20 @@ export class UsuariosService {
     return this.auth.signOut();
   }
 
+  stateUser(): Observable<any> {
+    return new Observable(observer => {
+      const unsubscribe = this.auth.onAuthStateChanged(
+        user => {
+          observer.next(user); // Envía el usuario al observador
+        },
+        error => observer.error(error), // En caso de error
+        () => observer.complete() // Completar el observable cuando Firebase finalice
+      );
 
-  stateUser() {
-    return this.auth.onAuthStateChanged((user) => {
-        if (user) {
-            console.log("Está logueado");
-            this.isUserLoggedIn = true;
-            this.getDatosUser(user.uid)
-        } else {
-            console.log("No está logueado");
-            this.isUserLoggedIn = false;
-        }
+      // Devuelve la función de desuscripción
+      return {unsubscribe: unsubscribe};
     });
 }
 
-getDatosUser(uid: string){
-  const path = "Usuarios";
-  const id = uid;
-  this.cursos.getDatos(path, id).subscribe(res => {
-    console.log('datos ->', res)
-  })
-}
+
 }
