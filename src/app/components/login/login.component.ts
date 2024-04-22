@@ -23,10 +23,16 @@ export class LoginComponent {
 
   onSubmit() {
     this.usuarioService.login(this.formulario.value)
-    .then(response => {
-      console.log(response);
-      this.router.navigate(['/']);
-    })
-    .catch(error => console.log(error));
-  }
+        .then(response => {
+            console.log(response);
+            this.router.navigate(['/home']);
+            alert("Bienvenido de nuevo" + " " + this.formulario.value.email);
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Upss... Parece que algo salió mal. Revisa que tu correo o tu contraseña sean correctos.");
+        });
+}
+
+
 }

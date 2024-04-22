@@ -14,11 +14,17 @@
           </div>
           <div class="desktop-menu" [class.mobile_menu]="menuValue" id="desktopMenu">
             <ul>
-              <li (click) = "cerrarMenu()"><a href="home"><i class="bi bi-house"></i>&nbsp;Inicio</a></li>
-              <li (click) = "cerrarMenu()"><a href="cursos"><i class="bi bi-book"></i>&nbsp;Cursos</a></li>
-              <li (click) = "cerrarMenu()"><a href="agregar-curso"><i class="bi bi-journal-plus"></i>&nbsp;Crear curso</a></li>
-              <li (click) = "cerrarMenu()"><a href="login"><i class="bi bi-box-arrow-in-right"></i>&nbsp;Iniciar Sesión</a></li>
-              <li (click) = "cerrarMenu()"><a href="registro"><i class="bi bi-person-add"></i>&nbsp;Registrarse</a></li>
+              <li (click)="cerrarMenu()"><a href="home"><i class="bi bi-house"></i>&nbsp;Inicio</a></li>
+              <li (click)="cerrarMenu()"><a href="cursos"><i class="bi bi-book"></i>&nbsp;Cursos</a></li>
+                <li *ngIf="isUserLoggedIn == true"><a href="login"><i class="bi bi-box-arrow-in-right"></i>&nbsp;Iniciar Sesión</a></li>
+                
+                <li *ngIf="isUserLoggedIn == true"><a href="registro"><i class="bi bi-person-add"></i>&nbsp;Registrarse</a></li>            
+            </ul>
+            <ul>
+              <li *ngIf="isUserLoggedIn == false" (click)="logout()"><a href="/login"><i class="bi bi-box-arrow-right"></i>&nbsp;Cerrar Sesión</a></li> 
+              <li>
+                <a href="agregar-curso"><i class="bi bi-journal-plus"></i>&nbsp;Crear curso</a>
+              </li>
             </ul>
           </div>
         </div>
