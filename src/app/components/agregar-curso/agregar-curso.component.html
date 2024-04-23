@@ -13,7 +13,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Imagen</label>
-        <!-- <input type="file" (change)="uploadImage($event)"> -->
+        <input type="file" (change)="uploadImage($event)">
     </div>
     <div class="mb-3">
         <label class="form-label">Descripción</label>
@@ -37,3 +37,7 @@
     </div>
     <input type="submit" value="Enviar" class="btn btn-info">
 </form>
+
+<div class="images">
+    <img [src]="images" *ngFor="let i of images" alt="" width="200px">
+</div>

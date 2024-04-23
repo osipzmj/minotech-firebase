@@ -23,6 +23,7 @@ export class NavegacionComponent implements OnInit{
   resultados: Curso[] | undefined;
   formulario: FormGroup;
   isUserLoggedIn: boolean = false;
+  isUserLoggedInAdmin: boolean = false;
 
   
   constructor(
@@ -44,10 +45,14 @@ export class NavegacionComponent implements OnInit{
     this.authService.stateUser().subscribe((user: User | null) => {
       if (user) {
         this.isUserLoggedIn = true;
-        this.getDatosUser(user.uid); // Esta función debería eventualmente asignar 'estandar' o 'admin' a `rol`
-      } else {
+        this.getDatosUser(user.uid);
+        this.rol = this.rol // Esta función debería eventualmente asignar 'estandar' o 'admin' a `rol`
+      } if (user){
+        this.isUserLoggedInAdmin = true;
+        this.rol = 'admin'
+      }else {
         this.isUserLoggedIn = false;
-        this.rol = 'admin' || 'estandar'; // Asegúrate que '' o null esté permitido según tu elección en la definición del tipo
+        this.rol = null  // Asegúrate que '' o null esté permitido según tu elección en la definición del tipo
       }
     });
   }
@@ -90,13 +95,15 @@ export class NavegacionComponent implements OnInit{
     this.router.navigate(['/login'])
   }
 
-  getDatosUser(uid: string) {
+  getDatosUser(uid: any) {
     const path = "Usuarios";
-    this._cursoService.getDatos<Usuario>(path, uid).subscribe(user => {
-        console.log('datos ->', user);
-        if (user) {
-            this.rol = user.rol; // Utilizando el rol del usuario
+    const id = uid;
+    this._cursoService.getDatos<Usuario>(path, id).subscribe(res => {
+        console.log('datos ->', res);
+        if (res) {
+            this.rol = res.rol; // Utilizando el rol del usuario
         }
     });
-}
+  }
+  
 }

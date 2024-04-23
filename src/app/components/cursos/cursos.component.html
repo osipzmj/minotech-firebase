@@ -489,8 +489,8 @@
               asincronismo, que te permitirán escribir código más eficiente
             </li>
           </ul>
-          <button mat-raised-button color="primary" [routerLink]="['/cursos', cursos[0].id]" class="custom-button">
-            Más información
+          <button id="inscribirButton" [disabled]="isInscrito" (click)="onInscribir()">
+            {{ isInscrito ? 'Inscrito' : 'Inscribirse' }}
           </button>
           
           

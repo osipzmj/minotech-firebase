@@ -3,7 +3,8 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendE
    GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, 
    User,
    user,
-   sendPasswordResetEmail} from '@angular/fire/auth';
+   sendPasswordResetEmail,
+   onAuthStateChanged} from '@angular/fire/auth';
    import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, DocumentData  } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Usuario } from '../interfaces/usuario';
@@ -51,20 +52,19 @@ export class UsuariosService {
     return this.auth.signOut();
   }
 
-  stateUser(): Observable<any> {
-    return new Observable(observer => {
-      const unsubscribe = this.auth.onAuthStateChanged(
-        user => {
-          observer.next(user); // Envía el usuario al observador
-        },
-        error => observer.error(error), // En caso de error
-        () => observer.complete() // Completar el observable cuando Firebase finalice
-      );
+  stateUser(): Observable<User | null> {
+    return new Observable<User | null>((observer) => {
+        const unsubscribe = onAuthStateChanged(this.auth, (user) => {
+            observer.next(user); // Emitir el usuario actual
+        }, (error) => {
+            observer.error(error); // Emitir un error si ocurre alguno
+        });
 
-      // Devuelve la función de desuscripción
-      return {unsubscribe: unsubscribe};
+        // Retornar la función de desuscripción
+        return () => unsubscribe();
     });
-  }
+}
+  
   async recuperarContrasena(datosU: Usuario): Promise<void> {
     try {
       // Llama a sendPasswordResetEmail con await
