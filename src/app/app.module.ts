@@ -23,7 +23,7 @@ import { FilterPipe } from 'src/pipes/filter.pipe';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { Storage } from '@angular/fire/storage';
-
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -43,12 +43,12 @@ import { Storage } from '@angular/fire/storage';
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    AngularFireAuthModule,
+    ReactiveFormsModule,  
+    RecaptchaModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
-
+    //Storage,
     NgbModule,
     
   ],

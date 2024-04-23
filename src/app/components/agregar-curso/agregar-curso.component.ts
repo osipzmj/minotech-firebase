@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CursosService } from 'src/app/services/cursos.service';
-import { Storage, ref, uploadBytes } from '@angular/fire/storage';
+//import { Storage, ref, uploadBytes } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-agregar-curso',
@@ -14,7 +14,7 @@ export class AgregarCursoComponent implements OnInit {
 
   constructor(
     private cursoService: CursosService,
-    private storage: Storage
+    //private storage: Storage
   ) {
     this.cursoForm = new FormGroup({
       nombreCurso: new FormControl(),
@@ -38,16 +38,16 @@ export class AgregarCursoComponent implements OnInit {
     console.log(response)
   }
 
-  uploadImage($event: any){
-    const file = $event.target.files[0];
-    console.log(file);
+  // uploadImage($event: any){
+  //   const file = $event.target.files[0];
+  //   console.log(file);
 
-    const imgRef = ref(this.storage, `img/${file.name}`)
+  //   const imgRef = ref(this.storage, `img/${file.name}`)
 
-    uploadBytes(imgRef, file)
-    .then()
-    .catch(error => console.log(error));
+  //   uploadBytes(imgRef, file)
+  //   .then()
+  //   .catch(error => console.log(error));
 
-  }
+  // }
 
 }

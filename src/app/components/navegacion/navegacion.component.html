@@ -19,7 +19,7 @@
               <li *ngIf="rol === 'admin' && isUserLoggedIn == true" ><a href="agregar-curso"><i class="bi bi-journal-plus"></i>&nbsp;Crear curso</a></li>
               <li *ngIf="isUserLoggedIn == false"><a href="login"><i class="bi bi-box-arrow-in-right"></i>&nbsp;Iniciar Sesión</a></li>
               <li *ngIf="isUserLoggedIn == false"><a href="registro"><i class="bi bi-person-add"></i>&nbsp;Registrarse</a></li>            
-              <li *ngIf="isUserLoggedIn == true" (click)="logout()"><a href="/login"><i class="bi bi-box-arrow-right"></i>&nbsp;Cerrar Sesión</a></li> 
+              <li *ngIf="isUserLoggedIn == true" (click)="logout()"><a href="login"><i class="bi bi-box-arrow-right"></i>&nbsp;Cerrar Sesión</a></li> 
             </ul>
           </div>
         </div>

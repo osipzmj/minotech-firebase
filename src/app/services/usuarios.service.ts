@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification,
    GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, 
    User,
-   user} from '@angular/fire/auth';
+   user,
+   sendPasswordResetEmail} from '@angular/fire/auth';
    import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, DocumentData  } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Usuario } from '../interfaces/usuario';
@@ -63,7 +64,17 @@ export class UsuariosService {
       // Devuelve la función de desuscripción
       return {unsubscribe: unsubscribe};
     });
-}
-
+  }
+  async recuperarContrasena(datosU: Usuario): Promise<void> {
+    try {
+      // Llama a sendPasswordResetEmail con await
+      await sendPasswordResetEmail(this.auth, datosU.email);
+      console.log('Se ha enviado un enlace de recuperación de contraseña a tu email.');
+    } catch (error) {
+      // Maneja los errores que puedan surgir durante la llamada a sendPasswordResetEmail
+      console.error('Error al enviar el email de recuperación:', error);
+      throw error; // Re-lanza el error para que pueda ser manejado por la llamada a esta función
+    }
+  }
 
 }

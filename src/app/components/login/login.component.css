@@ -6,6 +6,7 @@
     border-radius: 10px; /* Aumenta el radio de los bordes para un aspecto más suave */
     background-color: #f9f9f9; /* Cambia el color de fondo para que contraste mejor */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+    font-family: 'Poppins', sans-serif;
   }
   
   .form-group {
@@ -14,6 +15,7 @@
   
   label {
     font-weight: bold;
+
   }
   
   input[type="email"],
@@ -42,5 +44,9 @@
   
   .btn:hover {
     background-color: #0056b3;
+  }
+
+  .fpass{
+    text-align: center;
   }
   
