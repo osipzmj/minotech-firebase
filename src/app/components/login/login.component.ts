@@ -1,7 +1,9 @@
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { NgbToastOptions } from '@ng-bootstrap/ng-bootstrap/toast/toast-config';
+import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -15,48 +17,62 @@ export class LoginComponent {
   captchaVisible = false;
   @ViewChild('reCaptcha') reCaptchaRef: ElementRef | undefined;
 
+  passwordType: string = 'password';
+
+
   
+
   //usersService = inject(UsersService);
   router = inject(Router)
 
-  constructor( private usuarioService: UsuariosService) {
-    this.formulario = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl()
-    })
+  constructor( private usuarioService: UsuariosService, private fb: FormBuilder) {
+    this.formulario = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+  });
   }
 
+  togglePasswordVisibility(): void {
+    this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
+}
+
   onSubmit(): void {
-    if (this.formulario.valid && this.captchaVerified) {
-      this.usuarioService.login(this.formulario.value)
+    if (!this.formulario.valid) {
+        // Marca todos los controles como tocados para mostrar errores
+        this.formulario.markAllAsTouched();
+        NgbToast.('My name is Inigo Montoya. You killed my father, prepare to die!')
+        alert('Por favor, completa todos los campos correctamente.');
+        return;
+    }
+    
+    if (!this.captchaVerified) {
+        // Si el captcha no está verificado, solicita que lo complete
+        this.captchaVisible = true;
+        alert('Por favor, completa el reCAPTCHA para continuar.');
+        return;
+    }
+
+    // Si el formulario es válido y el captcha está verificado, envía la solicitud de inicio de sesión
+    this.usuarioService.login(this.formulario.value)
         .then(response => {
-          console.log(response);
-          this.router.navigate(['/home']);
-          alert("Bienvenido de nuevo " + this.formulario.value.email);
+            console.log(response);
+            this.router.navigate(['/home']);
+            alert("Bienvenido de nuevo " + this.formulario.value.email);
         })
         .catch(error => {
-          console.error(error);
-          alert("Upss... Parece que algo salió mal. Revisa que tu correo o tu contraseña sean correctos.");
-          
-          // Intenta reiniciar el reCAPTCHA después de un breve retraso
-          setTimeout(() => {
-            if (this.reCaptchaRef && this.reCaptchaRef.nativeElement) {
-              this.reCaptchaRef.nativeElement.reset();
-              this.captchaVerified = false;
-            }
-          }, 1000);
+            console.error(error);
+            alert("Upss... Parece que algo salió mal. Revisa que tu correo o tu contraseña sean correctos.");
+            
+            // Intenta reiniciar el reCAPTCHA después de un breve retraso
+            setTimeout(() => {
+                if (this.reCaptchaRef && this.reCaptchaRef.nativeElement) {
+                    this.reCaptchaRef.nativeElement.reset();
+                    this.captchaVerified = false;
+                }
+            }, 1000);
         });
-    } else if (this.formulario.valid && !this.captchaVerified) {
-      this.captchaVisible = true;
-      alert('Por favor, completa el reCAPTCHA para continuar.');
-    } else if (!this.formulario.valid && !this.captchaVerified)
-    {
-      this.captchaVisible = false;
-    } else {
-      alert('Por favor, completa todos los campos correctamente.');
-    }
-  }
-  
+}
+
   
 
   resetPassword(event: Event) {

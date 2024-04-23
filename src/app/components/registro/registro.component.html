@@ -1,45 +1,113 @@
 <div class="formRegistro">
   <div class="register-form">
-  <div class="registro">
-    <input type="text" [(ngModel)]="datosU.nombre" placeholder="Nombre de usuario">
-  </div>
-  <div class="registro">
-    <input type="number" [(ngModel)]="datosU.edad" placeholder="Ingresa tu edad">
-  </div>
-  <div class="registro">
-    <input type="text" [(ngModel)]="datosU.telefono" placeholder="Número telefónico">
-  </div>
-  <div class="registro">  
-    <input type="email" [(ngModel)]="datosU.email" placeholder="Ingresa tu email">
-  </div>
-  <div class="registro">  
-    <input type="password" [(ngModel)]="datosU.password" placeholder="Ingresa una contraseña">
-  </div>
-   
-    <button (click)="onSubmit()" class="btn btn-primary btn-block" type="submit">Enviar</button>
-    <br>
-    <br>
-    <label for="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ó</label>
+    <div class="registro">
+      <input
+        type="text"
+        [(ngModel)]="datosU.nombre"
+        placeholder="Nombre de usuario"
+      />
+      <div *ngIf="validationErrors.nombre">
+        <small class="text-danger">{{ validationErrors.nombre }}</small>
+      </div>
+    </div>
+
+    <div class="registro">
+      <input
+        type="number"
+        [(ngModel)]="datosU.edad"
+        placeholder="Ingresa tu edad"
+      />
+      <div *ngIf="validationErrors.edad">
+        <small class="text-danger">{{ validationErrors.edad }}</small>
+      </div>
+    </div>
+
+    <div class="registro">
+      <input
+        type="text"
+        [(ngModel)]="datosU.telefono"
+        placeholder="Número telefónico"
+      />
+      <div *ngIf="validationErrors.telefono">
+        <small class="text-danger">{{ validationErrors.telefono }}</small>
+      </div>
+    </div>
+
+    <div class="registro">
+      <input
+        type="email"
+        [(ngModel)]="datosU.email"
+        placeholder="Ingresa tu email"
+      />
+      <div *ngIf="validationErrors.email">
+        <small class="text-danger">{{ validationErrors.email }}</small>
+      </div>
+    </div>
+
+    <div class="registro">
+      <div class="input-container">
+        <input
+          type="{{ passwordType }}"
+          [(ngModel)]="datosU.password"
+          placeholder="Ingresa una contraseña"
+          class="form-control"
+        />
+        <!-- Icono de ojo dentro del campo de entrada -->
+        <i
+          (click)="togglePasswordVisibility()"
+          [class]="
+            passwordType === 'password' ? 'bi bi-eye-slash' : 'bi bi-eye'
+          "
+          class="eye-icon"
+        ></i>
+      </div>
+      <div *ngIf="validationErrors.password">
+        <small class="text-danger">{{ validationErrors.password }}</small>
+      </div>
+    </div>
+
+    <button
+      (click)="onSubmit()"
+      class="btn btn-primary btn-block"
+      type="submit"
+    >
+      Enviar
+    </button>
+    <br />
+    <br />
     <div class="google">
       <button class="google-login" (click)="signInWithGoogle()">
-          <img src="../../../assets/google-icon-logo.svg" alt="Google Icon" class="icon">
-          Iniciar sesión con Google
-        </button>
-  </div>
-  <div class="facebook">
+        <img
+          src="../../../assets/google-icon-logo.svg"
+          alt="Google Icon"
+          class="icon"
+        />
+        Iniciar sesión con Google
+      </button>
+    </div>
+    <div class="facebook">
       <button class="google-login" (click)="signInWithFacebook()">
-          <img src="../../../assets/facebook-icon-logo.svg" alt="Google Icon" class="icon">
-          Iniciar sesión con Facebook
-        </button>
+        <img
+          src="../../../assets/facebook-icon-logo.svg"
+          alt="Google Icon"
+          class="icon"
+        />
+        Iniciar sesión con Facebook
+      </button>
+    </div>
   </div>
-</div>
 </div>
 <div class="modal" *ngIf="showModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Verifica tu cuenta</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

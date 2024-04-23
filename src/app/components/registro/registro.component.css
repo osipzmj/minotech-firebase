@@ -12,6 +12,18 @@
   margin-bottom: 20px;
 }
 
+.input-container {
+  position: relative; /* Posiciona el contenedor relativamente */
+}
+
+.eye-icon {
+  position: absolute; /* Posiciona el icono de forma absoluta dentro del contenedor */
+  top: 50%; /* Centra el icono verticalmente */
+  right: 10px; /* Coloca el icono a la derecha */
+  transform: translateY(-50%); /* Ajusta el posicionamiento vertical */
+  cursor: pointer; /* Hace que el icono sea clickeable */
+}
+
 label {
   font-weight: bold;
 }

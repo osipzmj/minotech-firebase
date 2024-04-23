@@ -10,10 +10,9 @@ import { CursosService } from 'src/app/services/cursos.service';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css']
+  styleUrls: ['./registro.component.css'],
 })
 export class RegistroComponent {
- 
   showModal: boolean = false;
   datosU: Usuario = {
     uid: null,
@@ -22,48 +21,92 @@ export class RegistroComponent {
     email: null,
     telefono: null,
     rol: 'estandar',
-    password: null // Inicializado a undefined
-};
+    password: null, // Inicializado a undefined
+  };
+  passwordType: string = 'password';
+  validationErrors: {
+    nombre?: string;
+    edad?: string;
+    telefono?: string;
+    email?: string;
+    password?: string;
+  } = {};
 
+  constructor(
+    private usuarioService: UsuariosService,
+    private router: Router,
+    private cursoService: CursosService
+  ) {}
 
-  constructor(private usuarioService: UsuariosService,
-    private router: Router, private cursoService: CursosService
-    ) {
+  togglePasswordVisibility() {
+    this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
   }
-
-
   async onSubmit() {
+    // Validación manual de los campos de datosU
+    this.validationErrors = {};
 
-    console.log( 'datosU -> ', this.datosU)
-    const res  = await this.usuarioService.registro(this.datosU).catch(error => {
-      console.log(error)
-    })
-    if (res){
-      console.log("Registro exitoso");
-      const path = 'Usuarios';
-      const id = res.user.uid
-      this.datosU.uid= id;
-      this.datosU.password = null
-     await this.cursoService.createDoc(this.datosU, path, id)
-     alert("Registro exitoso. Bienvenido " + this.datosU.nombre)
-     this.router.navigate(['/home'])
+    // Verifica que el nombre esté presente
+    if (!this.datosU.nombre) {
+      this.validationErrors.nombre = 'El nombre es obligatorio.';
     }
-    // try {
-    //   const response = await this.usuarioService.registro(this.datosU);
-    //   // Manejo después del registro exitoso...
-    //   console.log('Registro exitoso, por favor verifica tu correo electrónico.', response);
-    //   this.showModal = true;
-    // } catch (error: any) { // Aquí se utiliza 'any' para poder acceder a 'error.code'
-    //   console.error('Error en el registro:', error);
 
-    //   // Asegurándonos de que el error tiene la propiedad 'code' antes de comparar
-    //   if (error.code === 'auth/email-already-in-use') {
-    //     alert('Este correo electrónico ya está en uso. Por favor, utiliza otro correo.');
-    //   } else {
-    //     // Manejo de otros errores
-    //     alert('Ocurrió un error durante el registro. Por favor, inténtalo de nuevo.');
-    //   }
-    // }
+    // Verifica que la edad esté presente y sea mayor de 18 años
+    if (this.datosU.edad === null || this.datosU.edad < 18) {
+      this.validationErrors.edad = 'Debes ser mayor de edad.';
+    }
+
+    // Verifica que el teléfono esté presente
+    if (!this.datosU.telefono) {
+      this.validationErrors.telefono = 'El teléfono es obligatorio.';
+    }
+
+    // Verifica que el correo electrónico esté presente y sea válido
+    if (!this.datosU.email) {
+      this.validationErrors.email = 'El correo electrónico es obligatorio.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.datosU.email)) {
+      this.validationErrors.email = 'Ingresa un correo electrónico válido.';
+    }
+
+    // Verifica que la contraseña esté presente y tenga al menos 6 caracteres
+    if (!this.datosU.password) {
+      this.validationErrors.password = 'La contraseña es obligatoria.';
+    } else if (this.datosU.password.length < 6) {
+      this.validationErrors.password =
+        'La contraseña debe tener al menos 6 caracteres.';
+    }
+
+    // Si hay errores, muestra alertas
+    if (Object.keys(this.validationErrors).length > 0) {
+      // Puedes usar alertas o simplemente salir de la función para no proceder con el registro
+      return;
+    }
+
+    // Si no hay errores, procede con el registro
+    try {
+      const res = await this.usuarioService.registro(this.datosU);
+      console.log('Registro exitoso');
+      const path = 'Usuarios';
+      const id = res.user.uid;
+      this.datosU.uid = id;
+      this.datosU.password = null;
+
+      // Guarda los datos en Firestore o realiza otras operaciones
+      await this.cursoService.createDoc(this.datosU, path, id);
+
+      alert(`Registro exitoso. Bienvenido ${this.datosU.nombre}`);
+      this.router.navigate(['/home']);
+    } catch (error: any) {
+      console.error('Error en el registro:', error);
+      if (error.code === 'auth/email-already-in-use') {
+        alert(
+          'Este correo electrónico ya está en uso. Por favor, utiliza otro correo.'
+        );
+      } else {
+        alert(
+          'Ocurrió un error durante el registro. Por favor, inténtalo de nuevo.'
+        );
+      }
+    }
   }
 
   async signInWithGoogle() {
@@ -87,5 +130,4 @@ export class RegistroComponent {
       // Manejar errores de inicio de sesión con Facebook, si es necesario
     }
   }
-
 }

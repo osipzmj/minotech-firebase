@@ -78,7 +78,7 @@
       Barra de busqueda-->
       <div class="container-tarjetas">
         <div class="tarjeta" (click)="abrirModal('miModal5')" *ngFor="let curso of cursos">
-            <div class="imagen" [ngStyle]="{ backgroundImage: 'url('+curso.img+')' }"></div>
+            <div class="imagen" [ngStyle]="{ backgroundImage: 'url({curso.img})' }"></div>
                 <h4>{{curso.nombreCurso}}</h4>
                 <p>{{curso.descripcion}}</p>
                 <p>Precio: {{curso.precio}}</p>
