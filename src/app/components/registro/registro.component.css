@@ -7,7 +7,7 @@
   background-color: #fff;
 }
 
-.form-group {
+.registro {
   margin-bottom: 20px;
 }
 
@@ -17,7 +17,8 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type = "number"] {
   width: 100%;
   padding: 10px;
   font-size: 16px;
