@@ -125,6 +125,35 @@ body {
       max-width: 100%;
       margin-bottom: 20px;
     }
+
+    #t1 {
+      font-size: 180%; /* Puedes ajustar este valor según tus preferencias */
+    }
+    
+    #p1 {
+      font-size: 125%; /* Puedes ajustar este valor según tus preferencias */
+    }
+    
+    #p2 {
+      font-size: 125%; /* Puedes ajustar este valor según tus preferencias */
+    }
+    
+    .text-container {
+      text-align: left; /* Alinea el texto a la izquierda */
+      margin: 2% auto; /* Centra el contenedor de texto horizontalmente */
+    }
+
+    .ver-cursos-btn {
+      width: 100%; /* Establece el ancho del botón al 100% del contenedor */
+      text-align: center; /* Centra el contenido del botón */
+      cursor: pointer;
+      transition: .5s;
+      display: flex;
+      justify-content: center; /* Centra horizontalmente el contenido */
+      align-items: center; /* Centra verticalmente el contenido */
+    }
+    
+    
   }
   
   
@@ -182,3 +211,102 @@ body {
     color: #fff;
   }
   
+  /* Estilos para los botones de desplazamiento */
+.scroll-to-top-bottom {
+  position: fixed;
+  bottom: 20px;
+  right: 7px;
+  background-color: #4b155f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.scroll-to-top-bottom:hover {
+  background-color: #7f5b8c;
+}
+
+.scroll-to-bottom-bottom {
+  position: fixed;
+  bottom: 92%;
+  right: 7px;
+  background-color: #4b155f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.scroll-to-bottom-bottom:hover {
+  background-color: #7f5b8c;
+}
+
+.hide {
+  display: none;
+}
+
+/* Agrega estilos para resaltar los cursos */
+.course-link {
+  text-decoration: none;
+  color: inherit; /* Para heredar el color del texto del padre */
+}
+
+.course-link:hover .featured-card {
+  transform: translateY(-5px);
+}
+
+.featured-card {
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+
+.featured-card img {
+  width: 80%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+} 
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3 {
+  margin-top: 0;
+}
+
+.card-content p {
+  margin-bottom: 20px;
+}
+
+.featured-courses {
+  display: flex; /* Establece el contenedor como flexbox */
+  justify-content: space-around; /* Distribuye el espacio alrededor de las tarjetas */
+  flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en múltiples líneas si es necesario */
+}
+
+.ver-cursos-btn {
+  background-color: #c079d9; /* Color de fondo */
+  color: white; /* Color del texto */
+  padding: 10px 20px; /* Espaciado interno */
+  font-size: 20px; /* Tamaño del texto */
+  border: none; /* Quita el borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+.ver-cursos-btn:hover {
+  background-color: #4b155f; /* Cambia el color de fondo al pasar el mouse */
+}

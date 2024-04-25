@@ -1,45 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página de Inicio</title>
-  <style>
-    /* Estilos para la barra de navegación vertical */
-    .vertical-nav {
-      position: fixed;
-      top: 50px;
-      left: 10px;
-      padding: 10px;
-      background-color: #f0f0f0;
-      border-radius: 5px;
-    }
-
-    /* Estilo para los enlaces */
-    .vertical-nav a {
-      display: block;
-      margin: 5px 0;
-      color: #007bff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    /* Estilo para resaltar el enlace de la sección actual */
-    .vertical-nav a.active {
-      color: #ff0000;
-    }
-  </style>
 </head>
-<body>
 
-  
+<body>
+  <button #scrollToBottomBtn class="scroll-to-bottom-bottom"><i class="bi bi-arrow-bar-down"></i></button>  
   <div class="principal-1" [@fadeIn]>
     <div class="text-container">
+      <br>
       <h1 id="t1" class="show fade-in">Aprende, Inventa y Práctica </h1>
-      <p id="p1" class="show fade-in">Diviértete y aprende con nuestros diferentes cursos,<strong> empápate de conocimiento</strong> y pon en práctica lo aprendido en nuestros cursos impartidos por profesionales especializados.  <br> Certifícate en actividades y sé capaz de crear algo nuevo.</p>
+      <p id="p1" class="show fade-in">Diviértete y aprende con nuestros diferentes cursos,<strong> empápate de
+          conocimiento</strong> y pon en práctica lo aprendido en nuestros cursos impartidos por profesionales
+        especializados. <br> Certifícate en actividades y sé capaz de crear algo nuevo.</p>
     </div>
     <img class="imgI" src="../../../assets/1.jpg" alt="Imagen de inicio">
-
   </div>
 
   <div class="divider"></div>
@@ -47,20 +25,73 @@
   <main>
     <section>
       <div class="principal-1" [@fadeIn]>
-        <img class="imgI" src="../../../assets/2.jpg" alt="Aprendizaje de calidad">
+        <img class="imgI" src="../../../assets/iniciogif.gif" alt="Aprendizaje de calidad">
         <div class="text-container">
-          <p class="show" id="p2"><strong>¡Descubre un mundo de posibilidades con nuestros cursos! </strong>Sumérgete en el conocimiento y potencia tus habilidades con nuestra amplia variedad de programas especializados. Con nosotros, tendrás la oportunidad de explorar nuevas áreas, desarrollar tus talentos y alcanzar tus metas.</p>
+          <p class="show" id="p2">
+            <strong>¡Descubre un mundo de posibilidades con nuestros cursos!</strong>
+            Sumérgete en el conocimiento y potencia tus habilidades con nuestra amplia variedad de programas especializados.
+            Con nosotros, tendrás la oportunidad de explorar nuevas áreas, desarrollar tus talentos y alcanzar tus metas.
+          </p>
+          <br>
+          <button class="ver-cursos-btn" (click)="irACursos()">VER TODOS LOS CURSOS</button>
         </div>
       </div>
     </section>
     
 
     <div class="divider"></div>
+    
+    <p class="show" id="p1"><strong>Cursos destacados</strong></p>
+    <section>
+      <div class="featured-courses">
+        <a href="/cursos" class="course-link">
+          <div class="featured-card">
+            <img src="https://caudetedigital.com/wp-content/uploads/2021/10/marketing-online-y-offline.png">
+            <div class="card-content">
+              <h3>Marketing Digital Estratégico</h3>
+              <span>Domina las estrategias de marketing digital más efectivas para impulsar el crecimiento de tu negocio en línea. Ideal para principiantes.</span>
+            </div>
+          </div>
+        </a>
+        <a href="/cursos" class="course-link">
+          <div class="featured-card">
+            <img src="https://codigospython.com/wp-content/uploads/2023/09/codigo-python.jpg">
+            <div class="card-content">
+              <h3>Programación en Phyton para principiantes</h3>
+              <span>Aprende los conceptos básicos de programación utilizando Python, desde la sintaxis hasta la resolución de problemas.</span>
+            </div>
+          </div>
+        </a>
+        <a href="/cursos" class="course-link">
+          <div class="featured-card">
+            <img src="https://www.servnet.mx/hs-fs/hubfs/Blog/Blog_Articulos/Blog_Art%C3%ADculos/Blog_Articulos_2021_Marzo/Blog_Art%C3%ADculos_2021_Marzo_Art47_ByF/Blog_Art%C3%ADculos_2021_Marzo_Art49_ByF_nuevo/%C2%BFQue-es-backend%3F.jpg?width=1044&height=579&name=%C2%BFQue-es-backend%3F.jpg">
+            <div class="card-content">
+              <h3>Desarrollo Web Frontend Avanzado</h3>
+              <span>Aprende las técnicas más avanzadas de desarrollo web frontend, incluyendo frameworks populares como React y Vue.js.</span>
+            </div>
+          </div>
+        </a>
+        <a href="/cursos" class="course-link">
+          <div class="featured-card">
+            <img src="https://monstruosdeldiseno.com/wp-content/uploads/2022/01/que-es-adobe-illustrator.gif">
+            <div class="card-content">
+              <h3>Diseño Gráfico con Adobe Illustrator</h3>
+              <span>Descubre las herramientas y técnicas de diseño gráfico utilizando Adobe Illustrator, desde la creación de logotipos hasta ilustraciones complejas.</span>
+            </div>
+          </div>
+        </a>
+        <!-- Repite para otros cursos destacados -->
+      </div>
+    </section>
+    
+    
+    
+    <div class="divider"></div>
 
     <p class="show" id="p1"><strong>Instructores que imparten nuestros cursos</strong></p>
-      <swiper-container init="false">
-        <swiper-slide>
-          <div class="picture">
+    <swiper-container init="false">
+      <swiper-slide>
+        <div class="picture">
           <img
             src="https://img.freepik.com/foto-gratis/retrato-hermosa-mujer-joven-piel-oscura-cabello-rizado-morena_273609-13873.jpg?size=626&ext=jpg&ga=GA1.1.87170709.1706918400&semt=ais"
             alt="">
@@ -70,98 +101,98 @@
           <span>Web Designer</span>
         </div>
       </swiper-slide>
-          <swiper-slide>
-            <div class="slider">
-            <div class="picture">
-              <img
-                src="https://us.123rf.com/450wm/tap10/tap101806/tap10180600274/104834506-retrato-de-un-chico-promedio-de-entre-20-y-30-a%C3%B1os.jpg"
-                alt="">
-            </div>
-            <div class="detail">
-              <h3>Francis Woods</h3>
-              <span>Web Designer</span>
-            </div>
+      <swiper-slide>
+        <div class="slider">
+          <div class="picture">
+            <img
+              src="https://us.123rf.com/450wm/tap10/tap101806/tap10180600274/104834506-retrato-de-un-chico-promedio-de-entre-20-y-30-a%C3%B1os.jpg"
+              alt="">
           </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="slider">
-            <div class="picture">
-              <img
-                src="https://media.istockphoto.com/id/1171169127/es/foto/disparo-de-cabeza-de-hombre-guapo-alegre-con-corte-de-pelo-de-moda-y-gafas-aisladas-en-el.webp?b=1&s=170667a&w=0&k=20&c=tE5LXpwq4uMdlOoYt4z7gxG0KXXwfwhYiqLZElxo9hs="
-                alt="">
-            </div>
-            <div class="detail">
-              <h3>Roger Rice</h3>
-              <span>Web Designer</span>
-            </div>
+          <div class="detail">
+            <h3>Francis Woods</h3>
+            <span>Web Designer</span>
           </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="slider">
-            <div class="picture">
-              <img
-                src="https://img.freepik.com/fotos-premium/retrato-mujer-joven-bonita-sobre-fondo-blanco_719646-9650.jpg"
-                alt="">
-            </div>
-            <div class="detail">
-              <h3>Jessica Garcia</h3>
-              <span>Web Designer</span>
-            </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="slider">
+          <div class="picture">
+            <img
+              src="https://media.istockphoto.com/id/1171169127/es/foto/disparo-de-cabeza-de-hombre-guapo-alegre-con-corte-de-pelo-de-moda-y-gafas-aisladas-en-el.webp?b=1&s=170667a&w=0&k=20&c=tE5LXpwq4uMdlOoYt4z7gxG0KXXwfwhYiqLZElxo9hs="
+              alt="">
           </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="slider">
-            <div class="picture">
-              <img
-                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
-                alt="">
-            </div>
-            <div class="detail">
-              <h3>Sean Adams</h3>
-              <span>Web Designer</span>
-            </div>
+          <div class="detail">
+            <h3>Roger Rice</h3>
+            <span>Web Designer</span>
           </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="slider">
-            <div class="picture">
-              <img
-                src="https://media.istockphoto.com/id/465479132/es/foto/retrato-de-mujer-de-negocios-foto.jpg?s=612x612&w=0&k=20&c=PTZ6ZK5AjzNG8ecO1mARIDVUnbq0QR9kuB_xcsNnNKc="
-                alt="">
-            </div>
-            <div class="detail">
-              <h3>Crystal Davidson</h3>
-              <span>Web Designer</span>
-            </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="slider">
+          <div class="picture">
+            <img
+              src="https://img.freepik.com/fotos-premium/retrato-mujer-joven-bonita-sobre-fondo-blanco_719646-9650.jpg"
+              alt="">
           </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="slider">
-            <div class="picture">
-              <img
-                src="https://media.istockphoto.com/id/1386479313/es/foto/feliz-mujer-de-negocios-afroamericana-millennial-posando-aislada-en-blanco.jpg?s=612x612&w=0&k=20&c=JP0NBxlxG2-bdpTRPlTXBbX13zkNj0mR5g1KoOdbtO4="
-                alt="">
-            </div>
-            <div class="detail">
-              <h3>Saodi Baez</h3>
-              <span>Web Designer</span>
-            </div>
+          <div class="detail">
+            <h3>Jessica Garcia</h3>
+            <span>Web Designer</span>
           </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="slider">
-            <div class="picture">
-              <img
-                src="https://media.istockphoto.com/id/1058651020/es/foto/retrato-de-mujer-moderna-agradable-en-jersey-blanco-pelo-corto-con-expresi%C3%B3n-alegre-alegre.jpg?s=170667a&w=0&k=20&c=xW-bvjuDGAALLNaCofw9lb1VbIulgDiUGh-0N_Wv9Mw="
-                alt="">
-            </div>
-            <div class="detail">
-              <h3>Romina Guerra</h3>
-              <span>Web Designer</span>
-            </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="slider">
+          <div class="picture">
+            <img
+              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
+              alt="">
           </div>
-          </swiper-slide>
-      </swiper-container>
+          <div class="detail">
+            <h3>Sean Adams</h3>
+            <span>Web Designer</span>
+          </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="slider">
+          <div class="picture">
+            <img
+              src="https://media.istockphoto.com/id/465479132/es/foto/retrato-de-mujer-de-negocios-foto.jpg?s=612x612&w=0&k=20&c=PTZ6ZK5AjzNG8ecO1mARIDVUnbq0QR9kuB_xcsNnNKc="
+              alt="">
+          </div>
+          <div class="detail">
+            <h3>Crystal Davidson</h3>
+            <span>Web Designer</span>
+          </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="slider">
+          <div class="picture">
+            <img
+              src="https://media.istockphoto.com/id/1386479313/es/foto/feliz-mujer-de-negocios-afroamericana-millennial-posando-aislada-en-blanco.jpg?s=612x612&w=0&k=20&c=JP0NBxlxG2-bdpTRPlTXBbX13zkNj0mR5g1KoOdbtO4="
+              alt="">
+          </div>
+          <div class="detail">
+            <h3>Saodi Baez</h3>
+            <span>Web Designer</span>
+          </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="slider">
+          <div class="picture">
+            <img
+              src="https://media.istockphoto.com/id/1058651020/es/foto/retrato-de-mujer-moderna-agradable-en-jersey-blanco-pelo-corto-con-expresi%C3%B3n-alegre-alegre.jpg?s=170667a&w=0&k=20&c=xW-bvjuDGAALLNaCofw9lb1VbIulgDiUGh-0N_Wv9Mw="
+              alt="">
+          </div>
+          <div class="detail">
+            <h3>Romina Guerra</h3>
+            <span>Web Designer</span>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
 
 
     <div class="divider"></div>
@@ -170,18 +201,10 @@
       <div class="principal-1" [@fadeIn]>
         <img class="imgI" src="../../../assets/3.jpg" alt="Aprendizaje de calidad">
         <div class="text-container">
-          <p class="show" id="p2">El primer paso hacia un futuro más brillante comienza aquí. Explora nuestra variedad de cursos, elige el que se adapte a tus objetivos y empieza tu viaje educativo hoy mismo. <strong>MinoTech</strong> está aquí para inspirarte, guiarte y apoyarte en cada paso de tu camino hacia el éxito <strong>¡Bienvenido a tu nueva fuente de aprendizaje! </strong></p>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section>
-      <div class="principal-1" [@fadeIn]>
-        <img class="imgI" src="../../../assets/4.jpg" alt="Aprendizaje de calidad">
-        <div class="text-container">
-          <p class="show" id="p2"><strong>¡Descubre un mundo de posibilidades con nuestros cursos! </strong>Sumérgete en el conocimiento y potencia tus habilidades con nuestra amplia variedad de programas especializados. Con nosotros, tendrás la oportunidad de explorar nuevas áreas, desarrollar tus talentos y alcanzar tus metas.</p>
+          <p class="show" id="p2">El primer paso hacia un futuro más brillante comienza aquí. Explora nuestra variedad
+            de cursos, elige el que se adapte a tus objetivos y empieza tu viaje educativo hoy mismo.
+            <strong>MinoTech</strong> está aquí para inspirarte, guiarte y apoyarte en cada paso de tu camino hacia el
+            éxito <strong>¡Bienvenido a tu nueva fuente de aprendizaje! </strong></p>
         </div>
       </div>
     </section>
@@ -192,52 +215,29 @@
       <div class="principal-1" [@fadeIn]>
         <img class="imgI" src="../../../assets/6.jpg" alt="Aprendizaje de calidad">
         <div class="text-container">
-          <p class="show" id="p2"><strong>¡Descubre un mundo de posibilidades con nuestros cursos! </strong>Sumérgete en el conocimiento y potencia tus habilidades con nuestra amplia variedad de programas especializados. Con nosotros, tendrás la oportunidad de explorar nuevas áreas, desarrollar tus talentos y alcanzar tus metas.</p>
+          <p class="show" id="p2"><strong>¡Conviértete en parte de MinoTech! </strong><br>
+            Contamos con profesores centificados para el contenido que imparten, así como una estructura perfectamente planeada 
+            sobre los temas que se enseñan, que esperas...
+          </p><br>
+          <button class="ver-cursos-btn" (click)="irARegistro()">¡REGISTRATE YA!</button>
         </div>
       </div>
     </section>
-    
-  </main>
 
-  <script>
-    document.addEventListener("scroll", function() {
-      const fadeInElements = document.querySelectorAll('.fade-in');
-      const headerElement = document.querySelector('header');
-  
-      fadeInElements.forEach((element) => {
-        const rect = element.getBoundingClientRect();
-        const isInView = (rect.top >= 0 && rect.bottom <= window.innerHeight);
-        if (isInView) {
-          element.classList.add('show');
-        }
-      });
-  
-      const rect = headerElement.getBoundingClientRect();
-      const headerIsInView = (rect.top >= 0 && rect.bottom <= window.innerHeight);
-      if (headerIsInView) {
-        headerElement.classList.add('show');
-      }
-    });
-  </script>
-  <script>
-    var swiper = new Swiper(".swiper-container", {
-  effect: "coverflow",
-  grabCursor: true,
-  centeredSlides: true,
-  slidesPerView: "auto",
-  coverflowEffect: {
-    rotate: 20,
-    stretch: 0,
-    depth: 350,
-    modifier: 1,
-    slideShadows: true
-  },
-  pagination: {
-    el: ".swiper-pagination"
-  }
-});
+    <div class="divider"></div>
 
-  </script>
-</body>
-
+    <section>
+      <div class="principal-1" [@fadeIn]>
+        <img class="imgI" src="../../../assets/4.jpg" alt="Aprendizaje de calidad">
+        <div class="text-container">
+          <p class="show" id="p2"><strong>¡Explora un universo de oportunidades a través de nuestros distintos cursos! </strong>Adéntrate 
+            en el saber y fortalece tus destrezas con nuestra diversa gama de cursos diseñados especialmente para ti. En nuestra plataforma <strong>MinoTech</strong>,
+            te ofrecemos la posibilidad de aventurarte en nuevos campos, nutrir tus habilidades y materializar tus objetivos.
+          </p>
+        </div>
+      </div>
+    </section>
+    <button #scrollToTopBtn class="scroll-to-top-bottom"><i class="bi bi-arrow-bar-up"></i></button>  
+    </main>
+  </body>
 </html>

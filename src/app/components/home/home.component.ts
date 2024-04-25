@@ -1,7 +1,8 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, signal } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, signal, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { SwiperContainer, register } from 'swiper/element/bundle';
 import { SwiperOptions } from 'swiper/types';
+import { Router } from '@angular/router';
 register();
 
 @Component({
@@ -20,9 +21,11 @@ register();
     ])
   ]
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit, AfterViewInit {
+  @ViewChild('scrollToTopBtn') scrollToTopBtn!: ElementRef<HTMLButtonElement>;
+  @ViewChild('scrollToBottomBtn') scrollToBottomBtn!: ElementRef<HTMLButtonElement>;
 
-  constructor() {}
+  constructor(private router: Router) {}
   swiperElements = signal<SwiperContainer | null>(null);
 
   ngOnInit(): void {
@@ -56,9 +59,61 @@ export class HomeComponent implements OnInit{
     this.swiperElements()?.initialize();
   }
 
-  ngAfterViewInit() {
 
-  }
+  ngAfterViewInit(): void {
+    // Función para desplazarse suavemente hacia arriba
+    this.scrollToTopBtn.nativeElement.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    // Función para desplazarse suavemente hacia abajo
+    this.scrollToBottomBtn.nativeElement.addEventListener("click", () => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+      });
+    });
+
+     // Mostrar/ocultar botones basados en la posición del usuario
+    const toggleScrollButtons = () => {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.body.clientHeight;
+
+    // Mostrar u ocultar el botón de scroll hacia abajo
+    if (scrollPosition > windowHeight * 0.5) {
+      this.scrollToBottomBtn.nativeElement.classList.remove("hide");
+    } else {
+      this.scrollToBottomBtn.nativeElement.classList.add("hide");
+    }
+
+    // Mostrar u ocultar el botón de scroll hacia arriba
+    if (scrollPosition < windowHeight * 0.5) {
+      this.scrollToTopBtn.nativeElement.classList.add("hide");
+    } else {
+      this.scrollToTopBtn.nativeElement.classList.remove("hide");
+    }
+  };
+
+  // Llamar a la función de toggle al cargar y al desplazarse
+  toggleScrollButtons();
+  window.addEventListener("scroll", toggleScrollButtons);
+}
+
+irACursos() {
+  this.router.navigate(['/cursos']);
+}
+
+irARegistro() {
+  this.router.navigate(['/registro']);
+}
+
+}
+
+  
   // private initSwiper() {
   //   new Swiper(".swiper-container", {
   //     effect: "coverflow",
@@ -75,5 +130,3 @@ export class HomeComponent implements OnInit{
   //     direction: 'horizontal' // Ajustar la dirección del desplazamiento a horizontal
   //   });
   // }
- 
-}

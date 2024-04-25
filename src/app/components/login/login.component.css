@@ -62,3 +62,24 @@
     transform: translateY(-50%); /* Ajusta el posicionamiento vertical */
     cursor: pointer; /* Hace que el icono sea clickeable */
 }
+
+@media screen and (max-width: 600px) {
+  .login-form {
+    max-width: 90%; /* Ajusta el ancho máximo al 90% del tamaño de la pantalla */
+    margin: 50px auto; /* Mantiene el margen superior */
+    padding: 10px; /* Reduce el padding para un aspecto más compacto */
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: calc(100% - 20px); /* Resta el padding para ajustar el ancho total */
+    padding: 8px; /* Reduce el padding */
+    font-size: 14px; /* Reduce el tamaño de la fuente */
+    margin-bottom: 8px; /* Reduce el espacio entre campos */
+  }
+
+  .btn {
+    padding: 8px; /* Reduce el padding */
+    font-size: 14px; /* Reduce el tamaño de la fuente */
+  }
+}

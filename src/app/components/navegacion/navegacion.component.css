@@ -118,8 +118,10 @@ a{
 .container-search {
     position: absolute;
     top: 100%; /* Coloca la barra de búsqueda debajo del encabezado */
-    right: 0; /* Alinea la barra de búsqueda en la esquina superior derecha */
-    margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+    right: 30px; /* Alinea la barra de búsqueda en la esquina superior derecha */
+    margin-top: 18px; /* Ajusta el margen superior según sea necesario */
+    display: flex;
+    align-items: center;
 }
 
 input {
@@ -133,6 +135,7 @@ input {
     font-size: 20px;
     border: 1px solid #c079d9;
     transition: all .7s ease;
+    margin-right: 10px; 
 }
 
 ::placeholder {
@@ -161,19 +164,6 @@ input {
     transition: all .7s ease;
 }
 
-.container-search {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 10px;
-    display: flex; /* Usamos flexbox para centrar el input y el botón */
-    align-items: center; /* Centra verticalmente los elementos */
-}
-
-input {
-    margin-right: 10px; /* Agregamos un margen entre el input y el botón */
-}
-
 .container-search:hover input {
     width: 350px;
 }
@@ -184,4 +174,37 @@ input {
 
 .btn:hover {
     background: rgb(104, 5, 146);
+}
+
+@media screen and (min-width: 128px) and (max-width:900px) {
+    .container-search {
+        position: absolute;
+        top: 190px; /* Ajusta la posición según sea necesario */
+        right: 20px; /* Ajusta la posición según sea necesario */
+        display: flex; /* Oculta la barra de búsqueda por defecto */
+        align-items: center;
+        transition: top 0.3s ease; /* Agrega una transición suave para el cambio de posición */
+    }
+    
+    .container-search.active {
+        top: 100px; /* Mueve la barra de búsqueda hacia arriba cuando está activa */
+        display: flex; /* Muestra la barra de búsqueda cuando está activa */
+    }
+    
+    .menu-icon:hover + .container-search {
+        display: flex; /* Muestra la barra de búsqueda cuando pasas el mouse sobre el icono */
+    }
+    
+    .container-search input {
+        margin-right: 5px; /* Añade menos espacio entre el input y el botón */
+        padding: 5px 10px; /* Reducir el relleno para que la barra de búsqueda sea más pequeña */
+        font-size: 14px; /* Reducir el tamaño del texto */
+        height: 40px; /* Reducir la altura del input */
+    }
+    
+    .container-search .btn {
+        flex-shrink: 0; /* Evita que el botón se reduzca en tamaño */
+        width: 40px; /* Reducir el ancho del botón */
+        height: 40px; /* Reducir la altura del botón */
+    }
 }

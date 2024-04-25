@@ -22,13 +22,13 @@
               <li *ngIf="isUserLoggedIn == true" (click)="logout()"><a href="login"><i class="bi bi-box-arrow-right"></i>&nbsp;Cerrar Sesión</a></li> 
               <li *ngIf="isUserLoggedIn == true">Hola {{this.formulario.value.email}}</li>
             </ul>
-            <div class="container-search">
-              <input type="text" [(ngModel)]="terminoBusqueda" placeholder="Buscar...">
-              <button class="btn" (click)="buscar()"><i class="bi bi-search"></i></button>
-            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="container-search">
+      <input type="text" [(ngModel)]="terminoBusqueda" placeholder="Buscar..." (keyup.enter)="buscar(terminoBusqueda)">
+      <button class="btn" (click)="buscar(terminoBusqueda)"><i class="bi bi-search"></i></button>
     </div>
   </header>
   

@@ -52,3 +52,14 @@
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada al pasar el cursor */
     transform: translateY(-2px); /* Desplazamiento hacia arriba */
 }
+
+@media screen and (max-width: 768px) {
+    /* Estilos para los enlaces en dispositivos con un ancho de pantalla máximo de 768px */
+    .sitio-links li a {
+      padding: 15px 14%; /* Ajustamos el padding para que los enlaces se ajusten al ancho del contenedor */
+      margin: 1 10px; /* Ajustamos los márgenes */
+      font-size: 16px; /* Reducimos el tamaño de la fuente */
+    }
+  }
+  
+  

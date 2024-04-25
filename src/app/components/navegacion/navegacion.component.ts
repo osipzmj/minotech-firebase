@@ -118,38 +118,50 @@ export class NavegacionComponent implements OnInit{
     });
   }
   
-  buscar() {
+ 
+  buscar(busqueda: string) {
     // Elimina los espacios en blanco al inicio y al final del término de búsqueda
-    const busqueda = this.terminoBusqueda.trim().toLowerCase();
+    const busquedaNormalizada = busqueda.trim().toLowerCase();
 
     // Redirige a la página correspondiente según el término de búsqueda
-    switch (busqueda) {
-      case 'inicio':
+    if (busquedaNormalizada.includes('inicio')) {
         this.router.navigate(['/home']);
-        break;
-      case 'cursos':
+    } else if (busquedaNormalizada.includes('cursos')) {
         this.router.navigate(['/cursos']);
-        break;
-      case 'crear curso':
+    } else if (busquedaNormalizada.includes('crear curso')) {
         this.router.navigate(['/agregar-curso']);
-        break;
-      case 'iniciar sesión':
+    } else if (busquedaNormalizada.includes('crear')) {
+      this.router.navigate(['/agregar-curso']);
+    } else if (busquedaNormalizada.includes('iniciar sesión')) {
         this.router.navigate(['/login']);
-        break;
-      case 'registro':
+    } else if (busquedaNormalizada.includes('iniciar sesion')) {
+      this.router.navigate(['/login']);
+    } else if (busquedaNormalizada.includes('iniciar')) {
+      this.router.navigate(['/login']);
+    } else if (busquedaNormalizada.includes('sesion')) {
+      this.router.navigate(['/login']);
+    } else if (busquedaNormalizada.includes('sesión')) {
+      this.router.navigate(['/login']);
+    } else if (busquedaNormalizada.includes('registro')) {
         this.router.navigate(['/registro']);
-        break;
-      case 'cerrar sesión':
-        this.router.navigate(['/login']); // Otra opción sería redirigir al componente de cerrar sesión
-        break;
-      case 'mapa del sitio':
-        this.router.navigate(['/mapa-sitio']);
-        break;
-      default:
-        // Si el término de búsqueda no coincide con ninguna página conocida, 
-        // puedes mostrar un mensaje de error o realizar otra acción
+    } else if (busquedaNormalizada.includes('cerrar sesión')) {
+        this.router.navigate(['/login']);
+    } else if (busquedaNormalizada.includes('mapa del sitio')) {
+        this.router.navigate(['/mapa']);
+    } else if (busquedaNormalizada.includes('mapa')) {
+      this.router.navigate(['/mapa']);
+    } else if (busquedaNormalizada.includes('sitio')) {
+      this.router.navigate(['/mapa']);
+    } else if (busquedaNormalizada.includes('preguntas')) {
+      this.router.navigate(['/preguntas']);
+    } else if (busquedaNormalizada.includes('preguntas frecuentes')) {
+      this.router.navigate(['/preguntas']);
+    } else {
         console.log('No se encontró ninguna página para el término de búsqueda ingresado.');
-        break;
     }
-  }
+}
+
+
+    
+  
 }
