@@ -2,6 +2,7 @@ header{
     padding: 60px;
     background: #c079d9;
     font-family: 'Poppins', sans-serif;  
+    position: relative;
 }
 
 .logo-container {
@@ -9,12 +10,13 @@ header{
     top: 0;
     left: 0;
     padding: 10px;
-  }
+}
   
-  .logo {
+.logo {
     width: 80%; /* Ajusta el tamaño del logo según sea necesario */
     max-width: 250px; /* Establece un máximo para el tamaño del logo */
-  }
+}
+
 .nav-bar{
     width: 70%;
     height: 2%;
@@ -24,13 +26,16 @@ header{
 .logo:hover{
     cursor: pointer;
 }
+
 .desktop-menu{
     margin-top: 10px;
 }
+
 .desktop-menu ul{
     padding: 0;
     margin: 0;
 }
+
 .desktop-menu ul li{
     list-style-type: none;
     color: white;
@@ -94,7 +99,8 @@ a{
       }
     
       .logo {
-        width: 30%; /* Ajusta el tamaño del logo para dispositivos móviles */
+        width: 90%; /* Ajusta el tamaño del logo para dispositivos móviles */
+
       }
 
       .main-container {
@@ -108,6 +114,7 @@ a{
         margin-left: -260px; /* Ancho del menú desplegable */
       }
 }
+
 .container-search {
     position: absolute;
     top: 100%; /* Coloca la barra de búsqueda debajo del encabezado */
@@ -124,7 +131,7 @@ input {
     color: black;
     border-radius: 50px;
     font-size: 20px;
-    border: 1px solid cyan;
+    border: 1px solid #c079d9;
     transition: all .7s ease;
 }
 
@@ -136,21 +143,35 @@ input {
     position: absolute;
     right: 0; /* Ajusta la posición del botón a la esquina superior derecha */
     top: 0;
-    width: 80px;
-    height: 80px;
-    background: cyan;
-    line-height: 80px;
+    width: 60px;
+    height: 60px;
+    background: #c079d9;
     border-radius: 50%;
     text-align: center;
     cursor: pointer;
     transition: .5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn i {
     font-size: 25px;
     color: white;
-    line-height: 80px;
     transition: all .7s ease;
+}
+
+.container-search {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    display: flex; /* Usamos flexbox para centrar el input y el botón */
+    align-items: center; /* Centra verticalmente los elementos */
+}
+
+input {
+    margin-right: 10px; /* Agregamos un margen entre el input y el botón */
 }
 
 .container-search:hover input {
@@ -162,5 +183,5 @@ input {
 }
 
 .btn:hover {
-    background: cyan;
+    background: rgb(104, 5, 146);
 }

@@ -8,5 +8,6 @@ export default interface Curso {
     idioma: String;
     valoracion: number;
     pais: String;
-    precio: number
+    precio: number;
+    contenido: String;
 }

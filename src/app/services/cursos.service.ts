@@ -31,10 +31,10 @@ export class CursosService {
     return addDoc(coleccion, data)
   }
 
-  getDatos<Tipo>(id: string, path: string): Observable<Tipo> {
-    const documentRef = doc(this.firestore, path, id);
+  getDatos<Tipo>(uid: string, path: string): Observable<Tipo> {
+    const documentRef = doc(this.firestore, path, uid);
     return docData(documentRef, { idField: 'uid' }) as Observable<Tipo>;
-}
+  }
 
 }
 

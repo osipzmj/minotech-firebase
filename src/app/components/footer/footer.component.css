@@ -41,3 +41,7 @@ p{
 .help-links li a:hover {
     color: black; /* Color de resaltado al pasar el ratón */
 }
+
+ul{
+    list-style: none;
+}

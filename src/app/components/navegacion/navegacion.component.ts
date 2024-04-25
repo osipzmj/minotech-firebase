@@ -7,6 +7,8 @@ import Curso from 'src/app/interfaces/curso.interface';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-navegacion',
   templateUrl: './navegacion.component.html',
@@ -16,21 +18,21 @@ export class NavegacionComponent implements OnInit{
 
   menuValue:boolean = false;
   menu_icon: string = 'bi bi-list';
-  rol: 'estandar' | 'admin' | null = null;
+  rol: 'admin' | 'estandar' | null = null ;
   // isLoginIn: boolean = false;
 
   terminoBusqueda: string = '';
   resultados: Curso[] | undefined;
   formulario: FormGroup;
   isUserLoggedIn: boolean = false;
-  isUserLoggedInAdmin: boolean = false;
 
   
   constructor(
     private  _cursoService: CursosService,
     private el: ElementRef, private renderer: Renderer2,
     private authService: UsuariosService, 
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
     
   ){ 
     this.formulario = new FormGroup({
@@ -42,21 +44,22 @@ export class NavegacionComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    // Suscríbete al estado del usuario autenticado
     this.authService.stateUser().subscribe((user: User | null) => {
-      if (user) {
-        this.isUserLoggedIn = true;
-        this.getDatosUser(user.uid);
-        this.rol = this.rol // Esta función debería eventualmente asignar 'estandar' o 'admin' a `rol`
-      } if (user){
-        this.isUserLoggedInAdmin = true;
-        this.rol = 'admin'
-      }else {
-        this.isUserLoggedIn = false;
-        this.rol = null  // Asegúrate que '' o null esté permitido según tu elección en la definición del tipo
-      }
+        if (user) {
+            // Si hay un usuario autenticado
+            this.isUserLoggedIn = true;
+            
+            // Llama a getDatosUser para obtener los datos del usuario autenticado
+            this.getDatosUser(user.uid);
+        } else {
+            // Si no hay un usuario autenticado
+            this.isUserLoggedIn = false;
+            this.rol = null; // Asegúrate de que null sea el valor adecuado para rol cuando el usuario no está autenticado
+        }
     });
   }
-
+  
   abrirMenu(){
     this.menuValue = !this.menuValue;
     this.menu_icon = this.menuValue ? 'bi bi-x' : 'bi bi-list';
@@ -91,19 +94,62 @@ export class NavegacionComponent implements OnInit{
 
   logout(){
     this.authService.logout();
-    alert("Sesión finalizada")
+    this.toastr.info("Sesión finalizada")
     this.router.navigate(['/login'])
   }
 
-  getDatosUser(uid: any) {
-    const path = "Usuarios";
-    const id = uid;
-    this._cursoService.getDatos<Usuario>(path, id).subscribe(res => {
-        console.log('datos ->', res);
+  getDatosUser(uid: string) {
+    const path = "Usuario"; // Ruta de la colección de usuarios en Firestore
+
+    // Llama al método getDatos de tu servicio para obtener los datos del usuario
+    this._cursoService.getDatos<Usuario>(path, uid).subscribe(res => {
         if (res) {
-            this.rol = res.rol; // Utilizando el rol del usuario
+            // Si hay una respuesta, asigna el rol del usuario a this.rol
+            this.rol = res.rol;
+        } else {
+            // Si no se encontró el usuario, puedes manejarlo de acuerdo a tus necesidades
+            console.log("Usuario no encontrado");
+            this.rol = null;
         }
+    }, (error) => {
+        // Maneja los errores de la suscripción si es necesario
+        console.error("Error al obtener los datos del usuario:", error);
+        this.rol = null;
     });
   }
   
+  buscar() {
+    // Elimina los espacios en blanco al inicio y al final del término de búsqueda
+    const busqueda = this.terminoBusqueda.trim().toLowerCase();
+
+    // Redirige a la página correspondiente según el término de búsqueda
+    switch (busqueda) {
+      case 'inicio':
+        this.router.navigate(['/home']);
+        break;
+      case 'cursos':
+        this.router.navigate(['/cursos']);
+        break;
+      case 'crear curso':
+        this.router.navigate(['/agregar-curso']);
+        break;
+      case 'iniciar sesión':
+        this.router.navigate(['/login']);
+        break;
+      case 'registro':
+        this.router.navigate(['/registro']);
+        break;
+      case 'cerrar sesión':
+        this.router.navigate(['/login']); // Otra opción sería redirigir al componente de cerrar sesión
+        break;
+      case 'mapa del sitio':
+        this.router.navigate(['/mapa-sitio']);
+        break;
+      default:
+        // Si el término de búsqueda no coincide con ninguna página conocida, 
+        // puedes mostrar un mensaje de error o realizar otra acción
+        console.log('No se encontró ninguna página para el término de búsqueda ingresado.');
+        break;
+    }
+  }
 }

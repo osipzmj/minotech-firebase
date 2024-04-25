@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { CursosService } from 'src/app/services/cursos.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registro',
@@ -35,7 +36,8 @@ export class RegistroComponent {
   constructor(
     private usuarioService: UsuariosService,
     private router: Router,
-    private cursoService: CursosService
+    private cursoService: CursosService,
+    private toastr: ToastrService
   ) {}
 
   togglePasswordVisibility() {
@@ -93,16 +95,16 @@ export class RegistroComponent {
       // Guarda los datos en Firestore o realiza otras operaciones
       await this.cursoService.createDoc(this.datosU, path, id);
 
-      alert(`Registro exitoso. Bienvenido ${this.datosU.nombre}`);
+      this.toastr.success(`Registro exitoso. Bienvenido ${this.datosU.nombre}`);
       this.router.navigate(['/home']);
     } catch (error: any) {
       console.error('Error en el registro:', error);
       if (error.code === 'auth/email-already-in-use') {
-        alert(
+        this.toastr.info(
           'Este correo electrónico ya está en uso. Por favor, utiliza otro correo.'
         );
       } else {
-        alert(
+        this.toastr.warning(
           'Ocurrió un error durante el registro. Por favor, inténtalo de nuevo.'
         );
       }

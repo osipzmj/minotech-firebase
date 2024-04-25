@@ -1,0 +1,32 @@
+<br>
+<div class="mapa-sitio-container">
+    <h3>MAPA DEL SITIO</h3>
+    <br>
+    <div class="sitio-fila">
+      <ul class="sitio-links">
+        <li><a routerLink="/">Inicio</a></li>
+      </ul>
+    </div>
+    <div class="sitio-fila">
+      <ul class="sitio-links">
+        <li *ngIf="!isLoggedIn"><a routerLink="/registro">Registrarse</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/login">Iniciar Sesión</a></li>
+      </ul>
+    </div>
+    <div class="sitio-fila">
+      <ul class="sitio-links">
+        <li><a routerLink="/cursos">Cursos</a></li>
+        <!-- <li *ngIf="esAdmin"><a routerLink="/agregar-curso">Agregar Curso</a></li> -->
+      </ul>
+    </div>
+    <div class="sitio-fila">
+      <ul class="sitio-links">
+        <li><a routerLink="/preguntas">Preguntas Frecuentes</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  
+  
+<!-- PARA AGREGAR CURSO *ngIf="esAdmin"-->
+<!-- PARA REGISTRO Y LOGIN *ngIf="!isLoggedIn"-->

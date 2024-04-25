@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { PaginaErrorComponent } from './components/pagina-error/pagina-error.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
+import { MapaSitioComponent } from './components/mapa-sitio/mapa-sitio.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/home',pathMatch:'full'},
@@ -16,8 +17,9 @@ const routes: Routes = [
   {path:'registro',component:RegistroComponent},
   {path: 'login', component: LoginComponent, pathMatch: "full" },
   {path: 'preguntas', component: PreguntasComponent},
+  {path: 'mapa', component: MapaSitioComponent},
  // { path: 'cursos/:_id', component: CursoDetalleComponent },
-  { path: '**', component:PaginaErrorComponent }
+  { path: '**', component:PaginaErrorComponent },
   
 ];
 

@@ -6,5 +6,4 @@ export interface Usuario {
     telefono: any;
     password: any;
     rol: 'estandar' | 'admin';
-    // fechaCreacionUsuario: Date;
 }

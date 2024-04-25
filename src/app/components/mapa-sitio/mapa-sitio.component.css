@@ -1,0 +1,54 @@
+/* Estilos para el contenedor principal del mapa del sitio */
+.mapa-sitio-container {
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background: linear-gradient(135deg, #9010ac, #d09ee4); /* Fondo degradado */
+    padding: 30px; /* Aumentamos el relleno */
+    border-radius: 15px; /* Borde redondeado */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+/* Estilos para el título del mapa del sitio */
+.mapa-sitio-container h3 {
+    font-size: 42px; /* Aumentamos el tamaño del título */
+    margin-bottom: 30px; /* Mayor espacio después del título */
+    color: #fff; /* Color del título */
+    text-transform: uppercase; /* Convertimos el texto a mayúsculas */
+    font-family: 'Poppins', sans-serif;  /* Tipografía audaz */
+}
+
+/* Estilos para la lista de enlaces */
+.sitio-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilos para cada elemento de la lista */
+.sitio-links li {
+    margin: 0 15px; /* Aumentamos el espacio entre elementos */
+}
+
+/* Estilos para los enlaces */
+.sitio-links li a {
+    text-decoration: none;
+    color: #fff; /* Color de texto blanco */
+    padding: 15px 30px; /* Aumentamos el padding para que los enlaces sean más grandes */
+    border-radius: 8px; /* Aumentamos el radio de borde para hacer los enlaces más redondeados */
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-size: 20px; /* Aumentamos el tamaño de la fuente */
+    background-color: #000000; /* Color de fondo verde */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Estilos para los enlaces al pasar el cursor */
+.sitio-links li a:hover {
+    background-color: #4a4949; /* Cambiamos el color de fondo al pasar el cursor */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada al pasar el cursor */
+    transform: translateY(-2px); /* Desplazamiento hacia arriba */
+}

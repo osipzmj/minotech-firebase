@@ -7,7 +7,7 @@
 }
 
 .tarjeta {
-    width: 30%;
+    width: 100%;
     padding: 10%;
     font-family: Poppins;
     font-weight: 500;
@@ -19,7 +19,7 @@
     margin: 10px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
-    width: calc(33.33% - 20px); /* Establece el ancho de cada tarjeta */
+    /* Establece el ancho de cada tarjeta */
 }
 
 /* Efecto al pasar el cursor */
@@ -102,14 +102,14 @@ li {
 }
 
 /* Consulta de medios para pantallas de hasta 768px */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 748px) {
     .modal-content {
         width: 90%; /* Ajusta el ancho del modal para pantallas más pequeñas */
     }
 }
 
 /* Consulta de medios para pantallas de hasta 768px */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 748px) {
     .container-tarjetas {
         flex-direction: column; /* Cambia a una disposición de columna */
         align-items: center; /* Alinea las tarjetas al centro */

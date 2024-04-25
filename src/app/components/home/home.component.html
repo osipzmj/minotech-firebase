@@ -4,8 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página de Inicio</title>
+  <style>
+    /* Estilos para la barra de navegación vertical */
+    .vertical-nav {
+      position: fixed;
+      top: 50px;
+      left: 10px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+    }
+
+    /* Estilo para los enlaces */
+    .vertical-nav a {
+      display: block;
+      margin: 5px 0;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Estilo para resaltar el enlace de la sección actual */
+    .vertical-nav a.active {
+      color: #ff0000;
+    }
+  </style>
 </head>
 <body>
+
+  
   <div class="principal-1" [@fadeIn]>
     <div class="text-container">
       <h1 id="t1" class="show fade-in">Aprende, Inventa y Práctica </h1>

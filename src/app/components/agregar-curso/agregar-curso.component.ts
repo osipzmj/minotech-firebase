@@ -25,7 +25,8 @@ export class AgregarCursoComponent implements OnInit {
       idioma: new FormControl(),
       valoracion: new FormControl(),
       pais: new FormControl(),
-      precio: new FormControl()
+      precio: new FormControl(),
+      contenido: new FormControl()
     });
     this.images = [];
   }

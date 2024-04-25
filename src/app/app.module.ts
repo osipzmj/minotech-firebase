@@ -21,9 +21,10 @@ import { from } from 'rxjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from 'src/pipes/filter.pipe';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { Storage, getStorage, provideStorage } from '@angular/fire/storage';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { ToastrModule } from 'ngx-toastr';
+import { MapaSitioComponent } from './components/mapa-sitio/mapa-sitio.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     RegistroComponent,
     PaginaErrorComponent,
     PreguntasComponent,
+    MapaSitioComponent
       //  CursoDetalleComponent,
   ],
   imports: [
@@ -43,6 +45,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    ToastrModule.forRoot(),
     ReactiveFormsModule,  
     RecaptchaModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),

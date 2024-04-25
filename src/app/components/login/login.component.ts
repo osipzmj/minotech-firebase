@@ -2,9 +2,7 @@ import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { NgbToastOptions } from '@ng-bootstrap/ng-bootstrap/toast/toast-config';
-import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -25,13 +23,15 @@ export class LoginComponent {
   //usersService = inject(UsersService);
   router = inject(Router)
 
-  constructor( private usuarioService: UsuariosService, private fb: FormBuilder) {
+  constructor( private usuarioService: UsuariosService, private fb: FormBuilder,private toastr: ToastrService) {
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
   });
   }
-
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
+  }
   togglePasswordVisibility(): void {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
 }
@@ -40,15 +40,14 @@ export class LoginComponent {
     if (!this.formulario.valid) {
         // Marca todos los controles como tocados para mostrar errores
         this.formulario.markAllAsTouched();
-        NgbToast.('My name is Inigo Montoya. You killed my father, prepare to die!')
-        alert('Por favor, completa todos los campos correctamente.');
+        this.toastr.warning('Por favor, completa todos los campos correctamente.');
         return;
     }
     
     if (!this.captchaVerified) {
         // Si el captcha no está verificado, solicita que lo complete
         this.captchaVisible = true;
-        alert('Por favor, completa el reCAPTCHA para continuar.');
+        this.toastr.info('Por favor, completa el reCAPTCHA para continuar.');
         return;
     }
 
@@ -57,11 +56,11 @@ export class LoginComponent {
         .then(response => {
             console.log(response);
             this.router.navigate(['/home']);
-            alert("Bienvenido de nuevo " + this.formulario.value.email);
+            this.toastr.success("Bienvenido de nuevo " + this.formulario.value.email);
         })
         .catch(error => {
             console.error(error);
-            alert("Upss... Parece que algo salió mal. Revisa que tu correo o tu contraseña sean correctos.");
+            this.toastr.warning("Upss... Parece que algo salió mal. Revisa que tu correo o tu contraseña sean correctos.");
             
             // Intenta reiniciar el reCAPTCHA después de un breve retraso
             setTimeout(() => {
@@ -94,14 +93,14 @@ export class LoginComponent {
           rol: 'estandar'
         }) // Asegúrate de pasar un objeto con el campo `email`.
             .then(() => {
-                alert('Se ha enviado un correo de recuperación de contraseña.');
+                this.toastr.info('Se ha enviado un correo de recuperación de contraseña.');
             })
             .catch(error => {
                 console.error('Error al enviar el correo de recuperación:', error);
-                alert('Error al intentar recuperar la contraseña.');
+                this.toastr.warning('Error al intentar recuperar la contraseña.');
             });
     } else {
-        alert('Por favor ingresa un correo electrónico válido.');
+        this.toastr.warning('Por favor ingresa un correo electrónico válido.');
     }
 }
 

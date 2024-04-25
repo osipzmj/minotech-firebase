@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { FilterPipe } from 'src/pipes/filter.pipe';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cursos',
@@ -21,7 +22,7 @@ rol: 'estandar' | 'admin' | null = null;
 
 modalAbierto: number = -1;
 
-constructor( private cursoService: CursosService, private authService: UsuariosService ){
+constructor( private cursoService: CursosService, private authService: UsuariosService, private toastr: ToastrService ){
 this.cursos = []
 }
 
@@ -59,11 +60,20 @@ cerrarModal(modalId: string): void {
   }
 
 }
+
 applyFilter() {
   if (this.searchTerm.trim() === '') {
-    this.cursoService.obtenerCursos();
+    // Si la barra de búsqueda está vacía, muestra todos los cursos
+    this.cursoService.obtenerCursos().subscribe(cursos => {
+      this.cursos = cursos;
+    });
   } else {
-    this.cursos = new FilterPipe().transform(this.cursos, this.searchTerm);
+    // Si hay un término de búsqueda, filtra los cursos
+    this.cursoService.obtenerCursos().subscribe(cursos => {
+      this.cursos = cursos.filter(curso =>
+        curso.nombreCurso.toLowerCase().includes(this.searchTerm.trim().toLowerCase())
+      );
+    });
   }
 }
 
@@ -74,7 +84,7 @@ onInscribir() {
     this.isInscrito = true;
     // También puedes realizar otras acciones, como enviar datos al backend
   } else {
-    alert('Debes iniciar sesión para inscribirte.');
+    this.toastr.info('Debes iniciar sesión para inscribirte.');
   }
 }
 

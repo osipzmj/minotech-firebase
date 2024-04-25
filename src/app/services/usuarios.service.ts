@@ -18,12 +18,19 @@ import { CursosService } from './cursos.service';
 })
 export class UsuariosService {
   isUserLoggedIn: boolean = false;
+  adminUid: string = 'TIdGkwFzztT66rxgnNNCd2QUPRj1'; // UID del administrador
+
 
   constructor(private auth: Auth, private cursos: CursosService) {
 
    
    }
 
+   // Método para verificar si el usuario es administrador
+  isUserAdmin(uid: string): boolean {
+    return uid === this.adminUid;
+  }
+  
   async registro(datosU: Usuario) {
     const userCredential = await createUserWithEmailAndPassword(this.auth, datosU.email, datosU.password);
     await this.enviarEmailDeVerificacion(userCredential.user);
@@ -55,15 +62,14 @@ export class UsuariosService {
   stateUser(): Observable<User | null> {
     return new Observable<User | null>((observer) => {
         const unsubscribe = onAuthStateChanged(this.auth, (user) => {
-            observer.next(user); // Emitir el usuario actual
+            observer.next(user);
         }, (error) => {
-            observer.error(error); // Emitir un error si ocurre alguno
+            observer.error(error);
         });
 
-        // Retornar la función de desuscripción
         return () => unsubscribe();
     });
-}
+  }
   
   async recuperarContrasena(datosU: Usuario): Promise<void> {
     try {
