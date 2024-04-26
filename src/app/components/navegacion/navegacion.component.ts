@@ -160,8 +160,4 @@ export class NavegacionComponent implements OnInit{
         console.log('No se encontró ninguna página para el término de búsqueda ingresado.');
     }
 }
-
-
-    
-  
 }

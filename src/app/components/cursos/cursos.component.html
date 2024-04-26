@@ -1,6 +1,4 @@
-<div class="cursos">
-
-</div>
+<br>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +44,9 @@
           <p>{{curso.descripcion}}</p>
           <p>Precio: {{curso.precio}}</p>
           <p>Horas: {{curso.horas}}</p>
+          <p>Tipo: {{curso.tipoCurso}}</p>
+          <p>Idioma: {{curso.idioma}}</p>
+          <p>Pais: {{curso.pais}}</p>
           <!-- <p>{{curso.img}}</p> -->
         </div>
       </div>
@@ -56,10 +57,7 @@
           <span class="close" (click)="cerrarModal('miModal' + curso.id)">&times;</span>
           <h2>{{ curso.nombreCurso }}</h2>
           <p>{{curso.contenido}}</p>
-          <p>Tipo: {{curso.tipoCurso}}</p>
-          <p>Idioma: {{curso.idioma}}</p>
-          <p>Pais: {{curso.pais}}</p>
-          <p>Valoracion: {{curso.valoracion}}</p>
+          <p>Temas a tratar:<br>{{curso.temas}}</p>
           <button id="inscribirButton" [disabled]="isInscrito" (click)="onInscribir()">
             {{ isInscrito ? 'Inscrito' : 'Inscribirse' }}
           </button>

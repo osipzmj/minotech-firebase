@@ -19,10 +19,8 @@
     margin: 10px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
-    /* Establece el ancho de cada tarjeta */
 }
 
-/* Efecto al pasar el cursor */
 .tarjeta:hover {
     transform: scale(1.05);
 }
@@ -58,7 +56,6 @@ li {
 }
 
 /* Estilos para el modal */
-/* Estilos para el modal */
 .modal {
     display: none;
     position: fixed;
@@ -69,13 +66,13 @@ li {
     height: 100%;
     overflow: auto;
     background-color: rgba(0,0,0,0.5);
-    opacity: 0; /* Inicialmente, el modal está oculto */ /* Agregamos una transición suave para la opacidad */
+    opacity: 0; 
 }
 
 
 .modal.show {
     display: block;
-    opacity: 1; /* Cuando se muestra el modal, la opacidad se establece en 1 */
+    opacity: 1; 
 }
 
 
@@ -104,20 +101,20 @@ li {
 /* Consulta de medios para pantallas de hasta 768px */
 @media screen and (max-width: 748px) {
     .modal-content {
-        width: 90%; /* Ajusta el ancho del modal para pantallas más pequeñas */
-    }
-}
-
-/* Consulta de medios para pantallas de hasta 768px */
-@media screen and (max-width: 748px) {
-    .container-tarjetas {
-        flex-direction: column; /* Cambia a una disposición de columna */
-        align-items: center; /* Alinea las tarjetas al centro */
-        margin-left: 0; /* Elimina el margen izquierdo negativo */
+        width: 80%; /* Ajusta el ancho del modal para pantallas más pequeñas */
     }
 
     .tarjeta {
-        width: 100%; /* Ocupa todo el ancho disponible */
+        align-items: center;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .container-tarjetas {
+        flex-direction: column; /* Cambia a una disposición de columna */
+        align-items: center; /* Alinea las tarjetas al centro */
+        padding-left: 30px;
+        padding-right: 15px;
     }
 }
 

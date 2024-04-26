@@ -49,7 +49,7 @@ async onClickDelete(curso: Curso){
 abrirModal(modalId: string): void {
   const modal = document.getElementById(modalId);
   if (modal) {
-      modal.classList.add('show'); // Agrega la clase show para mostrar el modal con la animación
+    modal.classList.add('show');
   }
 }
 
