@@ -36,6 +36,15 @@ h3 {
     padding: 5%;  
 }
 
+h4 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
 p {
     font-family: Poppins;
     font-weight: 300;
@@ -116,6 +125,10 @@ li {
         padding-left: 30px;
         padding-right: 15px;
     }
+
+    p{
+        text-align: left;
+    }
 }
 
 .curso-img-container {
@@ -140,3 +153,55 @@ li {
     font-weight: 700;
     padding: 1%;
 }
+
+/* Estilos para las migas de pan */
+.breadcrumb {
+    padding: 25px 35px;
+    font-size: 18px;
+    display: flex;
+  }
+  
+  .breadcrumb-link {
+    color: #57216a; 
+    text-decoration: none; 
+  }
+  
+  .breadcrumb-link:hover {
+    color: #57216a; 
+    text-decoration: underline; 
+  }
+  
+  /* Estilos para la sección actual de las migas de pan */
+  .breadcrumb-current {
+    color: #c37ed4; 
+    font-weight: bold; 
+  }
+  
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Aplicar animación a las migas de pan */
+  .breadcrumb {
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  /* Zoom-in animation */
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }

@@ -132,10 +132,12 @@ body {
     
     #p1 {
       font-size: 125%; /* Puedes ajustar este valor según tus preferencias */
+      text-align: left;
     }
     
     #p2 {
       font-size: 125%; /* Puedes ajustar este valor según tus preferencias */
+      text-align: left;
     }
     
     .text-container {
@@ -152,8 +154,6 @@ body {
       justify-content: center; /* Centra horizontalmente el contenido */
       align-items: center; /* Centra verticalmente el contenido */
     }
-    
-    
   }
   
   

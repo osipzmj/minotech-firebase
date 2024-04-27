@@ -8,6 +8,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navegacion',
@@ -15,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./navegacion.component.css']
 })
 export class NavegacionComponent implements OnInit{
-
+  mostrarMenuSecundario: boolean = false;
   menuValue:boolean = false;
   menu_icon: string = 'bi bi-list';
   rol: 'admin' | 'estandar' | null = null ;
@@ -32,7 +33,8 @@ export class NavegacionComponent implements OnInit{
     private el: ElementRef, private renderer: Renderer2,
     private authService: UsuariosService, 
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute
     
   ){ 
     this.formulario = new FormGroup({
@@ -58,6 +60,9 @@ export class NavegacionComponent implements OnInit{
             this.rol = null; // Asegúrate de que null sea el valor adecuado para rol cuando el usuario no está autenticado
         }
     });
+    this.route.url.subscribe(url => {
+      this.mostrarMenuSecundario = url[0].path === 'cursos';
+    });    
   }
   
   abrirMenu(){
