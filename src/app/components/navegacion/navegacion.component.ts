@@ -19,11 +19,9 @@ export class NavegacionComponent implements OnInit{
   mostrarMenuSecundario: boolean = false;
   menuValue:boolean = false;
   menu_icon: string = 'bi bi-list';
-  rol: 'admin' | 'estandar' | null = null ;
+  rol: 'estandar' | 'admin' | null = null;
   // isLoginIn: boolean = false;
-
   terminoBusqueda: string = '';
-  resultados: Curso[] | undefined;
   formulario: FormGroup;
   isUserLoggedIn: boolean = false;
 
@@ -46,25 +44,68 @@ export class NavegacionComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    // Suscríbete al estado del usuario autenticado
+    this.authService.stateUser();
     this.authService.stateUser().subscribe((user: User | null) => {
-        if (user) {
-            // Si hay un usuario autenticado
-            this.isUserLoggedIn = true;
-            
-            // Llama a getDatosUser para obtener los datos del usuario autenticado
-            this.getDatosUser(user.uid);
-        } else {
-            // Si no hay un usuario autenticado
-            this.isUserLoggedIn = false;
-            this.rol = null; // Asegúrate de que null sea el valor adecuado para rol cuando el usuario no está autenticado
-        }
+      if (user) {
+        this.isUserLoggedIn = true;
+        this.rol = this.rol; // Esta función debería eventualmente asignar 'estandar' o 'admin' a `rol`
+      } else {
+        this.isUserLoggedIn = false;
+        this.rol = 'admin' || 'estandar'; // Asegúrate que '' o null esté permitido según tu elección en la definición del tipo
+      }
     });
     this.route.url.subscribe(url => {
       this.mostrarMenuSecundario = url[0].path === 'cursos';
     });    
   }
-  
+
+  getDatosUser() {
+    const collectionPath = 'Usuarios';
+
+    this._cursoService.getDocument<Usuario>(collectionPath).subscribe(
+      (usuarios: Usuario[]) => {
+          // Iterar sobre cada usuario
+          usuarios.forEach(usuario => {
+              // Aquí puedes realizar las operaciones que necesites con cada usuario
+              console.log(usuario);
+          });
+      },
+      (error) => {
+          console.error("Error al obtener los datos de los usuarios:", error);
+      }
+  );
+}
+
+//   getDatosUser(uid: string) {
+//     const path = "Usuarios";
+//     this._cursoService.getDocument<Usuario>(path).subscribe(user => {
+//       console.log('datos ->', user);
+//       if (user) {
+//           this.rol = user.rol; // Utilizando el rol del usuario
+//       }
+//   });
+// }
+
+  // getDatosUser(uid: string) {
+  //   const path = "Usuarios"; // Ruta de la colección de usuarios en Firestore
+
+  //   // Llama al método getDatos de tu servicio para obtener los datos del usuario
+  //   this._cursoService.getDocument<Usuario>(path, uid).subscribe(res => {
+  //       if (res) {
+  //           // Si hay una respuesta, asigna el rol del usuario a this.rol
+  //           this.rol = res.rol;
+  //       } else {
+  //           // Si no se encontró el usuario, puedes manejarlo de acuerdo a tus necesidades
+  //           console.log("Usuario no encontrado");
+  //           this.rol = null;
+  //       }
+  //   }, (error) => {
+  //       // Maneja los errores de la suscripción si es necesario
+  //       console.error("Error al obtener los datos del usuario:", error);
+  //       this.rol = null;
+  //   });
+  // }
+
   abrirMenu(){
     this.menuValue = !this.menuValue;
     this.menu_icon = this.menuValue ? 'bi bi-x' : 'bi bi-list';
@@ -103,27 +144,6 @@ export class NavegacionComponent implements OnInit{
     this.router.navigate(['/login'])
   }
 
-  getDatosUser(uid: string) {
-    const path = "Usuario"; // Ruta de la colección de usuarios en Firestore
-
-    // Llama al método getDatos de tu servicio para obtener los datos del usuario
-    this._cursoService.getDatos<Usuario>(path, uid).subscribe(res => {
-        if (res) {
-            // Si hay una respuesta, asigna el rol del usuario a this.rol
-            this.rol = res.rol;
-        } else {
-            // Si no se encontró el usuario, puedes manejarlo de acuerdo a tus necesidades
-            console.log("Usuario no encontrado");
-            this.rol = null;
-        }
-    }, (error) => {
-        // Maneja los errores de la suscripción si es necesario
-        console.error("Error al obtener los datos del usuario:", error);
-        this.rol = null;
-    });
-  }
-  
- 
   buscar(busqueda: string) {
     // Elimina los espacios en blanco al inicio y al final del término de búsqueda
     const busquedaNormalizada = busqueda.trim().toLowerCase();

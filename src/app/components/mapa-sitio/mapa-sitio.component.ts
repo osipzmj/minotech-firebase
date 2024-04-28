@@ -14,18 +14,18 @@ export class MapaSitioComponent implements OnInit {
 
   ngOnInit(): void {
     // Verificar el estado del usuario al iniciar el componente
-    this.usuariosService.stateUser().subscribe((user: any) => {
-      if (user) {
-        // El usuario está autenticado
-        this.isLoggedIn = true;
-        // Verificar si el usuario es administrador
-        this.isAdmin = this.usuariosService.isUserAdmin(user.uid);
-      } else {
-        // El usuario no está autenticado
-        this.isLoggedIn = false;
-        this.isAdmin = false;
-      }
-    });
+    // this.usuariosService.stateUser().subscribe((user: any) => {
+    //   if (user) {
+    //     // El usuario está autenticado
+    //     this.isLoggedIn = true;
+    //     // Verificar si el usuario es administrador
+    //     this.isAdmin = this.usuariosService.isUserAdmin(user.uid);
+    //   } else {
+    //     // El usuario no está autenticado
+    //     this.isLoggedIn = false;
+    //     this.isAdmin = false;
+    //   }
+    // });
   }
 
   esAdmin(): boolean {

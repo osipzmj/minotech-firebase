@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp  } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth'
-import { HomeComponent } from './components/home/home.component';
 import { CursosComponent } from './components/cursos/cursos.component';
 import { AgregarCursoComponent } from './components/agregar-curso/agregar-curso.component';
 import { environment } from 'src/environments/environments';
@@ -21,10 +20,13 @@ import { from } from 'rxjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from 'src/pipes/filter.pipe';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
-import { Storage, getStorage, provideStorage } from '@angular/fire/storage';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ToastrModule } from 'ngx-toastr';
 import { MapaSitioComponent } from './components/mapa-sitio/mapa-sitio.component';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { MapaSitioComponent } from './components/mapa-sitio/mapa-sitio.component
     provideStorage(()=> getStorage()),
     //Storage,
     NgbModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule // Importa el módulo de autenticación
     
   ],
   providers: [FilterPipe],
