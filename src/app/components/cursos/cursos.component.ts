@@ -31,15 +31,15 @@ this.cursos = []
     this.cursos = cursos;
   })
 
-  ;(await this.authService.stateUser()).subscribe((user: User | null) => {
-    if (user) {
-      this.isUserLoggedIn = true;
-      this.getDatosUser(user.uid);
-    } else {
-      this.isUserLoggedIn = false;
-      this.rol = 'admin' || 'estandar';
-    }
-  });
+  // ;(await this.authService.stateUser()).subscribe((user: User | null) => {
+  //   if (user) {
+  //     this.isUserLoggedIn = true;
+  //     // this.getDatosUser(user.uid);
+  //   } else {
+  //     this.isUserLoggedIn = false;
+  //     this.rol = 'admin' || 'estandar';
+  //   }
+  // });
 }
 
 async onClickDelete(curso: Curso){
@@ -88,15 +88,15 @@ onInscribir() {
   }
 }
 
-getDatosUser(uid: string) {
-  const path = "Usuarios";
-  this.cursoService.getDatos<Usuario>(path, uid).subscribe(user => {
-      console.log('datos ->', user);
-      if (user) {
-          this.rol = user.rol; // Utilizando el rol del usuario
-      }
-  });
-}
+// getDatosUser(uid: string) {
+//   const path = "Usuarios";
+//   this.cursoService.getDatos<Usuario>(path, uid).subscribe(user => {
+//       console.log('datos ->', user);
+//       if (user) {
+//           this.rol = user.rol; // Utilizando el rol del usuario
+//       }
+//   });
+// }
 
 
 }

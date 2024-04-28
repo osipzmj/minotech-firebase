@@ -28,14 +28,19 @@
 
     <div class="registro">
       <input
-        type="text"
+        type="tel"
+        pattern="\d{3}-\d{3}-\d{4}"
+        maxlength="12"
         [(ngModel)]="datosU.telefono"
-        placeholder="Número telefónico"
+        placeholder="Número telefónico (123-456-7890)"
+        class="form-control"
+        title="Ingresa un número telefónico en el formato 123-456-7890"
       />
       <div *ngIf="validationErrors.telefono">
         <small class="text-danger">{{ validationErrors.telefono }}</small>
       </div>
     </div>
+    
 
     <div class="registro">
       <input
@@ -53,22 +58,30 @@
         <input
           type="{{ passwordType }}"
           [(ngModel)]="datosU.password"
+          (ngModelChange)="updatePasswordStrengthIndicator(datosU.password)"
           placeholder="Ingresa una contraseña"
           class="form-control"
         />
         <!-- Icono de ojo dentro del campo de entrada -->
         <i
           (click)="togglePasswordVisibility()"
-          [class]="
-            passwordType === 'password' ? 'bi bi-eye-slash' : 'bi bi-eye'
-          "
+          [class]="passwordType === 'password' ? 'bi bi-eye-slash' : 'bi bi-eye'"
           class="eye-icon"
         ></i>
       </div>
       <div *ngIf="validationErrors.password">
         <small class="text-danger">{{ validationErrors.password }}</small>
       </div>
+      
+      <!-- Agrega aquí una barra de progreso o indicador visual para la fortaleza de la contraseña -->
+      <div class="password-strength-indicator">
+        <progress [value]="passwordStrengthScore" max="100"></progress>
+        </div>
+        <div>
+        <span id="passS">{{ passwordStrengthLevel }}</span>
+      </div>
     </div>
+    
 
     <button
       (click)="onSubmit()"
