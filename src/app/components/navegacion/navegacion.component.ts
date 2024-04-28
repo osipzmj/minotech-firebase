@@ -43,38 +43,54 @@ export class NavegacionComponent implements OnInit{
 
   }
 
+  // ngOnInit(): void {
+  //   this.authService.stateUser();
+  //   this.authService.stateUser().subscribe((user: User | null) => {
+  //     if (user) {
+  //       this.isUserLoggedIn = true;
+  //       this.rol = 'admin' || 'estandar'; // Esta función debería eventualmente asignar 'estandar' o 'admin' a `rol`
+  //     } else {
+  //       this.isUserLoggedIn = false;
+  //       this.rol = null; // Asegúrate que '' o null esté permitido según tu elección en la definición del tipo
+  //     }
+  //   });
+  //   this.route.url.subscribe(url => {
+  //     this.mostrarMenuSecundario = url[0].path === 'cursos';
+  //   });    
+  // }
   ngOnInit(): void {
-    this.authService.stateUser();
-    this.authService.stateUser().subscribe((user: User | null) => {
-      if (user) {
-        this.isUserLoggedIn = true;
-        this.rol = this.rol; // Esta función debería eventualmente asignar 'estandar' o 'admin' a `rol`
-      } else {
-        this.isUserLoggedIn = false;
-        this.rol = 'admin' || 'estandar'; // Asegúrate que '' o null esté permitido según tu elección en la definición del tipo
-      }
+    // Suscríbete al estado del usuario autenticado
+    this.authService.stateUser().subscribe(user => {
+        if (user) {
+            // Si hay un usuario autenticado, establece isUserLoggedIn como true
+            this.isUserLoggedIn = true;
+            // Llama a getDatosUser para obtener los datos del usuario autenticado
+            this.getDatosUser(user.uid);
+            this.rol = this.rol
+        } else {
+            // Si no hay un usuario autenticado, establece isUserLoggedIn como false
+            this.isUserLoggedIn = false;
+            // Establece el rol como null
+            this.rol = null;
+        }
     });
-    this.route.url.subscribe(url => {
-      this.mostrarMenuSecundario = url[0].path === 'cursos';
-    });    
   }
+//   getDatosUser() {
+//     const collectionPath = 'Usuarios';
 
-  getDatosUser() {
-    const collectionPath = 'Usuarios';
-
-    this._cursoService.getDocument<Usuario>(collectionPath).subscribe(
-      (usuarios: Usuario[]) => {
-          // Iterar sobre cada usuario
-          usuarios.forEach(usuario => {
-              // Aquí puedes realizar las operaciones que necesites con cada usuario
-              console.log(usuario);
-          });
-      },
-      (error) => {
-          console.error("Error al obtener los datos de los usuarios:", error);
-      }
-  );
-}
+//     this._cursoService.getDocument<Usuario>(collectionPath).subscribe(
+//       (usuarios: Usuario[]) => {
+//           // Iterar sobre cada usuario
+//           usuarios.forEach(usuario => {
+//               // Aquí puedes realizar las operaciones que necesites con cada usuario
+//               console.log(usuario);
+//           });
+//       },
+//       (error) => {
+//           console.error("Error al obtener los datos de los usuarios:", error);
+//       }
+//   );
+// }
 
 //   getDatosUser(uid: string) {
 //     const path = "Usuarios";
@@ -105,6 +121,34 @@ export class NavegacionComponent implements OnInit{
   //       this.rol = null;
   //   });
   // }
+
+  //NUEVAAAAAAAAAAAA
+  getDatosUser(uid: string) {
+    // Ruta de la colección en Firestore
+    const path = 'Usuarios';
+    const id = uid;
+    console.log(uid)
+    
+    // Llama al método getDocument para obtener los datos del usuario
+    this._cursoService.getDocument<Usuario>(path, id).subscribe(
+        (res) => {
+            if (res) {
+                // Si el usuario existe, asigna el rol del usuario a this.rol
+                this.rol = res.rol;
+            } else {
+                // Si el usuario no fue encontrado, establece el rol como null
+                console.log(res)
+                console.log("Usuario no encontrado");
+                this.rol = null;
+            }
+        },
+        (error) => {
+            // Maneja los errores de la suscripción
+            console.error("Error al obtener los datos del usuario:", error);
+            this.rol = null; // Establece el rol como null en caso de error
+        }
+    );
+  }
 
   abrirMenu(){
     this.menuValue = !this.menuValue;

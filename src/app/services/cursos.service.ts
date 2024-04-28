@@ -31,32 +31,32 @@ export class CursosService {
     return addDoc(coleccion, data)
   }
 
-  getDocument<T>(path: string): Observable<T[]> {
-    const collectionRef = collection(this.firestore, path);
+//   getDocument<T>(path: string): Observable<T[]> {
+//     const collectionRef = collection(this.firestore, path);
     
-    return new Observable<T[]>((observer) => {
-        getDocs(collectionRef)
-            .then((querySnapshot) => {
-                const data: T[] = [];
-                querySnapshot.forEach((doc) => {
-                    // Convierte los documentos a datos genéricos y los agrega al array de datos
-                    data.push(doc.data() as T);
-                });
-                observer.next(data); // Envía los datos al observador
-                observer.complete(); // Completa el observable
-            })
-            .catch((error) => {
-                observer.error(error); // Envía el error al observador
-                observer.complete(); // Completa el observable
-            });
-    });
-}
+//     return new Observable<T[]>((observer) => {
+//         getDocs(collectionRef)
+//             .then((querySnapshot) => {
+//                 const data: T[] = [];
+//                 querySnapshot.forEach((doc) => {
+//                     // Convierte los documentos a datos genéricos y los agrega al array de datos
+//                     data.push(doc.data() as T);
+//                 });
+//                 observer.next(data); // Envía los datos al observador
+//                 observer.complete(); // Completa el observable
+//             })
+//             .catch((error) => {
+//                 observer.error(error); // Envía el error al observador
+//                 observer.complete(); // Completa el observable
+//             });
+//     });
+// }
 
-  // getDocument<T>(path: string, id: any): Observable<T> {
-  //   const docRef = doc(this.firestore, path, id);
-  //   return docData(docRef, { idField: 'uid'}) as Observable<T>;
+  getDocument<T>(path: string, id: any): Observable<T> {
+    const docRef = doc(this.firestore, path, id);
+    return docData(docRef, { idField: 'uid'}) as Observable<T>;
     
-  // }
+  }
 
   // getDoc<tipo>(path: string, id: string){
   //   return this.firestore.collection(path).doc<tipo>(id).valueChanges()

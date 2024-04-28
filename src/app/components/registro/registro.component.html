@@ -91,6 +91,12 @@
       Enviar
     </button>
     <br />
+    <div *ngIf="captchaVisible">
+      <re-captcha 
+          #reCaptcha
+          (resolved)="onCaptchaResolved($event)"
+          siteKey="6Lej1KApAAAAANfm2iDyUR1Sd-Gk3s9xhnxI5HQK"></re-captcha>
+      </div>
     <br />
     <div class="google">
       <button class="google-login" (click)="signInWithGoogle()">

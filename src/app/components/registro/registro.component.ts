@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { EmailAuthCredential } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -17,6 +17,10 @@ export class RegistroComponent {
   showModal: boolean = false;
   passwordStrengthScore: number = 0;  // Puntuación de fortaleza de la contraseña
   passwordStrengthLevel: string = '';
+  captchaVerified = false;
+  captchaVisible = false;
+  @ViewChild('reCaptcha') reCaptchaRef: ElementRef | undefined;
+
   datosU: Usuario = {
     uid: '',
     nombre:'',
@@ -46,101 +50,87 @@ export class RegistroComponent {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
   }
 
-async onSubmit() {
-    // Validación manual de los campos de datosU
+  async onSubmit() {
     this.validationErrors = {};
+    this.validateFields();
 
-    // Verifica que el nombre esté presente
+    if (!this.captchaVerified && Object.keys(this.validationErrors).length === 0) {
+        this.captchaVisible = true; // Asegura que el reCAPTCHA sea visible si aún no ha sido verificado
+        this.toastr.info('Por favor, completa el reCAPTCHA para continuar.');
+        return; // Retorna aquí para no continuar con el proceso de registro hasta que el reCAPTCHA esté verificado
+    } else {
+        this.captchaVisible = false; // Opcional, ocultar después de verificar
+    }
+    try {
+      const res = await this.usuarioService.registro(this.datosU);
+      console.log('Registro exitoso');
+      const path = 'Usuarios';
+      const id = res.user.uid;
+      this.datosU.uid = id;
+      this.datosU.password = '';
+
+      await this.cursoService.createDoc(this.datosU, path, id);
+
+      this.toastr.success(`Registro exitoso. Bienvenido ${this.datosU.nombre}`);
+      this.router.navigate(['/home']);
+    } catch (error: any) {
+      console.error('Error en el registro:', error);
+      this.handleRegistrationError(error);
+    }
+  }
+
+  validateFields() {
     if (!this.datosU.nombre) {
-        this.validationErrors.nombre = 'El nombre es obligatorio.';
+      this.validationErrors.nombre = 'El nombre es obligatorio.';
     }
 
-    // Verifica que la edad esté presente y sea mayor de 18 años
     if (this.datosU.edad === null || this.datosU.edad < 18) {
-        this.validationErrors.edad = 'Debes ser mayor de edad.';
+      this.validationErrors.edad = 'Debes ser mayor de edad.';
     }
 
-    // Verifica que el teléfono esté presente
     if (!this.datosU.telefono) {
       this.validationErrors.telefono = 'El teléfono es obligatorio.';
-  } else {
-      // Expresión regular para verificar el formato del número de teléfono
-      const phoneRegex = /^\+?[1-10]\d{1,14}$/; // Formato internacional
-      if (!phoneRegex.test(this.datosU.telefono)) {
-          this.validationErrors.telefono = 'Ingresa un número de teléfono válido.';
-      }
-  }
-
-    // Verifica que el correo electrónico esté presente y sea válido
-    if (!this.datosU.email) {
-        this.validationErrors.email = 'El correo electrónico es obligatorio.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.datosU.email)) {
-        this.validationErrors.email = 'Ingresa un correo electrónico válido.';
-    }
-
-    // Verifica que la contraseña esté presente y cumpla con los criterios de seguridad
-    if (!this.datosU.password) {
-        this.validationErrors.password = 'La contraseña es obligatoria.';
     } else {
-        // Verificar la longitud de la contraseña
-        if (this.datosU.password.length < 8) {
-            this.validationErrors.password = 'La contraseña debe tener al menos 8 caracteres.';
-        }
-        // Verificar si la contraseña contiene mayúsculas
-        else if (!/[A-Z]/.test(this.datosU.password)) {
-            this.validationErrors.password = 'La contraseña debe contener al menos una letra mayúscula.';
-        }
-        // Verificar si la contraseña contiene minúsculas
-        else if (!/[a-z]/.test(this.datosU.password)) {
-            this.validationErrors.password = 'La contraseña debe contener al menos una letra minúscula.';
-        }
-        // Verificar si la contraseña contiene números
-        else if (!/[0-9]/.test(this.datosU.password)) {
-            this.validationErrors.password = 'La contraseña debe contener al menos un número.';
-        }
-        // Verificar si la contraseña contiene símbolos especiales
-        else if (!/[!@#$%^&*(),.?":{}|<>]/.test(this.datosU.password)) {
-            this.validationErrors.password = 'La contraseña debe contener al menos un símbolo especial.';
-        } else {
-            // Puedes calcular la fortaleza de la contraseña aquí y actualizar la barra de progreso visual si es necesario.
-            // Por ejemplo:
-            this.updatePasswordStrengthIndicator(this.datosU.password);
-        }
+      const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+      if (!phoneRegex.test(this.datosU.telefono)) {
+        this.validationErrors.telefono = 'Ingresa un número de teléfono válido.';
+      }
     }
 
-    // Si hay errores, muestra alertas
-    if (Object.keys(this.validationErrors).length > 0) {
-        // Puedes usar alertas o simplemente salir de la función para no proceder con el registro
-        return;
+    if (!this.datosU.email) {
+      this.validationErrors.email = 'El correo electrónico es obligatorio.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.datosU.email)) {
+      this.validationErrors.email = 'Ingresa un correo electrónico válido.';
     }
 
-    // Si no hay errores, procede con el registro
-    try {
-        const res = await this.usuarioService.registro(this.datosU);
-        console.log('Registro exitoso');
-        const path = 'Usuarios';
-        const id = res.user.uid;
-        this.datosU.uid = id;
-        this.datosU.password = '';
-
-        // Guarda los datos en Firestore o realiza otras operaciones
-        await this.cursoService.createDoc(this.datosU, path, id);
-
-        this.toastr.success(`Registro exitoso. Bienvenido ${this.datosU.nombre}`);
-        this.router.navigate(['/home']);
-    } catch (error: any) {
-        console.error('Error en el registro:', error);
-        if (error.code === 'auth/email-already-in-use') {
-            this.toastr.info(
-                'Este correo electrónico ya está en uso. Por favor, utiliza otro correo.'
-            );
-        } else {
-            this.toastr.warning(
-                'Ocurrió un error durante el registro. Por favor, inténtalo de nuevo.'
-            );
-        }
+    if (!this.datosU.password) {
+      this.validationErrors.password = 'La contraseña es obligatoria.';
+    } else {
+      this.validatePassword();
     }
   }
+
+  validatePassword() {
+    if (this.datosU.password.length < 8) {
+      this.validationErrors.password = 'La contraseña debe tener al menos 8 caracteres.';
+    } else if (!/[A-Z]/.test(this.datosU.password)) {
+      this.validationErrors.password = 'La contraseña debe contener al menos una letra mayúscula.';
+    } else if (!/[a-z]/.test(this.datosU.password)) {
+      this.validationErrors.password = 'La contraseña debe contener al menos una letra minúscula.';
+    } else if (!/[0-9]/.test(this.datosU.password)) {
+      this.validationErrors.password = 'La contraseña debe contener al menos un número.';
+    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(this.datosU.password)) {
+      this.validationErrors.password = 'La contraseña debe contener al menos un símbolo especial.';
+    }
+  }
+
+  handleRegistrationError(error: any) {
+    if (error.code === 'auth/email-already-in-use') {
+      this.toastr.info('Este correo electrónico ya está en uso. Por favor, utiliza otro correo.');
+    } else {
+      this.toastr.warning('Ocurrió un error durante el registro. Por favor, inténtalo de nuevo.');
+    }
+ }
 
   updatePasswordStrengthIndicator(password: string) {
     // Puntuación inicial de fortaleza de la contraseña
@@ -216,6 +206,18 @@ updatePasswordStrengthVisual(strengthScore: number) {
     } catch (error) {
       console.error('Error en el inicio de sesión con Facebook:', error);
       // Manejar errores de inicio de sesión con Facebook, si es necesario
+    }
+  }
+
+  onCaptchaResolved(token: string | null): void {
+    if (token) {
+      // Si se resuelve el reCAPTCHA con éxito, actualiza captchaVerified a true
+      this.captchaVerified = true;
+      // Ejecutar el envío automático del formulario
+      this.onSubmit();
+    } else {
+      // Si el token es nulo, el captcha no se ha completado correctamente
+      this.captchaVerified = false;
     }
   }
 }
