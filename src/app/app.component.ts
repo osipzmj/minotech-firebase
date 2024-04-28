@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.authService.logout().then(() => {
         // Redirigir o hacer otras acciones después de cerrar sesión
         console.log('Sesión caducada por inactividad');
-        this.toastr.show('Sesión caducada por inactividad', 'Upsss...', {
+        this.toastr.show('Tu sesión a caducado por falta de actividad', 'Upsss... lo siento', {
           timeOut: 0, // Esto hace que la notificación no caduque
           closeButton: true // Muestra el botón de cierre para que el usuario pueda cerrar la notificación manualmente
         });

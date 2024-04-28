@@ -91,7 +91,7 @@
       Enviar
     </button>
     <br />
-    <div *ngIf="captchaVisible">
+    <div *ngIf="captchaVisible" @fadeInOut>
       <re-captcha 
           #reCaptcha
           (resolved)="onCaptchaResolved($event)"

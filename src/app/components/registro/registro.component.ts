@@ -7,11 +7,24 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { CursosService } from 'src/app/services/cursos.service';
 import { ToastrService } from 'ngx-toastr';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+        state('in', style({ opacity: 1 })),
+        transition('void => *', [
+            style({ opacity: 0 }),
+            animate(500)
+        ]),
+        transition('* => void', [
+            animate(500, style({ opacity: 0 }))
+        ])
+    ])
+]
 })
 export class RegistroComponent {
   showModal: boolean = false;
@@ -51,64 +64,84 @@ export class RegistroComponent {
   }
 
   async onSubmit() {
+    // Restablece los errores de validación
     this.validationErrors = {};
+    
+    // Llama a la función para validar los campos
     this.validateFields();
-
-    if (!this.captchaVerified && Object.keys(this.validationErrors).length === 0) {
-        this.captchaVisible = true; // Asegura que el reCAPTCHA sea visible si aún no ha sido verificado
+    
+    // Si hay errores de validación, muestra un mensaje y detiene el proceso
+    if (Object.keys(this.validationErrors).length > 0) {
+        this.toastr.error('Por favor, corrige los errores en el formulario.');
+        return; // Detiene el proceso de registro
+    }
+    
+    // Si no hay errores de validación, verifica el reCAPTCHA
+    if (!this.captchaVerified) {
+        this.captchaVisible = true; // Muestra el reCAPTCHA
         this.toastr.info('Por favor, completa el reCAPTCHA para continuar.');
-        return; // Retorna aquí para no continuar con el proceso de registro hasta que el reCAPTCHA esté verificado
-    } else {
-        this.captchaVisible = false; // Opcional, ocultar después de verificar
+        return; // Detiene el proceso de registro hasta que el reCAPTCHA esté verificado
     }
+
+    // Continúa con el proceso de registro si todo está validado
     try {
-      const res = await this.usuarioService.registro(this.datosU);
-      console.log('Registro exitoso');
-      const path = 'Usuarios';
-      const id = res.user.uid;
-      this.datosU.uid = id;
-      this.datosU.password = '';
+        const res = await this.usuarioService.registro(this.datosU);
+        console.log('Registro exitoso');
+        const path = 'Usuarios';
+        const id = res.user.uid;
+        this.datosU.uid = id;
+        this.datosU.password = ''; // Limpia la contraseña por seguridad
 
-      await this.cursoService.createDoc(this.datosU, path, id);
-
-      this.toastr.success(`Registro exitoso. Bienvenido ${this.datosU.nombre}`);
-      this.router.navigate(['/home']);
-    } catch (error: any) {
-      console.error('Error en el registro:', error);
-      this.handleRegistrationError(error);
+        await this.cursoService.createDoc(this.datosU, path, id);
+        
+        // Muestra un mensaje de éxito
+        this.toastr.success(`Registro exitoso. Bienvenido ${this.datosU.email}`);
+        
+        // Redirige al usuario
+        this.router.navigate(['/home']);
+    } catch (error) {
+        console.error('Error en el registro:', error);
+        this.handleRegistrationError(error);
     }
-  }
+}
 
   validateFields() {
+    // Validación del nombre
     if (!this.datosU.nombre) {
-      this.validationErrors.nombre = 'El nombre es obligatorio.';
+        this.validationErrors.nombre = 'El nombre es obligatorio.';
     }
 
+    // Validación de la edad
     if (this.datosU.edad === null || this.datosU.edad < 18) {
-      this.validationErrors.edad = 'Debes ser mayor de edad.';
+        this.validationErrors.edad = 'Debes ser mayor de edad.';
     }
 
+    // Validación del teléfono
     if (!this.datosU.telefono) {
-      this.validationErrors.telefono = 'El teléfono es obligatorio.';
+        this.validationErrors.telefono = 'El teléfono es obligatorio.';
     } else {
-      const phoneRegex = /^\+?[1-9]\d{1,14}$/;
-      if (!phoneRegex.test(this.datosU.telefono)) {
-        this.validationErrors.telefono = 'Ingresa un número de teléfono válido.';
-      }
+        // Expresión regular para verificar que el número de teléfono tenga al menos 10 dígitos
+        const phoneRegex = /^\d{10,}$/;
+        if (!phoneRegex.test(this.datosU.telefono)) {
+            this.validationErrors.telefono = 'Ingresa un número de teléfono válido con al menos 10 dígitos.';
+        }
     }
 
+    // Validación del correo electrónico
     if (!this.datosU.email) {
-      this.validationErrors.email = 'El correo electrónico es obligatorio.';
+        this.validationErrors.email = 'El correo electrónico es obligatorio.';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.datosU.email)) {
-      this.validationErrors.email = 'Ingresa un correo electrónico válido.';
+        this.validationErrors.email = 'Ingresa un correo electrónico válido.';
     }
 
+    // Validación de la contraseña
     if (!this.datosU.password) {
-      this.validationErrors.password = 'La contraseña es obligatoria.';
+        this.validationErrors.password = 'La contraseña es obligatoria.';
     } else {
-      this.validatePassword();
+        // Llama a tu método de validación de contraseña para verificar otros criterios de seguridad
+        this.validatePassword();
     }
-  }
+}
 
   validatePassword() {
     if (this.datosU.password.length < 8) {
