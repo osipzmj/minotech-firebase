@@ -12,8 +12,8 @@
     </div>
     <div class="sitio-fila">
       <ul class="sitio-links">
-        <li *ngIf="!isLoggedIn"><a routerLink="/registro">Registrarse</a></li>
-        <li *ngIf="!isLoggedIn"><a routerLink="/login">Iniciar Sesión</a></li>
+        <li *ngIf="isUserLoggedIn == false"><a href="login" style="font-size: 15px;">&nbsp;Iniciar Sesión<strong></strong></a></li>
+        <li *ngIf="isUserLoggedIn == false"><a href="registro" style="font-size: 16px;">&nbsp;Registrarse</a></li> 
       </ul>
     </div>
     <div class="sitio-fila">

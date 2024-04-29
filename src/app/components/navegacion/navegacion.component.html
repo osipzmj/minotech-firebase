@@ -20,7 +20,7 @@
               <li (mouseenter)="mostrarMenuSecundario = true" (mouseleave)="mostrarMenuSecundario = false">
                 <i class="bi bi-person-circle"></i>
                 <ul class="dropdown-menu" *ngIf="mostrarMenuSecundario">
-                  <li class="bienvenida" *ngIf="isUserLoggedIn == true">Hola {{this.nombre}}</li>                         
+                  <p class="bienvenida" *ngIf="isUserLoggedIn == true">Hola {{this.nombre}}</p>                    
                   <li *ngIf="isUserLoggedIn == false"><a href="login" style="font-size: 15px;"><i class="bi bi-box-arrow-in-right" style="padding-left: 8px;"></i>&nbsp;Iniciar Sesión<strong>__</strong></a></li>
                   <li *ngIf="isUserLoggedIn == false"><a href="registro" style="font-size: 16px;"><i class="bi bi-person-add" style="padding-left: 8px;"></i>&nbsp;Registrarse</a></li> 
                   <li *ngIf="isUserLoggedIn == true" (click)="logout()"><a href="login" style="font-size: 15px;"><i class="bi bi-box-arrow-right" style="padding-left: 9px;"></i>&nbsp;Cerrar Sesión<strong>__</strong></a></li> 

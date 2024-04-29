@@ -326,7 +326,11 @@ strong {
         display: block;
     }
 
-    .bienvenida{
+    .dropdown-menu p {
         font-size: 5px;
+        text-align: center;
+        margin: 2px;
+        color: white;
     }
+
 }
