@@ -123,7 +123,7 @@ li {
     .container-tarjetas {
         flex-direction: column; /* Cambia a una disposición de columna */
         align-items: center; /* Alinea las tarjetas al centro */
-        padding-left: 30px;
+        padding-left: 5px;
         padding-right: 15px;
     }
 

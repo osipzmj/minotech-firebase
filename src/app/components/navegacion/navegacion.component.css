@@ -257,6 +257,11 @@ strong {
     color: #c079d9;
 }  
 
+.bienvenida {
+    text-align: center;
+    padding-top: 10px;
+}
+
 @media screen and (min-width: 128px) and (max-width:900px) {
     .container-search {
         position: absolute;
@@ -300,7 +305,7 @@ strong {
     .dropdown-menu {
         position: absolute;
         top: 16%; /* Ajusta la posición según sea necesario */
-        right: 40px; /* Ajusta la posición según sea necesario */
+        right: 18px; /* Ajusta la posición según sea necesario */
         width: 80px;
     }
 
@@ -333,4 +338,8 @@ strong {
         color: white;
     }
 
+    header .bienvenida {
+        font-size: 20px;
+        color: #000;
+    }
 }
