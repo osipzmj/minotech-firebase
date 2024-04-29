@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, docData, getDoc, getDocs, query, where } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, docData, getDoc, getDocs, query, where, updateDoc } from '@angular/fire/firestore';
 import Curso from '../interfaces/curso.interface';
 import { Observable } from 'rxjs';
+import { Usuario } from '../interfaces/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,34 @@ export class CursosService {
     const coleccion = collection(this.firestore, path);
     return addDoc(coleccion, data)
   }
+
+  obtenerUsuarios(): Observable<Usuario[]>{
+    const cursoRef = collection(this.firestore, 'Usuarios');
+    return collectionData(cursoRef, { idField: 'uid' }) as Observable <Usuario[]>;
+  }
+
+  eliminarUsuario(usuario: Usuario){
+    const cursoDocRef = doc(this.firestore, `Usuarios/${usuario.uid}`);
+    return deleteDoc(cursoDocRef);
+  }
+  actualizarUsuario(uid: string, datos: Partial<Usuario>): Promise<void> {
+    // Obtén la referencia del documento del usuario usando su UID
+    const usuarioDocRef = doc(this.firestore, `Usuarios/${uid}`);
+    
+    // Utiliza updateDoc para actualizar el documento con los datos proporcionados
+    return updateDoc(usuarioDocRef, {
+      nombre: datos.nombre,
+      email: datos.email,
+      telefono: datos.telefono,
+      edad: datos.edad,
+      rol: datos.rol
+    });
+}
+
+  // actualizarUsuario(curso: Curso){
+  //   const cursoDocRef = doc(this.firestore, `cursos/${curso.id}`);
+  //   return doc(cursoDocRef);
+  // }
 
   getDocument<T>(path: string, id: string): Observable<T> {
     const docRef = doc(this.firestore, path, id);

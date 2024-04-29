@@ -5,5 +5,5 @@ export interface Usuario {
     email: any;
     telefono: any;
     password: any;
-    rol: 'estandar' | 'admin' | null;
+    rol: 'estandar' | 'admin' | 'profesor' | null;
 }

@@ -37,7 +37,7 @@ this.cursos = []
       // this.getDatosUser(user.uid);
     } else {
       this.isUserLoggedIn = false;
-      this.rol = 'admin' || 'estandar';
+      this.rol = null ;
     }
   });
 }
@@ -87,8 +87,5 @@ onInscribir() {
     this.toastr.info('Debes iniciar sesión para inscribirte.');
   }
 }
-
-
-
 
 }
