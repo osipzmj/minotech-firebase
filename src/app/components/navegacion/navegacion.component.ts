@@ -17,7 +17,7 @@ export class NavegacionComponent implements OnInit{
   mostrarMenuSecundario: boolean = false;
   menuValue:boolean = false;
   menu_icon: string = 'bi bi-list';
-  rol: 'estandar' | 'admin' | null = null;
+  rol: 'estandar' | 'admin' | 'profesor' | null = null;
   nombre = '';
   // isLoginIn: boolean = false;
   terminoBusqueda: string = '';
@@ -83,6 +83,7 @@ export class NavegacionComponent implements OnInit{
         const usuario = await this._cursoService.getDocumentByName<Usuario>(path,fieldName, id);
         if (usuario) {
             this.rol = usuario.rol;
+            console.log(this.rol)
             this.nombre = usuario.nombre;
         } else {
             console.log("Usuario no encontrado");

@@ -20,7 +20,7 @@ export class AdminGuard implements CanActivate {
             this.authService.stateUser().subscribe(async (user) => {
                 if (user) {
                     const usuario = await this.getDatosUser(user.uid);
-                    if (usuario && usuario.rol === 'admin') {
+                    if (usuario && usuario.rol === 'admin' || usuario && usuario.rol === 'profesor') {
                         resolve(true);
                     } else {
                         // Redirigir a la página de error si el usuario no tiene rol de admin

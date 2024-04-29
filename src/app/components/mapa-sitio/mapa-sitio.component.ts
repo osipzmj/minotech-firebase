@@ -11,7 +11,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 export class MapaSitioComponent implements OnInit {
   isLoggedIn: boolean = false;
   isAdmin: boolean = false;
-  rol: 'estandar' | 'admin' | null = null;
+  rol: 'estandar' | 'admin' | 'profesor' | null = null;
   isUserLoggedIn: boolean = false;
 
   constructor(

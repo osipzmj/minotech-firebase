@@ -10,6 +10,7 @@ import { PreguntasComponent } from './components/preguntas/preguntas.component';
 import { MapaSitioComponent } from './components/mapa-sitio/mapa-sitio.component';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AdminGuard } from './admin.guard';
+import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/home',pathMatch:'full'},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, pathMatch: "full" },
   {path: 'preguntas', component: PreguntasComponent},
   {path: 'mapa', component: MapaSitioComponent},
+  {path: 'usuarios', component: ListaUsuariosComponent,  canActivate: [AdminGuard]},
  // { path: 'cursos/:_id', component: CursoDetalleComponent },
   { path: '**', component:PaginaErrorComponent },
   

@@ -27,6 +27,7 @@ import { MapaSitioComponent } from './components/mapa-sitio/mapa-sitio.component
 import { AdminGuard } from './admin.guard';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     RegistroComponent,
     PaginaErrorComponent,
     PreguntasComponent,
-    MapaSitioComponent
+    MapaSitioComponent,
+    ListaUsuariosComponent
       //  CursoDetalleComponent,
   ],
   imports: [
