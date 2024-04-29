@@ -1,7 +1,17 @@
-<div id="miModal{{curso.id}}" class="modal" *ngFor="let curso of cursos">
-    <div class="modal-content">
-      <h2>{{ curso.nombreCurso }}</h2>
-      <p>{{curso.contenido}}</p>
-      <p><strong>Temas a tratar:</strong><br>{{curso.temas}}</p>
-    </div>
+<div class="container">
+  <div *ngIf="curso" class="curso-info">
+    <h2 style="text-align: center;">{{ curso.nombreCurso }}</h2>
+    <p>{{ curso.descripcion }}</p>  
+    <p><strong>Contenido del curso:</strong></p>
+    <p>{{ curso.contenido }}</p>
+    <p><strong>Temas a tratar:</strong><br>{{ curso.temas }}</p>
+    <!-- Aquí puedes agregar cualquier otro detalle del curso que desees mostrar -->
+    <p><strong>EXAMEN FINAL</strong></p>
+    <P>Lee cuidadosamente el siguiente texto...</P>
+    <p>{{ curso.lectura }}</p><br>
+    <h2 style="text-align: center;">FELICIDADES ACREDITASTE EL CURSO: <br><br>{{ curso.nombreCurso }}</h2>
   </div>
+  <div *ngIf="!curso" class="mensaje">
+    <p>No se ha encontrado el curso seleccionado.</p>
+  </div>
+</div>

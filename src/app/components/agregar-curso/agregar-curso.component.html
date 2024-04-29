@@ -89,6 +89,13 @@
         <div *ngIf="formTouched && cursoForm.get('temas')?.invalid" class="error-message" style="padding-bottom: 3%;">
             Por favor, complete este campo.
         </div>
+        <div class="form-group">
+            <label class="form-label">Lectura</label>
+            <textarea type="text" class="form-control" formControlName="lectura" style="height: 500px;"></textarea>
+        </div>
+        <div *ngIf="formTouched && cursoForm.get('lectura')?.invalid" class="error-message" style="padding-bottom: 3%;">
+            Por favor, complete este campo.
+        </div>
         <input type="submit" value="Enviar" class="btn btn-info">
         </form>
     </div>

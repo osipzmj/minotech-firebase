@@ -32,13 +32,14 @@ export class AgregarCursoComponent implements OnInit {
       pais: new FormControl('', [Validators.required, this.validarPais.bind(this)]),
       precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
       contenido: new FormControl('', Validators.required),
-      temas: new FormControl('', Validators.required)
+      temas: new FormControl('', Validators.required),
+      lectura: new FormControl('', Validators.required)
     });
     this.images = [];
   }
 
   ngOnInit(): void {
-    this.getImagenes();
+    //this.getImagenes();
   }
 
   async enviarDatos() {
@@ -51,24 +52,24 @@ export class AgregarCursoComponent implements OnInit {
       
     
     // Si hay una imagen, la subimos y obtenemos la URL
-    if (cursoData.img) {
-      const file = cursoData.img;
-      const imgRef = ref(this.storage, `img/${file.name}`);
+    // if (cursoData.img) {
+    //   const file = cursoData.img;
+    //   const imgRef = ref(this.storage, `img/${file.name}`);
       
-      try {
-        const response = await uploadBytes(imgRef, file);
-        console.log('Imagen subida con éxito:', response);
+    //   try {
+    //     const response = await uploadBytes(imgRef, file);
+    //     console.log('Imagen subida con éxito:', response);
         
-        // Obtenemos la URL de la imagen subida
-        const imageUrl = await getDownloadURL(imgRef);
+    //     // Obtenemos la URL de la imagen subida
+    //     const imageUrl = await getDownloadURL(imgRef);
         
-        // Agregamos la URL de la imagen a los datos del curso
-        cursoData.imgUrl = imageUrl;
-      } catch (error) {
-        console.log('Error al subir imagen:', error);
-        return;
-      }
-    }
+    //     // Agregamos la URL de la imagen a los datos del curso
+    //     cursoData.imgUrl = imageUrl;
+    //   } catch (error) {
+    //     console.log('Error al subir imagen:', error);
+    //     return;
+    //   }
+    // }
     
     // Enviamos los datos del curso al servicio
     try {
@@ -93,26 +94,26 @@ export class AgregarCursoComponent implements OnInit {
     this.cursoForm.patchValue({ img: file });
   }
 
-  async getImagenes() {
-    const imagesRef = ref(this.storage, 'img');
+  // async getImagenes() {
+  //   const imagesRef = ref(this.storage, 'img');
     
-    try {
-      const response = await listAll(imagesRef);
-      console.log('Imágenes encontradas:', response);
+  //   try {
+  //     const response = await listAll(imagesRef);
+  //     console.log('Imágenes encontradas:', response);
       
-      // Limpia la lista de imágenes
-      this.images = [];
+  //     // Limpia la lista de imágenes
+  //     this.images = [];
       
-      for (let item of response.items) {
-        const url = await getDownloadURL(item);
-        this.images.push(url);
-      }
+  //     for (let item of response.items) {
+  //       const url = await getDownloadURL(item);
+  //       this.images.push(url);
+  //     }
       
-      console.log('URLs de imágenes:', this.images);
-    } catch (error) {
-      console.log('Error al obtener imágenes:', error);
-    }
-  }
+  //     console.log('URLs de imágenes:', this.images);
+  //   } catch (error) {
+  //     //console.log('Error al obtener imágenes:', error);
+  //   }
+  // }
 
   // Validador personalizado para verificar si el país es válido
 validarPais(control: FormControl): { [key: string]: boolean } | null {

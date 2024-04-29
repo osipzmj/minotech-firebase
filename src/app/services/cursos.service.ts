@@ -91,6 +91,24 @@ export class CursosService {
         }
     }
   }
+
+  async getCursoByUid(uid: string): Promise<Curso | undefined> {
+    try {
+      const cursoDocRef = doc(this.firestore, `cursos/${uid}`);
+      const cursoSnapshot = await getDoc(cursoDocRef);
+
+      if (cursoSnapshot.exists()) {
+        const cursoData = cursoSnapshot.data() as Curso;
+        return { ...cursoData, id: cursoSnapshot.id };
+      } else {
+        console.log("No se encontró el curso con el UID proporcionado.");
+        return undefined;
+      }
+    } catch (error) {
+      console.error("Error al obtener el curso:", error);
+      return undefined;
+    }
+  }
   
 }
 

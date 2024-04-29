@@ -11,4 +11,5 @@ export default interface Curso {
     precio: number;
     contenido: String;
     temas: String;
+    lectura: String;
 }

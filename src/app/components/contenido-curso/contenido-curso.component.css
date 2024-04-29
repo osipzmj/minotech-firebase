@@ -1,0 +1,37 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  
+  .curso-info {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .curso-info h2 {
+    color: #333;
+  }
+  
+  .curso-info p {
+    color: #666;
+  }
+  
+  .curso-info strong {
+    color: #555;
+  }
+  
+  .mensaje {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffcccc;
+    border-radius: 8px;
+  }
+  
+  .mensaje p {
+    color: #660000;
+  }
+  

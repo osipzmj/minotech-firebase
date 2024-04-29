@@ -113,7 +113,7 @@ export class CursosComponent implements OnInit {
       // Aquí puedes agregar la lógica para inscribir al usuario en el curso
       this.isInscrito = true;
       const cursoUid = curso.id; // Asumiendo que cada curso tiene un UID
-      const url = `/curso/${cursoUid}`;
+      const url = `/contenido-curso/${cursoUid}`;
       window.open(url, '_blank'); // Abre una nueva pestaña con la URL del curso específico
     } else {
       this.toastr.info('Debes iniciar sesión para inscribirte.');

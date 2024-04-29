@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'preguntas', component: PreguntasComponent},
   {path: 'mapa', component: MapaSitioComponent},
   {path: 'usuarios', component: ListaUsuariosComponent,  canActivate: [AdminGuard]},
-  {path: 'curso/:uid', component: ContenidoCursoComponent },
+  { path: 'contenido-curso/:cursoUid', component: ContenidoCursoComponent },
  // { path: 'cursos/:_id', component: CursoDetalleComponent },
   { path: '**', component:PaginaErrorComponent },
   
