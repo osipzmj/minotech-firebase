@@ -222,7 +222,7 @@ updatePasswordStrengthVisual(strengthScore: number) {
 
   async signInWithGoogle() {
     try {
-      const response = await this.usuarioService.signInWithGoogle();
+      const response = await this.usuarioService.loginWithGoogle();
       console.log('Inicio de sesión con Google exitoso.', response);
       // Redireccionar o realizar alguna acción después del inicio de sesión exitoso
     } catch (error) {
@@ -233,7 +233,7 @@ updatePasswordStrengthVisual(strengthScore: number) {
 
   async signInWithFacebook() {
     try {
-      const response = await this.usuarioService.signInWithFacebook();
+      const response = await this.usuarioService.loginWithFacebook();
       console.log('Inicio de sesión con Facebook exitoso.', response);
       // Redireccionar o realizar alguna acción después del inicio de sesión exitoso
     } catch (error) {

@@ -89,11 +89,13 @@
   padding: 25px 35px;
   font-size: 18px;
   display: flex;
+  
 }
 
 .breadcrumb-link {
   color: #57216a; 
-  text-decoration: none; 
+  text-decoration: none;
+
 }
 
 .breadcrumb-link:hover {
@@ -134,4 +136,9 @@
     transform: scale(1);
     opacity: 1;
   }
+}
+
+.registro{
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
 }

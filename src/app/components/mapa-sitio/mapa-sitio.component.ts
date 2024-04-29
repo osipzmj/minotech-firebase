@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuariosService } from '../../services/usuarios.service';
+import { CursosService } from 'src/app/services/cursos.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Usuario } from 'src/app/interfaces/usuario';
 
 @Component({
   selector: 'app-mapa-sitio',
@@ -9,24 +11,51 @@ import { UsuariosService } from '../../services/usuarios.service';
 export class MapaSitioComponent implements OnInit {
   isLoggedIn: boolean = false;
   isAdmin: boolean = false;
+  rol: 'estandar' | 'admin' | null = null;
+  isUserLoggedIn: boolean = false;
 
-  constructor(private usuariosService: UsuariosService) { }
+  constructor(
+    private  _cursoService: CursosService,
+    private userSer: UsuariosService) { }
 
   ngOnInit(): void {
-    // Verificar el estado del usuario al iniciar el componente
-    // this.usuariosService.stateUser().subscribe((user: any) => {
-    //   if (user) {
-    //     // El usuario está autenticado
-    //     this.isLoggedIn = true;
-    //     // Verificar si el usuario es administrador
-    //     this.isAdmin = this.usuariosService.isUserAdmin(user.uid);
-    //   } else {
-    //     // El usuario no está autenticado
-    //     this.isLoggedIn = false;
-    //     this.isAdmin = false;
-    //   }
-    // });
-  }
+    // Suscríbete al estado del usuario autenticado
+    this.userSer.stateUser().subscribe(async user => {
+        if (user) {
+            // Si hay un usuario autenticado, establece isUserLoggedIn como true
+            this.isUserLoggedIn = true;
+            // Llama a getDatosUser para obtener los datos del usuario autenticado
+            await this.getDatosUser(user.uid);
+            // Después de que getDatosUser haya completado su ejecución,
+            // el rol estará disponible aquí
+            console.log(this.rol);
+        } else {
+            // Si no hay un usuario autenticado, establece isUserLoggedIn como false
+            this.isUserLoggedIn = false;
+            // Establece el rol como null
+            this.rol = null;
+        }
+    });
+}
+
+  async getDatosUser(uid: string) {
+    // Ruta de la colección en Firestore
+    const path = 'Usuarios';
+    const fieldName = 'uid';
+    const id = uid;
+    try {
+        const usuario = await this._cursoService.getDocumentByName<Usuario>(path,fieldName, id);
+        if (usuario) {
+            this.rol = usuario.rol;
+        } else {
+            console.log("Usuario no encontrado");
+            this.rol = null;
+        }
+    } catch (error) {
+        console.error("Error al obtener los datos del usuario:", error);
+        this.rol = null;
+    }
+}
 
   esAdmin(): boolean {
     return this.isAdmin;

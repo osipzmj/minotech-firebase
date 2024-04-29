@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, docData, getDoc, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, docData, getDoc, getDocs, query, where } from '@angular/fire/firestore';
 import Curso from '../interfaces/curso.interface';
 import { Observable } from 'rxjs';
-import { Usuario } from '../interfaces/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -31,56 +30,38 @@ export class CursosService {
     return addDoc(coleccion, data)
   }
 
-//   getDocument<T>(path: string): Observable<T[]> {
-//     const collectionRef = collection(this.firestore, path);
-    
-//     return new Observable<T[]>((observer) => {
-//         getDocs(collectionRef)
-//             .then((querySnapshot) => {
-//                 const data: T[] = [];
-//                 querySnapshot.forEach((doc) => {
-//                     // Convierte los documentos a datos genéricos y los agrega al array de datos
-//                     data.push(doc.data() as T);
-//                 });
-//                 observer.next(data); // Envía los datos al observador
-//                 observer.complete(); // Completa el observable
-//             })
-//             .catch((error) => {
-//                 observer.error(error); // Envía el error al observador
-//                 observer.complete(); // Completa el observable
-//             });
-//     });
-// }
-
-  getDocument<T>(path: string, id: any): Observable<T> {
+  getDocument<T>(path: string, id: string): Observable<T> {
     const docRef = doc(this.firestore, path, id);
     return docData(docRef, { idField: 'uid'}) as Observable<T>;
     
   }
 
-  // getDoc<tipo>(path: string, id: string){
-  //   return this.firestore.collection(path).doc<tipo>(id).valueChanges()
-  // }
+  async getDocumentByName<T>(collectionPath: string, fieldName: string, name: string): Promise<T | undefined> {
+    const q = query(collection(this.firestore, collectionPath), where(fieldName, '==', name));
+    const querySnapshot = await getDocs(q);
 
-  // getDatos(uid: any){
-  //   const usr = collection(this.firestore,'Usuarios')
-  //   console.log('Holaassas',)
-  //   return doc(usr,uid)
-  // }
-  
-//   getDocument<tipo>(path: string, id: any): Observable<tipo> {
-//     const documentRef = doc(this.firestore, path, id);
-//     return docData(documentRef, { idField: 'id' }) as Observable<tipo>;
-// }
-// getDocument<tipo>(path: string, id?: any): Observable<tipo[]> {
-//   const collectionRef = collection(this.firestore, path);
-//   return collectionData(collectionRef, { idField: id || 'id' }) as Observable<tipo[]>;
-// }
-
-// getDatos(email: any): Observable<Usuario> {
-//   const documentRef = doc(this.firestore, 'Usuarios', email);
-//   return docData(documentRef, { idField: 'email' }) as Observable<Usuario>;
-// }
+    if (querySnapshot.empty) {
+        return undefined; // No se encontró ningún documento con el nombre dado
+    } else {
+        // Solo se espera un documento con el nombre único, así que tomamos el primero
+        const docRef = doc(this.firestore, collectionPath, querySnapshot.docs[0].id);
+        try {
+            const docSnapshot = await getDoc(docRef);
+            if (docSnapshot.exists()) {
+                // El documento existe, puedes acceder a sus datos con docSnapshot.data()
+                return docSnapshot.data() as T;
+            } else {
+                // El documento no existe
+                console.log('El documento no existe en Firestore.');
+                return undefined;
+            }
+        } catch (error) {
+            // Manejo de errores
+            console.error('Error al obtener el documento:', error);
+            return undefined;
+        }
+    }
+}
 }
 
 

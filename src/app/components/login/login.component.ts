@@ -11,15 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent {
   formulario: FormGroup;
-  captchaVerified = false;
-  captchaVisible = false;
-  @ViewChild('reCaptcha') reCaptchaRef: ElementRef | undefined;
-
   passwordType: string = 'password';
-
-
-  
-
   //usersService = inject(UsersService);
   router = inject(Router)
 
@@ -29,9 +21,8 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(6)]]
   });
   }
-  showSuccess() {
-    this.toastr.success('Hello world!', 'Toastr fun!');
-  }
+
+
   togglePasswordVisibility(): void {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
 }
@@ -44,13 +35,6 @@ export class LoginComponent {
         return;
     }
     
-    if (!this.captchaVerified) {
-        // Si el captcha no está verificado, solicita que lo complete
-        this.captchaVisible = true;
-        this.toastr.info('Por favor, completa el reCAPTCHA para continuar.');
-        return;
-    }
-
     // Si el formulario es válido y el captcha está verificado, envía la solicitud de inicio de sesión
     this.usuarioService.login(this.formulario.value)
         .then(response => {
@@ -63,16 +47,9 @@ export class LoginComponent {
             this.toastr.warning("Upss... Parece que algo salió mal. Revisa que tu correo o tu contraseña sean correctos.");
             
             // Intenta reiniciar el reCAPTCHA después de un breve retraso
-            setTimeout(() => {
-                if (this.reCaptchaRef && this.reCaptchaRef.nativeElement) {
-                    this.reCaptchaRef.nativeElement.reset();
-                    this.captchaVerified = false;
-                }
-            }, 1000);
+  
         });
 }
-
-  
 
   resetPassword(event: Event) {
     event.preventDefault(); // Evita que el enlace navegue a otra página.
@@ -90,7 +67,7 @@ export class LoginComponent {
           edad: undefined,
           telefono: undefined,
           password: undefined,
-          rol: 'estandar'
+          rol: 'estandar' || 'admin' || null
         }) // Asegúrate de pasar un objeto con el campo `email`.
             .then(() => {
                 this.toastr.info('Se ha enviado un correo de recuperación de contraseña.');
@@ -104,16 +81,5 @@ export class LoginComponent {
     }
 }
 
-// Método que se llama cuando el reCAPTCHA se resuelve
-onCaptchaResolved(token: string | null): void {
-  if (token) {
-    // Si se resuelve el reCAPTCHA con éxito, actualiza captchaVerified a true
-    this.captchaVerified = true;
-    // Ejecutar el envío automático del formulario
-    this.onSubmit();
-  } else {
-    // Si el token es nulo, el captcha no se ha completado correctamente
-    this.captchaVerified = false;
-  }
-}
+
 }

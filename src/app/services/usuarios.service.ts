@@ -1,140 +1,169 @@
 import { Injectable } from '@angular/core';
 import {
-  Auth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendEmailVerification,
-  GoogleAuthProvider,
-  signInWithPopup,
-  FacebookAuthProvider,
-  User,
-  sendPasswordResetEmail,
-  onAuthStateChanged,
-  multiFactor,
-  PhoneMultiFactorGenerator,
-  RecaptchaVerifier,
-  confirmPasswordReset,
-  UserCredential
+    Auth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendEmailVerification,
+    GoogleAuthProvider,
+    signInWithPopup,
+    FacebookAuthProvider,
+    User,
+    sendPasswordResetEmail,
+    onAuthStateChanged,
+    PhoneMultiFactorGenerator,
+    RecaptchaVerifier,
+    UserCredential,
+    multiFactor,
+    PhoneAuthProvider,
+    MultiFactorAssertion,
+    PhoneAuthCredential
 } from '@angular/fire/auth';
-//    import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, DocumentData  } from '@angular/fire/firestore';
-// import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Usuario } from '../interfaces/usuario';
-import { Observable, catchError, from, map, of } from 'rxjs';
-import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class UsuariosService {
-  isUserLoggedIn: boolean = false;
-  adminUid: string = 'TIdGkwFzztT66rxgnNNCd2QUPRj1';
+    // adminUid: ;
+    recaptchaVerifier: RecaptchaVerifier | undefined;
 
-  isUserAdmin(uid: string): boolean {
-    return uid === this.adminUid;
-  }
+    constructor(private auth: Auth ) { }
 
-  constructor(
-    private auth: Auth, private firestore: Firestore
-  ) { }
+    // isUserAdmin(uid: string): boolean {
+    //     return uid === this.adminUid;
+    // }
 
-  //////////////////////////////////////////////////// METODOS DE LOGUEO DEL USUARIO //////////////////////////////////////////////////// 
-
-  login(datosU: Usuario) {
-    return signInWithEmailAndPassword(this.auth, datosU.email, datosU.password);
-  }
-
-
-  async signInWithGoogle() {
-    const provider = new GoogleAuthProvider();
-    return signInWithPopup(this.auth, provider);
-  }
-
-  async signInWithFacebook() {
-    const provider = new FacebookAuthProvider();
-    return signInWithPopup(this.auth, provider);
-  }
-
-  logout(): Promise<void> {
-    return this.auth.signOut();
-  }
-
-  //////////////////////////////////////////////////// METODOS DE REGISTRO DEL USUARIO //////////////////////////////////////////////////// 
-
-  async registro(datosU: Usuario): Promise<UserCredential> {
-    // Verifica si la contraseña es segura antes de crear el usuario
-    if (!this.esContrasenaSegura(datosU)) {
-      throw new Error('La contraseña no cumple con los requisitos de seguridad.');
+    login(datosU: Usuario): Promise<UserCredential> {
+        return signInWithEmailAndPassword(this.auth, datosU.email, datosU.password);
     }
 
-    // Crea el usuario con email y contraseña
-    const userCredential: UserCredential = await createUserWithEmailAndPassword(
-      this.auth,
-      datosU.email,
-      datosU.password
-    );
-
-    // Envía el email de verificación
-    await this.enviarEmailDeVerificacion(userCredential.user);
+    // setupRecaptcha() {
+    //   if (!this.recaptchaVerifier) {
+    //     this.recaptchaVerifier = new RecaptchaVerifier(
+    //       'recaptcha-container', // ID del contenedor de reCAPTCHA en el HTML
+    //       {
+    //         size: 'invisible', // Opción para el tamaño del reCAPTCHA
+    //         callback: (response: any) => {
+    //           // Aquí puedes agregar una función de devolución de llamada (callback) para manejar la verificación
+    //           // El parámetro 'response' contiene la información de la verificación de reCAPTCHA
+    //           console.log('reCAPTCHA verificado:', response);
     
-    // Devuelve las credenciales del usuario
-    return userCredential;
-  }
+    //           // Ejemplo de cómo usar la respuesta de reCAPTCHA
+    //           // if (response.token) {
+    //           //   // Envía el token de reCAPTCHA al servidor para su validación
+    //           // } else {
+    //           //   // Maneja el caso en que la verificación de reCAPTCHA falla
+    //           // }
+    //         },
+    //       },
+    //       this.auth // Asegúrate de que la instancia de Auth se pase correctamente
+    //     );
+    //   }
+    // }
+  
 
-  // Método para enviar el email de verificación
-  private async enviarEmailDeVerificacion(usuario: User): Promise<void> {
-    await sendEmailVerification(usuario);
-  }
+    // async verifyPhoneNumber(phoneNumber: string, mfaDisplayName?: string): Promise<void> {
+    //     // Configura el reCAPTCHA
+    //     this.setupRecaptcha();
+    //     const user = this.auth.currentUser;
 
- //////////////////////////////////////////////////// METODOS DE FUNCIONES DEL USUARIO //////////////////////////////////////////////////// 
+    //     if (!user) {
+    //         throw new Error('No se pudo obtener el usuario actual.');
+    //     }
 
- stateUser(): Observable<User | null> {
-  return new Observable<User | null>((observer) => {
-    const unsubscribe = onAuthStateChanged(this.auth, (user) => {
-      observer.next(user);
-    }, (error) => {
-      observer.error(error);
-    });
-    return () => unsubscribe();
-  });
-}
+    //     // Obtiene la sesión multifactor
+    //     const multiFactorSession = await multiFactor(user).getSession();
 
+    //     // Configura las opciones de información telefónica
+    //     const phoneInfoOptions = {
+    //         phoneNumber,
+    //         session: multiFactorSession
+    //     };
 
-  private esContrasenaSegura(datosU: Usuario): boolean {
-    // Expresión regular para verificar los requisitos de la contraseña
-    const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d!@#$%^&*()_+]).{8,}$/;
-    return regex.test(datosU.password);
-  }
+    //     // Inicializa `PhoneAuthProvider`
+    //     const phoneAuthProvider = new PhoneAuthProvider(this.auth);
 
-  async recuperarContrasena(datosU: Usuario): Promise<void> {
-    try {
-      // Llama a sendPasswordResetEmail con await
-      await sendPasswordResetEmail(this.auth, datosU.email);
-      console.log(
-        'Se ha enviado un enlace de recuperación de contraseña a tu email.'
-      );
-    } catch (error) {
-      // Maneja los errores que puedan surgir durante la llamada a sendPasswordResetEmail
-      console.error('Error al enviar el email de recuperación:', error);
-      throw error; // Re-lanza el error para que pueda ser manejado por la llamada a esta función
+    //     // Envía un mensaje de verificación por SMS
+    //     const verificationId = await phoneAuthProvider.verifyPhoneNumber(phoneInfoOptions, this.recaptchaVerifier);
+
+    //     // Solicita al usuario que verifique el código
+    //     const verificationCode = prompt('Por favor, ingresa el código que recibiste por SMS:');
+
+    //     if (!verificationCode) {
+    //         throw new Error('El código de verificación no se ingresó.');
+    //     }
+
+    //     // Inicializa `PhoneAuthCredential`
+    //     const cred = PhoneAuthProvider.credential(verificationId, verificationCode);
+
+    //     // Inicializa `MultiFactorAssertion`
+    //     const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
+
+    //     // Completa la inscripción del factor secundario
+    //     await multiFactor(user).enroll(multiFactorAssertion, mfaDisplayName);
+    // }
+
+    async loginWithGoogle(): Promise<UserCredential> {
+        const provider = new GoogleAuthProvider();
+        return signInWithPopup(this.auth, provider);
     }
-  }
 
-  // async cambiarContrasena(datosU: Usuario): Promise<void> {
-  //   // Verifica si la nueva contraseña es segura
-  //   if (!this.esContrasenaSegura(datosU.password)) {
-  //     console.error('La nueva contraseña no cumple con los requisitos de seguridad.');
-  //     return;
-  //   }
-  
-  //   try {
-  //     // Cambia la contraseña del usuario utilizando el enlace de recuperación
-  //     const actionCode = ''; // Debes obtener el código de acción de la URL de restablecimiento
-  
-  //     // Llama a confirmPasswordReset para cambiar la contraseña
-  //     await confirmPasswordReset(this.auth, actionCode, datosU.password);
-  //     console.log('Contraseña cambiada con éxito.');
-  //   } catch (error) {
-  //     console.error('Error al cambiar la contraseña:', error);
-  //   }
-  // }
+    async loginWithFacebook(): Promise<UserCredential> {
+        const provider = new FacebookAuthProvider();
+        return signInWithPopup(this.auth, provider);
+    }
+
+    logout(): Promise<void> {
+        return this.auth.signOut();
+    }
+
+    async registro(datosU: Usuario): Promise<UserCredential> {
+        // Verifica si la contraseña es segura antes de crear el usuario
+        if (!this.esContrasenaSegura(datosU.password)) {
+            throw new Error('La contraseña no cumple con los requisitos de seguridad.');
+        }
+
+        // Crea el usuario con email y contraseña
+        const userCredential = await createUserWithEmailAndPassword(
+            this.auth,
+            datosU.email,
+            datosU.password
+        );
+
+        // Envía el email de verificación
+        await this.enviarEmailDeVerificacion(userCredential.user);
+
+        return userCredential;
+    }
+
+    private async enviarEmailDeVerificacion(usuario: User): Promise<void> {
+        await sendEmailVerification(usuario);
+    }
+
+    stateUser(): Observable<User | null> {
+        return new Observable<User | null>((observer) => {
+            const unsubscribe = onAuthStateChanged(this.auth, (user) => {
+                observer.next(user);
+            }, (error) => {
+                observer.error(error);
+            });
+            return () => unsubscribe();
+        });
+    }
+    
+    private esContrasenaSegura(password: string): boolean {
+        const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d!@#$%^&*()_+]).{8,}$/;
+        return regex.test(password);
+    }
+
+    async recuperarContrasena(datosU: Usuario): Promise<void> {
+        try {
+            await sendPasswordResetEmail(this.auth, datosU.email);
+            console.log('Se ha enviado un enlace de recuperación de contraseña a tu email.');
+        } catch (error) {
+            console.error('Error al enviar el email de recuperación:', error);
+            throw error;
+        }
+    }
 }

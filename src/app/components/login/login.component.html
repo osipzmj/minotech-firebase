@@ -37,16 +37,16 @@
 
 
   <!-- reCAPTCHA -->
-  <div *ngIf="captchaVisible">
-  <re-captcha 
-      #reCaptcha
-      (resolved)="onCaptchaResolved($event)"
-      siteKey="6Lej1KApAAAAANfm2iDyUR1Sd-Gk3s9xhnxI5HQK"></re-captcha>
-  </div>
+  <div id="recaptcha-container"></div>
+
   <button class="btn btn-primary btn-block" type="submit">Enviar</button>
   <div class="fpass">
     <br>
   <a id="fpass" href="" (click)="resetPassword($event)">Olvidé mi contraseña</a>
+  </div>
+  <div class="registro">
+    <br>
+  <a id="regis" href="registro">No tienes cuenta? Crea una</a>
   </div>
 </form>
 
