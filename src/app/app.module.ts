@@ -28,6 +28,7 @@ import { AdminGuard } from './admin.guard';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
+import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuari
     PaginaErrorComponent,
     PreguntasComponent,
     MapaSitioComponent,
-    ListaUsuariosComponent
+    ListaUsuariosComponent,
+    ContenidoCursoComponent
       //  CursoDetalleComponent,
   ],
   imports: [

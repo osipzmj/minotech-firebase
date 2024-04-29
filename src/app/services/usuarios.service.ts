@@ -137,9 +137,11 @@ export class UsuariosService {
         return userCredential;
     }
 
-    private async enviarEmailDeVerificacion(usuario: User): Promise<void> {
+     async enviarEmailDeVerificacion(usuario: User): Promise<void> {
         await sendEmailVerification(usuario);
     }
+
+    
 
     stateUser(): Observable<User | null> {
         return new Observable<User | null>((observer) => {

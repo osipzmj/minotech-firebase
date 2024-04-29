@@ -7,12 +7,13 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 
+
 @Component({
-  selector: 'app-cursos',
-  templateUrl: './cursos.component.html',
-  styleUrls: ['./cursos.component.css']
+  selector: 'app-contenido-curso',
+  templateUrl: './contenido-curso.component.html',
+  styleUrls: ['./contenido-curso.component.css']
 })
-export class CursosComponent implements OnInit {
+export class ContenidoCursoComponent {
   @ViewChild('paypal', { static: true }) paypalElement!: ElementRef;
   cursos: Curso[] = [];
   searchTerm = '';
@@ -31,15 +32,12 @@ export class CursosComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     // Obtener el UID del curso desde la ruta
-    const id = this.route.snapshot.paramMap.get('uid');
+    const id = this.route.snapshot.paramMap.get('id');
 
     // Obtener todos los cursos
-    this.cursoService.obtenerCursos().subscribe(cursos => {
-      this.cursos = cursos;
-      // Intentar obtener el curso por UID
       if (id !== null) {
         // Solo realiza la llamada si id tiene un valor válido
-        this.cursoService.getDocumentByName<Curso>('cursos', 'uid', id)
+        this.cursoService.getDocumentByName<Curso>('cursos', 'id', id)
             .then(curso => {
                 if (curso) {
                     // Lógica para manejar el curso obtenido
@@ -55,8 +53,6 @@ export class CursosComponent implements OnInit {
         console.log("No se encontró el UID en la URL");
     }
 
-      // Este bloque de código no está completo, se debe completar la lógica para obtener el curso.
-    });
 
     // Observar el estado de autenticación del usuario
     (await this.authService.stateUser()).subscribe((user: User | null) => {
@@ -70,44 +66,12 @@ export class CursosComponent implements OnInit {
     });
   }
 
-  async onClickDelete(curso: Curso) {
-    // Llama al servicio para eliminar el curso
-    const response = await this.cursoService.eliminarCurso(curso);
-    // if (response) {
-    //   // Realizar acciones adicionales si se elimina correctamente
-    // }
-  }
-
-  abrirModal(modalId: string): void {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      modal.classList.add('show');
-    }
-  }
-
   cerrarModal(modalId: string): void {
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.classList.remove('show');
     }
   }
-
-  applyFilter() {
-    if (this.searchTerm.trim() === '') {
-      // Si la barra de búsqueda está vacía, muestra todos los cursos
-      this.cursoService.obtenerCursos().subscribe(cursos => {
-        this.cursos = cursos;
-      });
-    } else {
-      // Si hay un término de búsqueda, filtra los cursos
-      this.cursoService.obtenerCursos().subscribe(cursos => {
-        this.cursos = cursos.filter(curso =>
-          curso.nombreCurso.toLowerCase().includes(this.searchTerm.trim().toLowerCase())
-        );
-      });
-    }
-  }
-
   onInscribir(curso: Curso) {
     if (this.isUserLoggedIn) {
       // Aquí puedes agregar la lógica para inscribir al usuario en el curso

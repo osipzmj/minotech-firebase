@@ -40,19 +40,6 @@ export class NavegacionComponent implements OnInit{
       password: new FormControl(),
     })
 
-    this.authService.stateUser().subscribe(res => {
-      if(res){
-        res.uid
-        console.log('Esta logueado');
-        this.isUserLoggedIn = true;
-        this.getDatosUser(res.uid);
-      }
-      else{
-        console.log('No esta logueado');
-        this.isUserLoggedIn = false
-      }
-    })
-
   }
 
   ngOnInit(): void {
@@ -93,7 +80,7 @@ export class NavegacionComponent implements OnInit{
         console.error("Error al obtener los datos del usuario:", error);
         this.rol = null;
     }
-}
+  }
 
   abrirMenu(){
     this.menuValue = !this.menuValue;

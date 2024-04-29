@@ -57,7 +57,7 @@
           <h2>{{ curso.nombreCurso }}</h2>
           <p>{{curso.contenido}}</p>
           <p><strong>Temas a tratar:</strong><br>{{curso.temas}}</p>
-          <button id="inscribirButton" [disabled]="isInscrito" (click)="onInscribir()">
+          <button id="inscribirButton" [disabled]="isInscrito" (click)="onInscribir(curso)">
             {{ isInscrito ? 'Inscrito' : 'Inscribirse' }}
           </button>
         </div>

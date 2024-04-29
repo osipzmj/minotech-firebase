@@ -1,0 +1,7 @@
+<div id="miModal{{curso.id}}" class="modal" *ngFor="let curso of cursos">
+    <div class="modal-content">
+      <h2>{{ curso.nombreCurso }}</h2>
+      <p>{{curso.contenido}}</p>
+      <p><strong>Temas a tratar:</strong><br>{{curso.temas}}</p>
+    </div>
+  </div>
