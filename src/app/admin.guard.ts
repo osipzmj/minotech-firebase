@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { UsuariosService } from './services/usuarios.service';
 import { CursosService } from './services/cursos.service';
 import { Usuario } from './interfaces/usuario';
@@ -15,31 +15,28 @@ export class AdminGuard implements CanActivate {
         private router: Router
     ) {}
 
-    canActivate(): Observable<boolean> | Promise<boolean> {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> {
         return new Promise((resolve) => {
             this.authService.stateUser().subscribe(async (user) => {
                 if (user) {
-                    // Verifica si el correo está verificado
-                    if (!user.emailVerified) {
+                    const usuario = await this.getDatosUser(user.uid);
+                    if (usuario) {
+                        const userRole = usuario.rol;
+                        const url = state.url;
+
+                        // Permitir acceso si el usuario es administrador o si es profesor y está accediendo a "agregar-curso"
+                        if (userRole === 'admin' || (userRole === 'profesor' && url === '/agregar-curso')) {
+                            resolve(true);
+                        } else {
+                            // Redirigir a la página de error si el usuario no tiene el rol necesario
+                            this.router.navigate(['**']);
+                            resolve(false);
+                        }
+                    } else {
+                        // Redirigir a la página de inicio de sesión si el usuario no está autenticado
                         this.router.navigate(['/login']);
                         resolve(false);
-                        return;
                     }
-
-                    // Obtén los datos del usuario
-                    const usuario = await this.getDatosUser(user.uid);
-                    
-                    if (usuario && (usuario.rol === 'admin' || usuario.rol === 'profesor')) {
-                        resolve(true);
-                    } else {
-                        // Redirige a la página de error si el usuario no tiene rol de admin o profesor
-                        this.router.navigate(['**']);
-                        resolve(false);
-                    }
-                } else {
-                    // Redirige a la página de inicio de sesión si el usuario no está autenticado
-                    this.router.navigate(['/login']);
-                    resolve(false);
                 }
             });
         });
