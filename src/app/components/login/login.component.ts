@@ -13,10 +13,8 @@ import { User, user } from '@angular/fire/auth';
 export class LoginComponent {
   formulario: FormGroup;
   passwordType: string = 'password';
-  //usersService = inject(UsersService);
   router = inject(Router);
-   uid = user // ID del usuario autenticado
- nuevoEstadoVerificacion = false;
+
   
   constructor( private usuarioService: UsuariosService, private fb: FormBuilder,private toastr: ToastrService) {
     this.formulario = this.fb.group({
@@ -25,17 +23,6 @@ export class LoginComponent {
       
   });
   }
-
-  async cambiarEstadoVerificacion(uid: string, estadoVerificacion: boolean): Promise<void> {
-    try {
-        await this.usuarioService.cambiarEstadoVerificacion(uid, estadoVerificacion);
-        this.toastr.info(`El estado de verificación del correo electrónico se ha cambiado a ${estadoVerificacion ? 'verificado' : 'no verificado'}.`);
-    } catch (error) {
-        console.error('Error al cambiar el estado de verificación del correo electrónico:', error);
-        this.toastr.warning('Hubo un problema al cambiar el estado de verificación.');
-    }
-  }
-
 
   togglePasswordVisibility(): void {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
@@ -59,9 +46,6 @@ export class LoginComponent {
                 // Verificar correo electrónico del usuario
                 await this.usuarioService.verificarCorreoElectronico(usuario);
 
-                // Cambia el estado de verificación personalizada a 'no verificado' (false)
-                await this.cambiarEstadoVerificacion(usuario.uid, false);
-
                 // Si el correo está verificado, permite al usuario navegar a la página de inicio
                 this.router.navigate(['/home']);
                 this.toastr.success("Bienvenido de nuevo " + this.formulario.value.email);
@@ -80,7 +64,7 @@ export class LoginComponent {
             console.error('Error durante el inicio de sesión:', error);
             this.toastr.warning('Ups... Parece que algo salió mal. Revisa que tu correo o tu contraseña sean correctos.');
         });
-}
+  }
 
 
   resetPassword(event: Event) {

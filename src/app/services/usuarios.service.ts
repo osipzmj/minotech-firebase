@@ -29,17 +29,30 @@ export class UsuariosService {
 
 
     async cambiarEstadoVerificacion(uid: string, estadoVerificacion: boolean): Promise<void> {
-        const usuarioDoc = doc(this.firestore, 'Usuarios', uid);
-        await updateDoc(usuarioDoc, { verificadoPersonalizado: estadoVerificacion });
+        try {
+            const usuarioDoc = doc(this.firestore, 'Usuarios', uid);
+            console.log('Actualizando documento con UID:', uid, 'y estadoVerificacion:', estadoVerificacion);
+            
+            await updateDoc(usuarioDoc, { verificadoPersonalizado: estadoVerificacion });
+        } catch (error) {
+            console.log('Error al cambiar el estado de verificación del correo electrónico:', error);
+            throw error;
+        }
     }
 
     async login(datosU: Usuario): Promise<UserCredential> {
         return signInWithEmailAndPassword(this.auth, datosU.email, datosU.password);
     }
-
     async logout(): Promise<void> {
-        return this.auth.signOut();
+
+            // Cierra la sesión
+            await this.auth.signOut();
+
     }
+    
+    
+    
+    
 
     async verificarCorreoElectronico(usuario: User): Promise<void> {
         if (!usuario.emailVerified) {
@@ -58,13 +71,7 @@ export class UsuariosService {
         return signInWithPopup(this.auth, provider);
     }
     
- 
-
-
-
     // Nuevo método para verificar el correo electrónico del usuario
-
-
     async registro(datosU: Usuario): Promise<UserCredential> {
         // Verifica si la contraseña es segura antes de crear el usuario
         if (!this.esContrasenaSegura(datosU.password)) {
