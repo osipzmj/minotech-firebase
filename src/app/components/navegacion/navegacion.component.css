@@ -325,4 +325,8 @@ strong {
     .dropdown-menu.show {
         display: block;
     }
+
+    .bienvenida{
+        font-size: 5px;
+    }
 }

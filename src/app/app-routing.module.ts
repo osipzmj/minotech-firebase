@@ -8,11 +8,13 @@ import { PaginaErrorComponent } from './components/pagina-error/pagina-error.com
 import { RegistroComponent } from './components/registro/registro.component';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
 import { MapaSitioComponent } from './components/mapa-sitio/mapa-sitio.component';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
   {path:'',redirectTo:'/home',pathMatch:'full'},
   {path:'home',component:HomeComponent},
-  {path:'agregar-curso',component:AgregarCursoComponent},
+  {path:'agregar-curso',component:AgregarCursoComponent, canActivate: [AdminGuard]},
   {path:'cursos',component:CursosComponent},
   {path:'registro',component:RegistroComponent},
   {path: 'login', component: LoginComponent, pathMatch: "full" },

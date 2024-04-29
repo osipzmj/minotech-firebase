@@ -24,7 +24,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ToastrModule } from 'ngx-toastr';
 import { MapaSitioComponent } from './components/mapa-sitio/mapa-sitio.component';
-
+import { AdminGuard } from './admin.guard';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
@@ -60,7 +60,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     AngularFireAuthModule // Importa el módulo de autenticación
     
   ],
-  providers: [FilterPipe],
+  providers: [FilterPipe, AdminGuard],
   bootstrap: [AppComponent],
   
 })

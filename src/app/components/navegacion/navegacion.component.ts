@@ -1,9 +1,7 @@
 import { ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { Component } from '@angular/core';
-import { User } from '@angular/fire/auth';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import Curso from 'src/app/interfaces/curso.interface';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -20,6 +18,7 @@ export class NavegacionComponent implements OnInit{
   menuValue:boolean = false;
   menu_icon: string = 'bi bi-list';
   rol: 'estandar' | 'admin' | null = null;
+  nombre = '';
   // isLoginIn: boolean = false;
   terminoBusqueda: string = '';
   formulario: FormGroup;
@@ -66,7 +65,6 @@ export class NavegacionComponent implements OnInit{
             await this.getDatosUser(user.uid);
             // Después de que getDatosUser haya completado su ejecución,
             // el rol estará disponible aquí
-            console.log(this.rol);
         } else {
             // Si no hay un usuario autenticado, establece isUserLoggedIn como false
             this.isUserLoggedIn = false;
@@ -85,6 +83,7 @@ export class NavegacionComponent implements OnInit{
         const usuario = await this._cursoService.getDocumentByName<Usuario>(path,fieldName, id);
         if (usuario) {
             this.rol = usuario.rol;
+            this.nombre = usuario.nombre;
         } else {
             console.log("Usuario no encontrado");
             this.rol = null;

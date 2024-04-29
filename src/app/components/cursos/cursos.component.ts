@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import Curso from 'src/app/interfaces/curso.interface';
 import { Usuario } from 'src/app/interfaces/usuario';
@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./cursos.component.css']
 })
 export class CursosComponent {
-
+  @ViewChild('paypal',{static:true}) paypalElement! : ElementRef;
 cursos: Curso[];
 searchTerm='';
 isUserLoggedIn: boolean = false;
@@ -31,15 +31,15 @@ this.cursos = []
     this.cursos = cursos;
   })
 
-  // ;(await this.authService.stateUser()).subscribe((user: User | null) => {
-  //   if (user) {
-  //     this.isUserLoggedIn = true;
-  //     // this.getDatosUser(user.uid);
-  //   } else {
-  //     this.isUserLoggedIn = false;
-  //     this.rol = 'admin' || 'estandar';
-  //   }
-  // });
+  ;(await this.authService.stateUser()).subscribe((user: User | null) => {
+    if (user) {
+      this.isUserLoggedIn = true;
+      // this.getDatosUser(user.uid);
+    } else {
+      this.isUserLoggedIn = false;
+      this.rol = 'admin' || 'estandar';
+    }
+  });
 }
 
 async onClickDelete(curso: Curso){
@@ -88,15 +88,7 @@ onInscribir() {
   }
 }
 
-// getDatosUser(uid: string) {
-//   const path = "Usuarios";
-//   this.cursoService.getDatos<Usuario>(path, uid).subscribe(user => {
-//       console.log('datos ->', user);
-//       if (user) {
-//           this.rol = user.rol; // Utilizando el rol del usuario
-//       }
-//   });
-// }
+
 
 
 }

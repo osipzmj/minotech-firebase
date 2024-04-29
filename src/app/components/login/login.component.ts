@@ -14,11 +14,12 @@ export class LoginComponent {
   passwordType: string = 'password';
   //usersService = inject(UsersService);
   router = inject(Router)
-
+  
   constructor( private usuarioService: UsuariosService, private fb: FormBuilder,private toastr: ToastrService) {
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      
   });
   }
 
