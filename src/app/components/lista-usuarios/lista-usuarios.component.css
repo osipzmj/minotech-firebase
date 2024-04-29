@@ -74,14 +74,25 @@
 select{
     border-radius: 5px;
 }
+
+/* Contenedor para la tabla */
+.table-container {
+  overflow-x: auto; /* Hace que el contenedor sea desplazable horizontalmente si el contenido es demasiado ancho */
+  padding-top: 15px;
+}
+
 /* Hacer la tabla responsiva */
 @media (max-width: 768px) {
-    .table table {
-        width: 100%; /* Ajustar la tabla al ancho completo del contenedor */
-    }
+  .table-container {
+      width: 100%; /* Ajustar el ancho del contenedor al 100% del contenedor padre */
+  }
 
-    /* Ajustar el tamaño de las celdas para pantallas más pequeñas */
-    .table td, .table th {
-        padding: 4px;
-    }
+  .table table {
+      width: auto; /* Permitir que la tabla tenga un ancho flexible según su contenido */
+  }
+
+  /* Ajustar el tamaño de las celdas para pantallas más pequeñas */
+  .table td, .table th {
+      padding: 6px;
+  }
 }
