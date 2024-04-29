@@ -10,99 +10,43 @@ import {
     User,
     sendPasswordResetEmail,
     onAuthStateChanged,
-    PhoneMultiFactorGenerator,
-    RecaptchaVerifier,
     UserCredential,
-    multiFactor,
-    PhoneAuthProvider,
-    MultiFactorAssertion,
-    PhoneAuthCredential
+    
 } from '@angular/fire/auth';
+import { AuthService } from '@auth0/auth0-angular';
 import { Usuario } from '../interfaces/usuario';
 import { Observable } from 'rxjs';
+import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UsuariosService {
     // adminUid: ;
-    recaptchaVerifier: RecaptchaVerifier | undefined;
 
-    constructor(private auth: Auth ) { }
 
-    // isUserAdmin(uid: string): boolean {
-    //     return uid === this.adminUid;
-    // }
+    constructor(private auth: Auth , private firestore: Firestore ) { }
 
-    login(datosU: Usuario): Promise<UserCredential> {
+
+    async cambiarEstadoVerificacion(uid: string, estadoVerificacion: boolean): Promise<void> {
+        const usuarioDoc = doc(this.firestore, 'Usuarios', uid);
+        await updateDoc(usuarioDoc, { verificadoPersonalizado: estadoVerificacion });
+    }
+
+    async login(datosU: Usuario): Promise<UserCredential> {
         return signInWithEmailAndPassword(this.auth, datosU.email, datosU.password);
     }
 
-    // setupRecaptcha() {
-    //   if (!this.recaptchaVerifier) {
-    //     this.recaptchaVerifier = new RecaptchaVerifier(
-    //       'recaptcha-container', // ID del contenedor de reCAPTCHA en el HTML
-    //       {
-    //         size: 'invisible', // Opción para el tamaño del reCAPTCHA
-    //         callback: (response: any) => {
-    //           // Aquí puedes agregar una función de devolución de llamada (callback) para manejar la verificación
-    //           // El parámetro 'response' contiene la información de la verificación de reCAPTCHA
-    //           console.log('reCAPTCHA verificado:', response);
-    
-    //           // Ejemplo de cómo usar la respuesta de reCAPTCHA
-    //           // if (response.token) {
-    //           //   // Envía el token de reCAPTCHA al servidor para su validación
-    //           // } else {
-    //           //   // Maneja el caso en que la verificación de reCAPTCHA falla
-    //           // }
-    //         },
-    //       },
-    //       this.auth // Asegúrate de que la instancia de Auth se pase correctamente
-    //     );
-    //   }
-    // }
-  
+    async logout(): Promise<void> {
+        return this.auth.signOut();
+    }
 
-    // async verifyPhoneNumber(phoneNumber: string, mfaDisplayName?: string): Promise<void> {
-    //     // Configura el reCAPTCHA
-    //     this.setupRecaptcha();
-    //     const user = this.auth.currentUser;
-
-    //     if (!user) {
-    //         throw new Error('No se pudo obtener el usuario actual.');
-    //     }
-
-    //     // Obtiene la sesión multifactor
-    //     const multiFactorSession = await multiFactor(user).getSession();
-
-    //     // Configura las opciones de información telefónica
-    //     const phoneInfoOptions = {
-    //         phoneNumber,
-    //         session: multiFactorSession
-    //     };
-
-    //     // Inicializa `PhoneAuthProvider`
-    //     const phoneAuthProvider = new PhoneAuthProvider(this.auth);
-
-    //     // Envía un mensaje de verificación por SMS
-    //     const verificationId = await phoneAuthProvider.verifyPhoneNumber(phoneInfoOptions, this.recaptchaVerifier);
-
-    //     // Solicita al usuario que verifique el código
-    //     const verificationCode = prompt('Por favor, ingresa el código que recibiste por SMS:');
-
-    //     if (!verificationCode) {
-    //         throw new Error('El código de verificación no se ingresó.');
-    //     }
-
-    //     // Inicializa `PhoneAuthCredential`
-    //     const cred = PhoneAuthProvider.credential(verificationId, verificationCode);
-
-    //     // Inicializa `MultiFactorAssertion`
-    //     const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
-
-    //     // Completa la inscripción del factor secundario
-    //     await multiFactor(user).enroll(multiFactorAssertion, mfaDisplayName);
-    // }
+    async verificarCorreoElectronico(usuario: User): Promise<void> {
+        if (!usuario.emailVerified) {
+            await sendEmailVerification(usuario);
+            throw new Error('El correo electrónico no está verificado. Se ha enviado un correo de verificación.');
+        }
+    }
 
     async loginWithGoogle(): Promise<UserCredential> {
         const provider = new GoogleAuthProvider();
@@ -113,10 +57,13 @@ export class UsuariosService {
         const provider = new FacebookAuthProvider();
         return signInWithPopup(this.auth, provider);
     }
+    
+ 
 
-    logout(): Promise<void> {
-        return this.auth.signOut();
-    }
+
+
+    // Nuevo método para verificar el correo electrónico del usuario
+
 
     async registro(datosU: Usuario): Promise<UserCredential> {
         // Verifica si la contraseña es segura antes de crear el usuario

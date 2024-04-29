@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
+import { User, user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,9 @@ export class LoginComponent {
   formulario: FormGroup;
   passwordType: string = 'password';
   //usersService = inject(UsersService);
-  router = inject(Router)
+  router = inject(Router);
+   uid = user // ID del usuario autenticado
+ nuevoEstadoVerificacion = false;
   
   constructor( private usuarioService: UsuariosService, private fb: FormBuilder,private toastr: ToastrService) {
     this.formulario = this.fb.group({
@@ -23,34 +26,62 @@ export class LoginComponent {
   });
   }
 
+  async cambiarEstadoVerificacion(uid: string, estadoVerificacion: boolean): Promise<void> {
+    try {
+        await this.usuarioService.cambiarEstadoVerificacion(uid, estadoVerificacion);
+        this.toastr.info(`El estado de verificación del correo electrónico se ha cambiado a ${estadoVerificacion ? 'verificado' : 'no verificado'}.`);
+    } catch (error) {
+        console.error('Error al cambiar el estado de verificación del correo electrónico:', error);
+        this.toastr.warning('Hubo un problema al cambiar el estado de verificación.');
+    }
+  }
+
 
   togglePasswordVisibility(): void {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
-}
+  }
 
   onSubmit(): void {
     if (!this.formulario.valid) {
-        // Marca todos los controles como tocados para mostrar errores
         this.formulario.markAllAsTouched();
         this.toastr.warning('Por favor, completa todos los campos correctamente.');
         return;
     }
-    
-    // Si el formulario es válido y el captcha está verificado, envía la solicitud de inicio de sesión
+
     this.usuarioService.login(this.formulario.value)
-        .then(response => {
+        .then(async (response) => {
             console.log(response);
-            this.router.navigate(['/home']);
-            this.toastr.success("Bienvenido de nuevo " + this.formulario.value.email);
+
+            // Obtén el usuario autenticado
+            const usuario: User = response.user;
+
+            try {
+                // Verificar correo electrónico del usuario
+                await this.usuarioService.verificarCorreoElectronico(usuario);
+
+                // Cambia el estado de verificación personalizada a 'no verificado' (false)
+                await this.cambiarEstadoVerificacion(usuario.uid, false);
+
+                // Si el correo está verificado, permite al usuario navegar a la página de inicio
+                this.router.navigate(['/home']);
+                this.toastr.success("Bienvenido de nuevo " + this.formulario.value.email);
+            } catch (error) {
+                console.error('Error durante la verificación de correo electrónico:', error);
+                this.toastr.info('Por favor verifica tu correo electrónico para continuar.');
+                
+                // Cierra sesión para evitar que el usuario acceda sin verificar su correo
+                await this.usuarioService.logout();
+                
+                // Redirige al usuario a la página de inicio de sesión
+                this.router.navigate(['/login']);
+            }
         })
         .catch(error => {
-            console.error(error);
-            this.toastr.warning("Upss... Parece que algo salió mal. Revisa que tu correo o tu contraseña sean correctos.");
-            
-            // Intenta reiniciar el reCAPTCHA después de un breve retraso
-  
+            console.error('Error durante el inicio de sesión:', error);
+            this.toastr.warning('Ups... Parece que algo salió mal. Revisa que tu correo o tu contraseña sean correctos.');
         });
 }
+
 
   resetPassword(event: Event) {
     event.preventDefault(); // Evita que el enlace navegue a otra página.

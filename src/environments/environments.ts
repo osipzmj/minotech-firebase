@@ -11,5 +11,9 @@ export const environment = {
     },
     recaptcha: {
         siteKey: '6Lej1KApAAAAANfm2iDyUR1Sd-Gk3s9xhnxI5HQK',
-      },
-  };
+    },
+    auth: { 
+        domain: 'dev-310rofg5a6l37w78.us.auth0.com',
+        clientId: 'gJPE10L4Z4hUSbxkBlrtraFCnbK5Gf0V'
+    }
+};

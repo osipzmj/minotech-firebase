@@ -29,6 +29,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
+import { AuthModule } from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ContenidoCursoComponent } from './components/contenido-curso/contenido-
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     provideStorage(()=> getStorage()),
+    AuthModule.forRoot(environment.auth),
     //Storage,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

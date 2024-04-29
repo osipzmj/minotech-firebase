@@ -19,16 +19,25 @@ export class AdminGuard implements CanActivate {
         return new Promise((resolve) => {
             this.authService.stateUser().subscribe(async (user) => {
                 if (user) {
+                    // Verifica si el correo está verificado
+                    if (!user.emailVerified) {
+                        this.router.navigate(['/login']);
+                        resolve(false);
+                        return;
+                    }
+
+                    // Obtén los datos del usuario
                     const usuario = await this.getDatosUser(user.uid);
-                    if (usuario && usuario.rol === 'admin' || usuario && usuario.rol === 'profesor') {
+                    
+                    if (usuario && (usuario.rol === 'admin' || usuario.rol === 'profesor')) {
                         resolve(true);
                     } else {
-                        // Redirigir a la página de error si el usuario no tiene rol de admin
+                        // Redirige a la página de error si el usuario no tiene rol de admin o profesor
                         this.router.navigate(['**']);
                         resolve(false);
                     }
                 } else {
-                    // Redirigir a la página de inicio de sesión si el usuario no está autenticado
+                    // Redirige a la página de inicio de sesión si el usuario no está autenticado
                     this.router.navigate(['/login']);
                     resolve(false);
                 }
