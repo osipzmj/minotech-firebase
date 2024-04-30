@@ -13,6 +13,7 @@ import { User, user } from '@angular/fire/auth';
 export class LoginComponent {
   formulario: FormGroup;
   passwordType: string = 'password';
+  telefono: any
   router = inject(Router);
 
   
@@ -20,6 +21,7 @@ export class LoginComponent {
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      tel: ['', [Validators.required, Validators.minLength(10)]],
       
   });
   }
@@ -97,5 +99,8 @@ export class LoginComponent {
     }
 }
 
+loginTel(){
+  this.usuarioService.obtenerOTP()
+}
 
 }

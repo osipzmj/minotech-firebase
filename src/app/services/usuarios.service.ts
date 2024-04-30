@@ -11,6 +11,8 @@ import {
     sendPasswordResetEmail,
     onAuthStateChanged,
     UserCredential,
+    RecaptchaVerifier,
+    signInWithPhoneNumber,
     
 } from '@angular/fire/auth';
 import { AuthService } from '@auth0/auth0-angular';
@@ -23,6 +25,8 @@ import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 })
 export class UsuariosService {
     // adminUid: ;
+    telefono: any;
+    reCaptchaVerifier: any;
 
 
     constructor(private auth: Auth , private firestore: Firestore ) { }
@@ -50,7 +54,13 @@ export class UsuariosService {
 
     }
     
-    
+    obtenerOTP(){
+        this.reCaptchaVerifier = new RecaptchaVerifier(this.auth,'recaptcha-container', {'size': 'invisible'} )
+
+        return signInWithPhoneNumber(this.auth, this.telefono, this.reCaptchaVerifier).then((confirmationResult) => {
+            console.log(confirmationResult)
+        })
+    }
     
     
 

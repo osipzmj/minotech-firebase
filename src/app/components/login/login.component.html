@@ -34,12 +34,30 @@
     <small class="text-danger" *ngIf="formulario?.get('password')?.errors?.['minLength']">La contraseña debe tener al menos 6 caracteres.</small>
   </div>
   </div>
+ 
 
 
   <!-- reCAPTCHA -->
   <div id="recaptcha-container"></div>
+  <div class="form-group">
+    <label for="password">Teléfono</label>
+    <div class="input-container">
+      <input [(ngModel)]="telefono"
+          id="tel"
+          class="form-control"
+          type="tel"
+          formControlName="tel"
+          placeholder="Ingresa tu número teléfonico"
+      >
+  </div>
+  <button (click)="loginTel()">Obtener CODIGO</button>
+  <div *ngIf="formulario?.get('telefono')?.invalid && formulario?.get('telefono')?.touched">
+    <small class="text-danger" *ngIf="formulario?.get('telefono')?.errors?.['required']">La contraseña es obligatoria.</small>
+    <small class="text-danger" *ngIf="formulario?.get('telefono')?.errors?.['minLength']">El número teléfonico debe tener al menos 10 caracteres.</small>
+  </div>
+  </div>
 
-  <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+  <button id="sign-in-button" class="btn btn-primary btn-block" type="submit">Enviar</button>
   <div class="fpass">
     <br>
   <a id="fpass" href="" (click)="resetPassword($event)">Olvidé mi contraseña</a>

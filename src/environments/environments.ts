@@ -2,7 +2,7 @@ export const environment = {
     production: true,
     firebaseConfig: {
         apiKey: "AIzaSyDsylsezgj-xtZR-wnVTrM7UPICe_ezk8c",
-        authDomain: "minotech-bf654.firebaseapp.com",
+        authDomain: "https://minotech-bf654.web.app",
         projectId: "minotech-bf654",
         storageBucket: "minotech-bf654.appspot.com",
         messagingSenderId: "11263524781",
