@@ -1,25 +1,22 @@
-/* Estilos para el contenedor principal del mapa del sitio */
 .mapa-sitio-container {
     text-align: center;
     margin-top: 50px;
     margin-left: 10%;
     margin-right: 10%;
-    background: linear-gradient(135deg, #9010ac, #d09ee4); /* Fondo degradado */
-    padding: 30px; /* Aumentamos el relleno */
-    border-radius: 15px; /* Borde redondeado */
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    background: linear-gradient(135deg, #9010ac, #d09ee4); 
+    padding: 30px; 
+    border-radius: 15px; 
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos para el título del mapa del sitio */
 .mapa-sitio-container h3 {
-    font-size: 42px; /* Aumentamos el tamaño del título */
-    margin-bottom: 30px; /* Mayor espacio después del título */
-    color: #fff; /* Color del título */
-    text-transform: uppercase; /* Convertimos el texto a mayúsculas */
-    font-family: 'Poppins', sans-serif;  /* Tipografía audaz */
+    font-size: 42px; 
+    margin-bottom: 30px;
+    color: #fff; 
+    text-transform: uppercase; 
+    font-family: 'Poppins', sans-serif; 
 }
 
-/* Estilos para la lista de enlaces */
 .sitio-links {
     list-style: none;
     padding: 0;
@@ -27,43 +24,37 @@
     justify-content: center;
 }
 
-/* Estilos para cada elemento de la lista */
 .sitio-links li {
-    margin: 0 15px; /* Aumentamos el espacio entre elementos */
+    margin: 0 15px;
 }
 
-/* Estilos para los enlaces */
 .sitio-links li a {
     text-decoration: none;
-    color: #fff; /* Color de texto blanco */
-    padding: 15px 30px; /* Aumentamos el padding para que los enlaces sean más grandes */
-    border-radius: 8px; /* Aumentamos el radio de borde para hacer los enlaces más redondeados */
+    color: #fff; 
+    padding: 15px 30px; 
+    border-radius: 8px;
     display: inline-block;
     transition: all 0.3s ease;
-    font-size: 20px; /* Aumentamos el tamaño de la fuente */
-    background-color: #000000; /* Color de fondo verde */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    font-size: 20px; 
+    background-color: #000000; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     font-family: 'Poppins', sans-serif;
 }
 
-/* Estilos para los enlaces al pasar el cursor */
 .sitio-links li a:hover {
-    background-color: #4a4949; /* Cambiamos el color de fondo al pasar el cursor */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada al pasar el cursor */
-    transform: translateY(-2px); /* Desplazamiento hacia arriba */
+    background-color: #4a4949;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); 
+    transform: translateY(-2px); 
 }
 
 @media screen and (max-width: 768px) {
-    /* Estilos para los enlaces en dispositivos con un ancho de pantalla máximo de 768px */
     .sitio-links li a {
-      padding: 15px 14%; /* Ajustamos el padding para que los enlaces se ajusten al ancho del contenedor */
-      margin: 1 10px; /* Ajustamos los márgenes */
-      font-size: 16px; /* Reducimos el tamaño de la fuente */
+      padding: 15px 14%; 
+      margin: 1 10px;
+      font-size: 16px; 
     }
   }
-  
-  
-/* Estilos para las migas de pan */
+
 .breadcrumb {
     padding: 25px 35px;
     font-size: 18px;
@@ -80,13 +71,11 @@
     text-decoration: underline; 
   }
   
-  /* Estilos para la sección actual de las migas de pan */
   .breadcrumb-current {
     color: #c37ed4; 
     font-weight: bold; 
   }
   
-  /* Fade-in animation */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -98,12 +87,10 @@
     }
   }
   
-  /* Aplicar animación a las migas de pan */
   .breadcrumb {
     animation: fadeIn 1.5s ease-in-out;
   }
   
-  /* Zoom-in animation */
   @keyframes zoomIn {
     from {
       transform: scale(0.5);

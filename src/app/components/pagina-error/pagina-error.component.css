@@ -1,8 +1,6 @@
-/* Estilos base */
 body {
     font-family: Poppins;
     font-weight: 500;
-
     margin: 0;
     padding: 0;
     text-align: justify;
@@ -39,7 +37,6 @@ body {
     text-decoration: underline;
   }
   
-  /* Reglas de medios para dispositivos móviles */
   @media only screen and (max-width: 600px) {
     .container {
       max-width: 90%;

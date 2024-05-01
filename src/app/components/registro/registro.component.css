@@ -13,15 +13,15 @@
 }
 
 .input-container {
-  position: relative; /* Posiciona el contenedor relativamente */
+  position: relative; 
 }
 
 .eye-icon {
-  position: absolute; /* Posiciona el icono de forma absoluta dentro del contenedor */
-  top: 50%; /* Centra el icono verticalmente */
-  right: 10px; /* Coloca el icono a la derecha */
-  transform: translateY(-50%); /* Ajusta el posicionamiento vertical */
-  cursor: pointer; /* Hace que el icono sea clickeable */
+  position: absolute; 
+  top: 50%;
+  right: 10px; 
+  transform: translateY(-50%); 
+  cursor: pointer;
 }
 
 label {
@@ -38,7 +38,6 @@ input[type = "number"] {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
 
 .btn {
   display: inline-block;
@@ -87,7 +86,6 @@ input[type = "number"] {
   margin-right: 10px;
 }
 
-/* Estilos para las migas de pan */
 .breadcrumb {
   padding: 25px 35px;
   font-size: 18px;
@@ -104,13 +102,11 @@ input[type = "number"] {
   text-decoration: underline; 
 }
 
-/* Estilos para la sección actual de las migas de pan */
 .breadcrumb-current {
   color: #c37ed4; 
   font-weight: bold; 
 }
 
-/* Fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -122,12 +118,10 @@ input[type = "number"] {
   }
 }
 
-/* Aplicar animación a las migas de pan */
 .breadcrumb {
   animation: fadeIn 1.5s ease-in-out;
 }
 
-/* Zoom-in animation */
 @keyframes zoomIn {
   from {
     transform: scale(0.5);

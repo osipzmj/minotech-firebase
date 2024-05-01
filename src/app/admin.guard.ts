@@ -23,17 +23,13 @@ export class AdminGuard implements CanActivate {
                     if (usuario) {
                         const userRole = usuario.rol;
                         const url = state.url;
-
-                        // Permitir acceso si el usuario es administrador o si es profesor y está accediendo a "agregar-curso"
                         if (userRole === 'admin' || (userRole === 'profesor' && url === '/agregar-curso')) {
                             resolve(true);
                         } else {
-                            // Redirigir a la página de error si el usuario no tiene el rol necesario
                             this.router.navigate(['**']);
                             resolve(false);
                         }
                     } else {
-                        // Redirigir a la página de inicio de sesión si el usuario no está autenticado
                         this.router.navigate(['/login']);
                         resolve(false);
                     }

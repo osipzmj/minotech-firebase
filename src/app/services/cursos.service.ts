@@ -41,10 +41,7 @@ export class CursosService {
     return deleteDoc(cursoDocRef);
   }
   actualizarUsuario(uid: string, datos: Partial<Usuario>): Promise<void> {
-    // Obtén la referencia del documento del usuario usando su UID
     const usuarioDocRef = doc(this.firestore, `Usuarios/${uid}`);
-    
-    // Utiliza updateDoc para actualizar el documento con los datos proporcionados
     return updateDoc(usuarioDocRef, {
       nombre: datos.nombre,
       email: datos.email,
@@ -53,11 +50,6 @@ export class CursosService {
       rol: datos.rol
     });
 }
-
-  // actualizarUsuario(curso: Curso){
-  //   const cursoDocRef = doc(this.firestore, `cursos/${curso.id}`);
-  //   return doc(cursoDocRef);
-  // }
 
   getDocument<T>(path: string, id: string): Observable<T> {
     const docRef = doc(this.firestore, path, id);
@@ -70,22 +62,18 @@ export class CursosService {
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
-        return undefined; // No se encontró ningún documento con el nombre dado
+        return undefined;
     } else {
-        // Solo se espera un documento con el nombre único, así que tomamos el primero
         const docRef = doc(this.firestore, collectionPath, querySnapshot.docs[0].id);
         try {
             const docSnapshot = await getDoc(docRef);
             if (docSnapshot.exists()) {
-                // El documento existe, puedes acceder a sus datos con docSnapshot.data()
                 return docSnapshot.data() as T;
             } else {
-                // El documento no existe
                 console.log('El documento no existe en Firestore.');
                 return undefined;
             }
         } catch (error) {
-            // Manejo de errores
             console.error('Error al obtener el documento:', error);
             return undefined;
         }
@@ -111,5 +99,3 @@ export class CursosService {
   }
   
 }
-
-

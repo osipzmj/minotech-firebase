@@ -1,9 +1,9 @@
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
-import { User, user } from '@angular/fire/auth';
+import { User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
@@ -40,25 +40,15 @@ export class LoginComponent {
     this.usuarioService.login(this.formulario.value)
         .then(async (response) => {
             console.log(response);
-
-            // Obtén el usuario autenticado
             const usuario: User = response.user;
-
             try {
-                // Verificar correo electrónico del usuario
                 await this.usuarioService.verificarCorreoElectronico(usuario);
-
-                // Si el correo está verificado, permite al usuario navegar a la página de inicio
                 this.router.navigate(['/home']);
                 this.toastr.success("Bienvenido de nuevo " + this.formulario.value.email);
             } catch (error) {
                 console.error('Error durante la verificación de correo electrónico:', error);
                 this.toastr.info('Por favor verifica tu correo electrónico para continuar.');
-                
-                // Cierra sesión para evitar que el usuario acceda sin verificar su correo
                 await this.usuarioService.logout();
-                
-                // Redirige al usuario a la página de inicio de sesión
                 this.router.navigate(['/login']);
             }
         })
@@ -70,12 +60,8 @@ export class LoginComponent {
 
 
   resetPassword(event: Event) {
-    event.preventDefault(); // Evita que el enlace navegue a otra página.
-
-    // Obtén el control de correo electrónico.
+    event.preventDefault();
     const emailControl = this.formulario.get('email');
-
-    // Verifica que el control de correo electrónico existe y tiene un valor válido.
     if (emailControl && emailControl.value) {
         const email = emailControl.value;
         this.usuarioService.recuperarContrasena({
@@ -86,7 +72,7 @@ export class LoginComponent {
           telefono: undefined,
           password: undefined,
           rol: 'estandar' || 'admin' || null
-        }) // Asegúrate de pasar un objeto con el campo `email`.
+        })
             .then(() => {
                 this.toastr.info('Se ha enviado un correo de recuperación de contraseña.');
             })
@@ -102,5 +88,4 @@ export class LoginComponent {
 loginTel(){
   this.usuarioService.obtenerOTP()
 }
-
 }

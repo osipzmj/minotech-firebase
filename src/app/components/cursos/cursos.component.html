@@ -26,16 +26,12 @@
       </li>
     </ul>
     <br>
-
-    <!--Barra de busqueda-->
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
         <input class="form-control me-2" type="search" name="filterCursos" placeholder="Buscar Cursos" aria-label="search" [(ngModel)]="searchTerm" (input)="applyFilter()">
       </div>
       <br>
     </nav>
-
-      <!--tarjeta-->
       <div class="container-tarjetas">
         <div *ngFor="let curso of cursos">
         <div class="tarjeta" (click)="verInfo(curso)">
@@ -43,9 +39,7 @@
           <p>{{curso.descripcion}}</p>
         </div>
       </div>
-      </div>
-
-      
+      </div>    
     </div>
   </body>
 </html>

@@ -9,37 +9,37 @@
 
 .tarjeta {
     width: 300px;
-    height: 420px; /* Altura fija para todas las tarjetas */
+    height: 420px;
     padding: 20px;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 18px;
     text-align: center;
-    border: 1px solid #ddd; /* Cambia el color del borde */
-    border-radius: 10px; /* Aumenta el radio de borde para que sea más suave */
+    border: 1px solid #ddd;
+    border-radius: 10px;
     margin: 20px;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Agrega transición suave al hacer hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .tarjeta:hover {
-    transform: scale(1.05); /* Escala ligeramente al hacer hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al hacer hover */
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .tarjeta h4 {
-    font-size: 24px; /* Aumenta el tamaño del título */
+    font-size: 24px;
     margin-bottom: 10px;
-    color: #57216a; /* Cambia el color del título */
+    color: #57216a;
 }
 
 .tarjeta p {
-    color: #333; /* Cambia el color del texto */
-    overflow: hidden; /* Evita que el texto sobresalga si es muy largo */
+    color: #333;
+    overflow: hidden;
 }
 
 
@@ -82,7 +82,6 @@ li {
     padding: 10px;  
 }
 
-/* Estilos para el modal */
 .modal {
     display: none;
     position: fixed;
@@ -95,7 +94,6 @@ li {
     background-color: rgba(0,0,0,0.5);
     opacity: 0; 
 }
-
 
 .modal.show {
     display: block;
@@ -125,10 +123,9 @@ li {
     cursor: pointer;
 }
 
-/* Consulta de medios para pantallas de hasta 768px */
 @media screen and (max-width: 748px) {
     .modal-content {
-        width: 80%; /* Ajusta el ancho del modal para pantallas más pequeñas */
+        width: 80%;
     }
 
     .tarjeta {
@@ -138,8 +135,8 @@ li {
     }
 
     .container-tarjetas {
-        flex-direction: column; /* Cambia a una disposición de columna */
-        align-items: center; /* Alinea las tarjetas al centro */
+        flex-direction: column; 
+        align-items: center; 
         padding-left: 5px;
         padding-right: 15px;
     }
@@ -150,7 +147,7 @@ li {
 }
 
 .curso-img-container {
-    text-align: center; /* Alinea el contenido al centro */
+    text-align: center;
 }
 .curso-img{
     width: 60%;
@@ -172,7 +169,6 @@ li {
     padding: 1%;
 }
 
-/* Estilos para las migas de pan */
 .breadcrumb {
     padding: 25px 35px;
     font-size: 18px;
@@ -189,13 +185,11 @@ li {
     text-decoration: underline; 
   }
   
-  /* Estilos para la sección actual de las migas de pan */
   .breadcrumb-current {
     color: #c37ed4; 
     font-weight: bold; 
   }
   
-  /* Fade-in animation */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -207,12 +201,10 @@ li {
     }
   }
   
-  /* Aplicar animación a las migas de pan */
   .breadcrumb {
     animation: fadeIn 1.5s ease-in-out;
   }
   
-  /* Zoom-in animation */
   @keyframes zoomIn {
     from {
       transform: scale(0.5);

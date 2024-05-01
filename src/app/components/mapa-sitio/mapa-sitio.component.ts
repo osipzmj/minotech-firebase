@@ -19,27 +19,19 @@ export class MapaSitioComponent implements OnInit {
     private userSer: UsuariosService) { }
 
   ngOnInit(): void {
-    // Suscríbete al estado del usuario autenticado
     this.userSer.stateUser().subscribe(async user => {
         if (user) {
-            // Si hay un usuario autenticado, establece isUserLoggedIn como true
             this.isUserLoggedIn = true;
-            // Llama a getDatosUser para obtener los datos del usuario autenticado
             await this.getDatosUser(user.uid);
-            // Después de que getDatosUser haya completado su ejecución,
-            // el rol estará disponible aquí
             console.log(this.rol);
         } else {
-            // Si no hay un usuario autenticado, establece isUserLoggedIn como false
             this.isUserLoggedIn = false;
-            // Establece el rol como null
             this.rol = null;
         }
     });
 }
 
   async getDatosUser(uid: string) {
-    // Ruta de la colección en Firestore
     const path = 'Usuarios';
     const fieldName = 'uid';
     const id = uid;

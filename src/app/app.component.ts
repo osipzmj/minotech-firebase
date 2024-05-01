@@ -11,8 +11,8 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'minotech';
   private inactivityTimeout: any;
-  private sessionClosureTimeout: any; // Nuevo temporizador para el cierre final de la sesión
-  private readonly inactivityLimit = 60000;  // 10 segundos de inactividad
+  private sessionClosureTimeout: any; 
+  private readonly inactivityLimit = 60000;
   private userSubscription: Subscription | null = null;
 
   private isAuthenticated = false;
@@ -29,15 +29,13 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Añadir eventos de actividad del usuario
     document.addEventListener('click', this.resetInactivityTimer);
     document.addEventListener('mousemove', this.resetInactivityTimer);
     document.addEventListener('keydown', this.resetInactivityTimer);
-    document.addEventListener('scroll', this.resetInactivityTimer, true); // True para capturar el evento más ampliamente
+    document.addEventListener('scroll', this.resetInactivityTimer, true); 
   }
 
   ngOnDestroy(): void {
-    // Remover todos los event listeners cuando el componente se destruya
     document.removeEventListener('click', this.resetInactivityTimer);
     document.removeEventListener('mousemove', this.resetInactivityTimer);
     document.removeEventListener('keydown', this.resetInactivityTimer);
@@ -46,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.userSubscription.unsubscribe();
     }
     this.clearInactivityTimer();
-    clearTimeout(this.sessionClosureTimeout); // Asegurarse de limpiar el nuevo temporizador también
+    clearTimeout(this.sessionClosureTimeout);
   }
 
   private startInactivityTimer(): void {
@@ -74,7 +72,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     toastrRef.onHidden.subscribe(() => {
         if (!extendSessionClicked) {
-            // Esperar 10 segundos adicionales antes de cerrar la sesión.
             this.sessionClosureTimeout = setTimeout(() => {
                 this.authService.logout().then(() => {
                     this.toastr.error('Tu sesión ha sido cerrada por inactividad.', 'Sesión Cerrada', {
@@ -96,6 +93,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private clearInactivityTimer(): void {
     clearTimeout(this.inactivityTimeout);
-    clearTimeout(this.sessionClosureTimeout); // Limpia el temporizador de cierre de sesión también
+    clearTimeout(this.sessionClosureTimeout);
   }
 }

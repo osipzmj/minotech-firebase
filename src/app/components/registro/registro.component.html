@@ -8,24 +8,20 @@
       <input
         type="text"
         [(ngModel)]="datosU.nombre"
-        placeholder="Nombre de usuario"
-      />
+        placeholder="Nombre de usuario"/>
       <div *ngIf="validationErrors.nombre">
         <small class="text-danger">{{ validationErrors.nombre }}</small>
       </div>
     </div>
-
     <div class="registro">
       <input
         type="number"
         [(ngModel)]="datosU.edad"
-        placeholder="Ingresa tu edad"
-      />
+        placeholder="Ingresa tu edad"/>
       <div *ngIf="validationErrors.edad">
         <small class="text-danger">{{ validationErrors.edad }}</small>
       </div>
     </div>
-
     <div class="registro">
       <input
         type="tel"
@@ -34,25 +30,20 @@
         [(ngModel)]="datosU.telefono"
         placeholder="Número telefónico (123-456-7890)"
         class="form-control"
-        title="Ingresa un número telefónico en el formato 123-456-7890"
-      />
+        title="Ingresa un número telefónico en el formato 123-456-7890"/>
       <div *ngIf="validationErrors.telefono">
         <small class="text-danger">{{ validationErrors.telefono }}</small>
       </div>
     </div>
-    
-
-    <div class="registro">
+  <div class="registro">
       <input
         type="email"
         [(ngModel)]="datosU.email"
-        placeholder="Ingresa tu email"
-      />
+        placeholder="Ingresa tu email"/>
       <div *ngIf="validationErrors.email">
         <small class="text-danger">{{ validationErrors.email }}</small>
       </div>
     </div>
-
     <div class="registro">
       <div class="input-container">
         <input
@@ -60,9 +51,7 @@
           [(ngModel)]="datosU.password"
           (ngModelChange)="updatePasswordStrengthIndicator(datosU.password)"
           placeholder="Ingresa una contraseña"
-          class="form-control"
-        />
-        <!-- Icono de ojo dentro del campo de entrada -->
+          class="form-control"/>
         <i
           (click)="togglePasswordVisibility()"
           [class]="passwordType === 'password' ? 'bi bi-eye-slash' : 'bi bi-eye'"
@@ -72,8 +61,6 @@
       <div *ngIf="validationErrors.password">
         <small class="text-danger">{{ validationErrors.password }}</small>
       </div>
-      
-      <!-- Agrega aquí una barra de progreso o indicador visual para la fortaleza de la contraseña -->
       <div class="password-strength-indicator">
         <progress [value]="passwordStrengthScore" max="100"></progress>
         </div>
@@ -81,15 +68,10 @@
         <span id="passS">{{ passwordStrengthLevel }}</span>
       </div>
     </div>
-    
-
     <button
       (click)="onSubmit()"
       class="btn btn-primary btn-block"
-      type="submit"
-    >
-      Enviar
-    </button>
+      type="submit">Enviar</button>
     <br />
     <div *ngIf="captchaVisible" @fadeInOut>
       <re-captcha 

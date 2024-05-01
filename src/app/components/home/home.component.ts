@@ -61,7 +61,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    // Función para desplazarse suavemente hacia arriba
     this.scrollToTopBtn.nativeElement.addEventListener("click", () => {
       window.scrollTo({
         top: 0,
@@ -69,7 +68,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       });
     });
 
-    // Función para desplazarse suavemente hacia abajo
     this.scrollToBottomBtn.nativeElement.addEventListener("click", () => {
       window.scrollTo({
         top: document.body.scrollHeight,
@@ -77,20 +75,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
       });
     });
 
-     // Mostrar/ocultar botones basados en la posición del usuario
     const toggleScrollButtons = () => {
     const scrollPosition = window.scrollY;
     const windowHeight = window.innerHeight;
-    const documentHeight = document.body.clientHeight;
 
-    // Mostrar u ocultar el botón de scroll hacia abajo
     if (scrollPosition > windowHeight * 0.5) {
       this.scrollToBottomBtn.nativeElement.classList.remove("hide");
     } else {
       this.scrollToBottomBtn.nativeElement.classList.add("hide");
     }
 
-    // Mostrar u ocultar el botón de scroll hacia arriba
     if (scrollPosition < windowHeight * 0.5) {
       this.scrollToTopBtn.nativeElement.classList.add("hide");
     } else {
@@ -98,7 +92,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   };
 
-  // Llamar a la función de toggle al cargar y al desplazarse
   toggleScrollButtons();
   window.addEventListener("scroll", toggleScrollButtons);
 }
@@ -112,21 +105,3 @@ irARegistro() {
 }
 
 }
-
-  
-  // private initSwiper() {
-  //   new Swiper(".swiper-container", {
-  //     effect: "coverflow",
-  //     grabCursor: true,
-  //     centeredSlides: true,
-  //     slidesPerView: "auto",
-  //     coverflowEffect: {
-  //       rotate: 10,
-  //       stretch: 0,
-  //       depth: 350,
-  //       modifier: 1,
-  //       slideShadows: true
-  //     },
-  //     direction: 'horizontal' // Ajustar la dirección del desplazamiento a horizontal
-  //   });
-  // }

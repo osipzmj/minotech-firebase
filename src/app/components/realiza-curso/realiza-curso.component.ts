@@ -17,15 +17,11 @@ export class RealizaCursoComponent {
   ) { }
 
   ngOnInit(): void {
-    // Obtener el UID del curso desde la ruta
     const cursoUid = this.route.snapshot.paramMap.get('cursoUid');
-
-    // Obtener el curso por UID
     if (cursoUid) {
       this.cursoService.getCursoByUid(cursoUid)
         .then(curso => {
           if (curso) {
-            // Asignar el curso obtenido para mostrar en el HTML
             this.curso = curso;
           } else {
             console.log("No se encontró el curso con el UID proporcionado.");
@@ -40,8 +36,8 @@ export class RealizaCursoComponent {
   }
 
   onExam(curso: Curso) {
-    const cursoUid = curso.id; // Asumiendo que cada curso tiene un UID
+    const cursoUid = curso.id; 
     const url = `/examen/${cursoUid}`;
-    window.open(url, '_blank'); // Abre una nueva pestaña con la URL del curso específico
+    window.open(url, '_blank');
 }
 }

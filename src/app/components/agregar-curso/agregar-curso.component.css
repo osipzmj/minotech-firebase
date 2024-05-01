@@ -69,7 +69,6 @@ textarea {
   background-color: #0056b3;
 }
 
-/* Estilos para el formulario */
 .form-grid {
   display: flex;
   justify-content: space-between;
@@ -86,7 +85,6 @@ textarea {
   padding-right: 10px;
 }
  
-/* Estilos para las migas de pan */
 .breadcrumb {
   padding: 25px 35px;
   font-size: 18px;
@@ -104,19 +102,16 @@ textarea {
 }
 
 .error-message {
-  color: #dc3545; /* Color rojo para indicar el error */
-  font-size: 14px; /* Tamaño de fuente */
-  margin-top: 5px; /* Espacio superior para separarlo del campo de entrada */
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
-
-/* Estilos para la sección actual de las migas de pan */
 .breadcrumb-current {
   color: #c37ed4; 
   font-weight: bold; 
 }
 
-/* Fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -128,12 +123,10 @@ textarea {
   }
 }
 
-/* Aplicar animación a las migas de pan */
 .breadcrumb {
   animation: fadeIn 1.5s ease-in-out;
 }
 
-/* Zoom-in animation */
 @keyframes zoomIn {
   from {
     transform: scale(0.5);

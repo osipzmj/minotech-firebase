@@ -13,8 +13,8 @@
     }
     
     .logo {
-        width: 80%; /* Ajusta el tamaño del logo según sea necesario */
-        max-width: 250px; /* Establece un máximo para el tamaño del logo */
+        width: 80%;
+        max-width: 250px;
     }
 
     .nav-bar{
@@ -71,7 +71,7 @@
             height: 100%;
             transition: 0.4s ease-in-out;
             z-index: 1000;
-            margin-top: 40px; /* Ajusta el margen superior del menú para dispositivos móviles */
+            margin-top: 40px; 
         }
         .desktop-menu ul li {
             display: block;
@@ -82,7 +82,7 @@
         }
         .container-main {
             position: relative;
-            overflow-x: hidden; /* Evita la barra de desplazamiento horizontal */
+            overflow-x: hidden;
         }    
         .menu-icon{
             display: block;
@@ -95,11 +95,11 @@
             transition: 0.4s ease-in-out;
         }
         .logo-container {
-            padding: 5px; /* Ajusta el padding según sea necesario para dispositivos móviles */
+            padding: 5px;
         }
         
         .logo {
-            width: 90%; /* Ajusta el tamaño del logo para dispositivos móviles */
+            width: 90%;
 
         }
 
@@ -111,17 +111,15 @@
         }
         
         .shifted .container {
-            margin-left: -260px; /* Ancho del menú desplegable */
+            margin-left: -260px; 
         }
-        /* Define los estilos para el menú desplegable en el modo responsivo */
-
 }
 
     .container-search {
         position: absolute;
-        top: 100%; /* Coloca la barra de búsqueda debajo del encabezado */
-        right: 30px; /* Alinea la barra de búsqueda en la esquina superior derecha */
-        margin-top: 18px; /* Ajusta el margen superior según sea necesario */
+        top: 100%; 
+        right: 30px; 
+        margin-top: 18px;
         display: flex;
         align-items: center;
     }
@@ -146,7 +144,7 @@
 
     .btn {
         position: absolute;
-        right: 0; /* Ajusta la posición del botón a la esquina superior derecha */
+        right: 0; 
         top: 0;
         width: 60px;
         height: 60px;
@@ -180,31 +178,27 @@
 
 
     .desktop-menu ul li ul {
-        width: 150px; /* Ancho del menú desplegable */
+        width: 150px; 
       }
 
-/* Ocultar el menú secundario por defecto */
 .desktop-menu ul:nth-child(2) {
     padding: 0;
     margin: 0;
     display: none;
 }
 
-/* Mostrar el menú secundario cuando sea necesario */
 .desktop-menu ul:nth-child(2).show {
     display: block;
 }
 
-/* Estilos de las opciones del menú secundario */
 .desktop-menu ul:nth-child(2) li {
     list-style-type: none;
     color: white;
     font-size: 18px;
-    margin: 10px 0; /* Añadir un margen superior e inferior para separar las opciones */
-    transition: font-size 0.4s ease-in-out; /* Añadir transición para el cambio de tamaño de fuente */
+    margin: 10px 0; 
+    transition: font-size 0.4s ease-in-out; 
 }
 
-/* Estilos al pasar el cursor sobre las opciones del menú secundario */
 .desktop-menu ul:nth-child(2) li:hover {
     font-size: 19px;
     font-weight: bold;
@@ -224,13 +218,12 @@
     position: absolute;
     top: 60%;
     right: 35px;
-    z-index: 1000; /* Asegura que esté por encima del contenido principal */
-    background-color: #c079d9; /* Ajusta el color de fondo según sea necesario */
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Añade sombra al menú desplegable */
-    display: none; /* Oculta el menú desplegable por defecto */
+    z-index: 1000; 
+    background-color: #c079d9; 
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+    display: none; 
 }
 
-/* Ajusta los estilos para el contenido del menú desplegable */
 .dropdown-menu ul {
     list-style: none;
     padding: 0;
@@ -244,10 +237,9 @@
 }
 
 .dropdown-menu ul li:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Cambia el color de fondo al pasar el cursor */
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Muestra el menú desplegable cuando es necesario */
 .dropdown-menu.show {
     display: block;
 }
@@ -265,37 +257,37 @@ strong {
 @media screen and (min-width: 128px) and (max-width:900px) {
     .container-search {
         position: absolute;
-        top: 190px; /* Ajusta la posición según sea necesario */
-        right: 20px; /* Ajusta la posición según sea necesario */
-        display: flex; /* Oculta la barra de búsqueda por defecto */
+        top: 190px;
+        right: 20px; 
+        display: flex; 
         align-items: center;
-        transition: top 0.3s ease; /* Agrega una transición suave para el cambio de posición */
+        transition: top 0.3s ease;
     }
     
     .container-search.active {
-        top: 100px; /* Mueve la barra de búsqueda hacia arriba cuando está activa */
-        display: flex; /* Muestra la barra de búsqueda cuando está activa */
+        top: 100px;
+        display: flex;
     }
     
     .menu-icon:hover + .container-search {
-        display: flex; /* Muestra la barra de búsqueda cuando pasas el mouse sobre el icono */
+        display: flex; 
     }
     
     .container-search input {
-        margin-right: 5px; /* Añade menos espacio entre el input y el botón */
-        padding: 5px 10px; /* Reducir el relleno para que la barra de búsqueda sea más pequeña */
-        font-size: 14px; /* Reducir el tamaño del texto */
-        height: 40px; /* Reducir la altura del input */
+        margin-right: 5px; 
+        padding: 5px 10px;
+        font-size: 14px; 
+        height: 40px; 
     }
     
     .container-search .btn {
-        flex-shrink: 0; /* Evita que el botón se reduzca en tamaño */
-        width: 40px; /* Reducir el ancho del botón */
-        height: 40px; /* Reducir la altura del botón */
+        flex-shrink: 0;
+        width: 40px; 
+        height: 40px;
     }
 
     .desktop-menu ul li ul {
-        width: auto; /* Ancho del menú desplegable */
+        width: auto; 
       }
 
       .container-search:hover input {
@@ -304,12 +296,11 @@ strong {
 
     .dropdown-menu {
         position: absolute;
-        top: 16%; /* Ajusta la posición según sea necesario */
-        right: 18px; /* Ajusta la posición según sea necesario */
+        top: 16%; 
+        right: 18px; 
         width: 80px;
     }
 
-    /* Estilos para las opciones del menú desplegable */
     .dropdown-menu ul {
         list-style: none;
         padding: 0;
@@ -323,10 +314,9 @@ strong {
     }
 
     .dropdown-menu ul li:hover {
-        background-color: rgba(255, 255, 255, 0.1); /* Cambia el color de fondo al pasar el cursor */
+        background-color: rgba(255, 255, 255, 0.1);
     }
 
-    /* Muestra el menú desplegable cuando es necesario */
     .dropdown-menu.show {
         display: block;
     }

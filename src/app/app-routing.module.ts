@@ -8,7 +8,6 @@ import { PaginaErrorComponent } from './components/pagina-error/pagina-error.com
 import { RegistroComponent } from './components/registro/registro.component';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
 import { MapaSitioComponent } from './components/mapa-sitio/mapa-sitio.component';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AdminGuard } from './admin.guard';
 import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
@@ -25,11 +24,10 @@ const routes: Routes = [
   {path: 'preguntas', component: PreguntasComponent},
   {path: 'mapa', component: MapaSitioComponent},
   {path: 'usuarios', component: ListaUsuariosComponent,  canActivate: [AdminGuard]},
-  { path: 'contenido-curso/:cursoUid', component: ContenidoCursoComponent },
+  {path: 'contenido-curso/:cursoUid', component: ContenidoCursoComponent },
   {path: 'examen/:cursoUid', component: ExamenComponent},
   {path: 'realiza-curso/:cursoUid', component: RealizaCursoComponent},
- // { path: 'cursos/:_id', component: CursoDetalleComponent },
-  { path: '**', component:PaginaErrorComponent },
+  {path: '**', component:PaginaErrorComponent },
   
 ];
 

@@ -13,9 +13,7 @@ import {
     UserCredential,
     RecaptchaVerifier,
     signInWithPhoneNumber,
-    
 } from '@angular/fire/auth';
-import { AuthService } from '@auth0/auth0-angular';
 import { Usuario } from '../interfaces/usuario';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
@@ -24,19 +22,16 @@ import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
     providedIn: 'root',
 })
 export class UsuariosService {
-    // adminUid: ;
     telefono: any;
     reCaptchaVerifier: any;
     private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(private auth: Auth , private firestore: Firestore ) { }
 
-    // Método para verificar si el usuario está autenticado
   isLoggedIn(): Observable<boolean> {
     return this.loggedInSubject.asObservable();
   }
 
-  // Método para actualizar el estado de inicio de sesión
   setLoggedIn(value: boolean) {
     this.loggedInSubject.next(value);
   }
@@ -57,10 +52,7 @@ export class UsuariosService {
         return signInWithEmailAndPassword(this.auth, datosU.email, datosU.password);
     }
     async logout(): Promise<void> {
-
-            // Cierra la sesión
             await this.auth.signOut();
-
     }
     
     obtenerOTP(){
@@ -71,8 +63,6 @@ export class UsuariosService {
         })
     }
     
-    
-
     async verificarCorreoElectronico(usuario: User): Promise<void> {
         if (!usuario.emailVerified) {
             await sendEmailVerification(usuario);
@@ -90,21 +80,17 @@ export class UsuariosService {
         return signInWithPopup(this.auth, provider);
     }
     
-    // Nuevo método para verificar el correo electrónico del usuario
     async registro(datosU: Usuario): Promise<UserCredential> {
-        // Verifica si la contraseña es segura antes de crear el usuario
         if (!this.esContrasenaSegura(datosU.password)) {
             throw new Error('La contraseña no cumple con los requisitos de seguridad.');
         }
 
-        // Crea el usuario con email y contraseña
         const userCredential = await createUserWithEmailAndPassword(
             this.auth,
             datosU.email,
             datosU.password
         );
 
-        // Envía el email de verificación
         await this.enviarEmailDeVerificacion(userCredential.user);
 
         return userCredential;
@@ -113,8 +99,6 @@ export class UsuariosService {
      async enviarEmailDeVerificacion(usuario: User): Promise<void> {
         await sendEmailVerification(usuario);
     }
-
-    
 
     stateUser(): Observable<User | null> {
         return new Observable<User | null>((observer) => {

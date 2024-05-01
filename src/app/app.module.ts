@@ -12,11 +12,9 @@ import { AgregarCursoComponent } from './components/agregar-curso/agregar-curso.
 import { environment } from 'src/environments/environments';
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
 import { FooterComponent } from './components/footer/footer.component';
-//import { CursoDetalleComponent } from './components/curso-detalle/curso-detalle.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { PaginaErrorComponent } from './components/pagina-error/pagina-error.component';
-import { from } from 'rxjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from 'src/pipes/filter.pipe';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
@@ -49,7 +47,6 @@ import { RealizaCursoComponent } from './components/realiza-curso/realiza-curso.
     ContenidoCursoComponent,
     ExamenComponent,
     RealizaCursoComponent
-      //  CursoDetalleComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,10 +61,9 @@ import { RealizaCursoComponent } from './components/realiza-curso/realiza-curso.
     provideAuth(() => getAuth()),
     provideStorage(()=> getStorage()),
     AuthModule.forRoot(environment.auth),
-    //Storage,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule // Importa el módulo de autenticación
+    AngularFireAuthModule
     
   ],
   providers: [FilterPipe, AdminGuard],

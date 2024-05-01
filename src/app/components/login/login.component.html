@@ -10,7 +10,6 @@
       <small class="text-danger" *ngIf="formulario?.get('email')?.errors?.['required']">El email es obligatorio.</small>
       <small class="text-danger" *ngIf="formulario?.get('email')?.errors?.['email']">Ingresa un email válido.</small>
   </div>
-
   </div>
   <div class="form-group">
     <label for="password">Contraseña</label>
@@ -20,9 +19,7 @@
           class="form-control"
           [type]="passwordType"
           formControlName="password"
-          placeholder="Ingresa tu contraseña"
-      >
-      <!-- Icono de ojo dentro del campo de entrada -->
+          placeholder="Ingresa tu contraseña">
       <i
           (click)="togglePasswordVisibility()"
           [class]="passwordType === 'password' ? 'bi bi-eye-slash' : 'bi bi-eye'"
@@ -34,11 +31,6 @@
     <small class="text-danger" *ngIf="formulario?.get('password')?.errors?.['minLength']">La contraseña debe tener al menos 6 caracteres.</small>
   </div>
   </div>
- 
-
-
-  <!-- reCAPTCHA -->
-  <div id="recaptcha-container"></div>
   <div class="form-group">
     <label for="password">Teléfono</label>
     <div class="input-container">
@@ -47,8 +39,7 @@
           class="form-control"
           type="tel"
           formControlName="tel"
-          placeholder="Ingresa tu número teléfonico"
-      >
+          placeholder="Ingresa tu número teléfonico">
   </div>
   <button (click)="loginTel()">Obtener CODIGO</button>
   <div *ngIf="formulario?.get('telefono')?.invalid && formulario?.get('telefono')?.touched">
@@ -56,7 +47,6 @@
     <small class="text-danger" *ngIf="formulario?.get('telefono')?.errors?.['minLength']">El número teléfonico debe tener al menos 10 caracteres.</small>
   </div>
   </div>
-
   <button id="sign-in-button" class="btn btn-primary btn-block" type="submit">Enviar</button>
   <div class="fpass">
     <br>

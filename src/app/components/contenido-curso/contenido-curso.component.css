@@ -1,6 +1,6 @@
 .container {
   max-width: 800px;
-  margin: 50px auto 100px auto; /* Aumenta el margen inferior para bajar más el contenido */
+  margin: 50px auto 100px auto;
   padding: 20px;
   border-radius: 8px;
   background: linear-gradient(135deg, #ffaff7, #dc3bee);
@@ -34,7 +34,7 @@
   font-size: 18px;
   line-height: 1.6;
   margin-bottom: 15px;
-  text-align: justify; /* Alinea el texto justificado */
+  text-align: justify;
 }
 
 .curso-info strong {
@@ -56,7 +56,7 @@
   font-size: 20px;
   transition: background-color 0.3s ease;
   display: block;
-  margin: 0 auto 20px auto; /* Aumenta el margen inferior para bajar el botón */
+  margin: 0 auto 20px auto;
 }
 
 #inscribirButton:hover {

@@ -112,7 +112,7 @@ body {
   }
   
   .content {
-    transition: margin-left 0.4s ease-in-out; /* Agregado para suavizar la transición al abrir/cerrar el menú */
+    transition: margin-left 0.4s ease-in-out;
   }
   
   @media screen and (max-width: 768px) {
@@ -127,38 +127,34 @@ body {
     }
 
     #t1 {
-      font-size: 180%; /* Puedes ajustar este valor según tus preferencias */
+      font-size: 180%;
     }
     
     #p1 {
-      font-size: 125%; /* Puedes ajustar este valor según tus preferencias */
+      font-size: 125%;
       text-align: left;
     }
     
     #p2 {
-      font-size: 125%; /* Puedes ajustar este valor según tus preferencias */
+      font-size: 125%;
       text-align: left;
     }
     
     .text-container {
-      text-align: left; /* Alinea el texto a la izquierda */
-      margin: 2% auto; /* Centra el contenedor de texto horizontalmente */
+      text-align: left; 
+      margin: 2% auto;
     }
 
     .ver-cursos-btn {
-      width: 100%; /* Establece el ancho del botón al 100% del contenedor */
-      text-align: center; /* Centra el contenido del botón */
+      width: 100%;
+      text-align: center;
       cursor: pointer;
       transition: .5s;
       display: flex;
-      justify-content: center; /* Centra horizontalmente el contenido */
-      align-items: center; /* Centra verticalmente el contenido */
+      justify-content: center;
+      align-items: center;
     }
   }
-  
-  
-  
-  /* ESTILOS DEL CARRUSEL */
   
   swiper-container {
     width: 60%;
@@ -168,19 +164,19 @@ body {
   }
   
   swiper-slide {
-    margin-right: 2%; /* Espacio entre las tarjetas */
+    margin-right: 2%; 
     background-position: center;
     background-size: cover;
-    width: 45%; /* Ancho de cada tarjeta */
+    width: 45%; 
     background-color: #c079d9;
     overflow: hidden;
     border-radius: 8px;
-    display: inline-block; /* Muestra las tarjetas en línea */
+    display: inline-block; 
   }
   
   .picture {
     width: 100%;
-    padding-top: 80%; /* Relación de aspecto 1:1 */
+    padding-top: 80%;
     position: relative;
     overflow: hidden;
   }
@@ -211,7 +207,6 @@ body {
     color: #fff;
   }
   
-  /* Estilos para los botones de desplazamiento */
 .scroll-to-top-bottom {
   position: fixed;
   bottom: 20px;
@@ -250,10 +245,9 @@ body {
   display: none;
 }
 
-/* Agrega estilos para resaltar los cursos */
 .course-link {
   text-decoration: none;
-  color: inherit; /* Para heredar el color del texto del padre */
+  color: inherit; 
 }
 
 .course-link:hover .featured-card {
@@ -291,22 +285,22 @@ body {
 }
 
 .featured-courses {
-  display: flex; /* Establece el contenedor como flexbox */
-  justify-content: space-around; /* Distribuye el espacio alrededor de las tarjetas */
-  flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en múltiples líneas si es necesario */
+  display: flex;
+  justify-content: space-around; 
+  flex-wrap: wrap;
 }
 
 .ver-cursos-btn {
-  background-color: #c079d9; /* Color de fondo */
-  color: white; /* Color del texto */
-  padding: 10px 20px; /* Espaciado interno */
-  font-size: 20px; /* Tamaño del texto */
-  border: none; /* Quita el borde */
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+  background-color: #c079d9; 
+  color: white; 
+  padding: 10px 20px; 
+  font-size: 20px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
 }
 
 .ver-cursos-btn:hover {
-  background-color: #4b155f; /* Cambia el color de fondo al pasar el mouse */
+  background-color: #4b155f;
 }

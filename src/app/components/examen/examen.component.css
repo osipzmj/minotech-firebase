@@ -15,18 +15,18 @@ body {
 }
 
 .curso-info {
-    background-color: #ebe6ff; /* Color de fondo del encabezado */
-    padding: 30px; /* Aumenta el espacio alrededor del encabezado */
+    background-color: #ebe6ff;
+    padding: 30px;
     margin-bottom: 20px;
-    border-radius: 15px; /* Aumenta la redondez de los bordes */
-    text-align: center; /* Centra el contenido del encabezado */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una ligera sombra */
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .curso-info h2 {
     margin: 0;
-    color: #7b68ee; /* Cambia el color del título */
-    font-size: 32px; /* Aumenta el tamaño del título */
+    color: #7b68ee;
+    font-size: 32px;
 }
 
 p {
@@ -41,7 +41,7 @@ label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
-    color: #333; /* Cambia el color de las etiquetas */
+    color: #333;
 }
 
 input[type="radio"] {
@@ -50,7 +50,7 @@ input[type="radio"] {
 }
 
 button {
-    background-color: #16b6df; /* Cambia el color de fondo del botón */
+    background-color: #16b6df;
     color: white;
     padding: 15px 25px;
     border: none;
@@ -58,37 +58,35 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 18px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una ligera sombra */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
-    background-color: #074455; /* Cambia el color de fondo al pasar el mouse */
+    background-color: #074455;
 }
 
 .mensaje {
-    background-color: #f0f8ff; /* Cambia el color de fondo del mensaje */
+    background-color: #f0f8ff;
     padding: 20px;
     margin-top: 20px;
     border-radius: 10px;
     text-align: center;
     font-weight: bold;
-    color: #4682b4; /* Cambia el color del texto del mensaje */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una ligera sombra */
+    color: #4682b4;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Asegúrate de que estos estilos estén cargados después de los estilos generales */
-
 .formulario-pregunta {
-    background-color: #f9f9f9; /* Color de fondo del contenedor de preguntas */
-    padding: 20px; /* Aumenta el espacio alrededor de las preguntas */
+    background-color: #f9f9f9;
+    padding: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una ligera sombra */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .pregunta {
-    font-size: 20px; /* Aumenta el tamaño del texto de la pregunta */
-    color: #691576; /* Cambia el color del texto de la pregunta */
+    font-size: 20px;
+    color: #691576;
     margin-bottom: 10px;
 }
 
@@ -99,18 +97,18 @@ button:hover {
 .respuesta label {
     display: block;
     margin-bottom: 5px;
-    font-size: 18px; /* Aumenta el tamaño del texto de las respuestas */
-    color: #333; /* Cambia el color del texto de las respuestas */
+    font-size: 18px;
+    color: #333;
 }
 
 .respuesta input[type="radio"] {
     margin-right: 10px;
-    transform: scale(1.2); /* Aumenta el tamaño de los botones de opción */
+    transform: scale(1.2);
 }
 
 .respuesta input[type="radio"]:checked + label {
-    font-weight: bold; /* Hace que la respuesta seleccionada sea más llamativa */
-    color: #16b6df; /* Cambia el color del texto de la respuesta seleccionada */
+    font-weight: bold;
+    color: #16b6df;
 }
 
 @media screen and (max-width: 768px) {

@@ -19,7 +19,6 @@ export class NavegacionComponent implements OnInit{
   menu_icon: string = 'bi bi-list';
   rol: 'estandar' | 'admin' | 'profesor' | null = null;
   nombre = '';
-  // isLoginIn: boolean = false;
   terminoBusqueda: string = '';
   formulario: FormGroup;
   isUserLoggedIn: boolean = false;
@@ -27,12 +26,10 @@ export class NavegacionComponent implements OnInit{
   
   constructor(
     private  _cursoService: CursosService,
-    private el: ElementRef, private renderer: Renderer2,
+    private el: ElementRef,
     private authService: UsuariosService, 
     private router: Router,
-    private toastr: ToastrService,
-    private route: ActivatedRoute
-    
+    private toastr: ToastrService,   
   ){ 
     this.formulario = new FormGroup({
       username: new FormControl(),
@@ -43,26 +40,18 @@ export class NavegacionComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    // Suscríbete al estado del usuario autenticado
     this.authService.stateUser().subscribe(async user => {
         if (user) {
-            // Si hay un usuario autenticado, establece isUserLoggedIn como true
             this.isUserLoggedIn = true;
-            // Llama a getDatosUser para obtener los datos del usuario autenticado
             await this.getDatosUser(user.uid);
-            // Después de que getDatosUser haya completado su ejecución,
-            // el rol estará disponible aquí
         } else {
-            // Si no hay un usuario autenticado, establece isUserLoggedIn como false
             this.isUserLoggedIn = false;
-            // Establece el rol como null
             this.rol = null;
         }
     });
 }
 
   async getDatosUser(uid: string) {
-    // Ruta de la colección en Firestore
     const path = 'Usuarios';
     const fieldName = 'uid';
     const id = uid;
@@ -107,11 +96,11 @@ export class NavegacionComponent implements OnInit{
   }
 
   login() {
-    this.authService.login(this.formulario.value); // Llama al método de inicio de sesión del servicio de autenticación
+    this.authService.login(this.formulario.value);
   }
 
   register() {
-    this.authService.registro(this.formulario.value); // Llama al método de registro del servicio de autenticación
+    this.authService.registro(this.formulario.value);
   }
 
   logout(){
@@ -121,10 +110,7 @@ export class NavegacionComponent implements OnInit{
   }
 
   buscar(busqueda: string) {
-    // Elimina los espacios en blanco al inicio y al final del término de búsqueda
     const busquedaNormalizada = busqueda.trim().toLowerCase();
-
-    // Redirige a la página correspondiente según el término de búsqueda
     if (busquedaNormalizada.includes('inicio')) {
         this.router.navigate(['/home']);
     } else if (busquedaNormalizada.includes('cursos')) {
