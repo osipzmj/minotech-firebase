@@ -3,7 +3,7 @@ export default interface Curso {
     nombreCurso: string;
     horas: string;
     tipoCurso: string;
-    img: Uint8Array;
+    img: any;
     descripcion: String;
     idioma: String;
     valoracion: number;

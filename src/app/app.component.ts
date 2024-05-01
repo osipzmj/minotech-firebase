@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsuariosService } from './services/usuarios.service';
-import { Toast, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,7 +11,8 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'minotech';
   private inactivityTimeout: any;
-  private readonly inactivityLimit = 10 * 1000; // 60 segundos de inactividad
+  private sessionClosureTimeout: any; // Nuevo temporizador para el cierre final de la sesión
+  private readonly inactivityLimit = 60000;  // 10 segundos de inactividad
   private userSubscription: Subscription | null = null;
 
   private isAuthenticated = false;
@@ -19,79 +20,82 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private authService: UsuariosService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    // Suscribirse a los cambios en el estado de autenticación del usuario
     this.userSubscription = this.authService.stateUser().subscribe((user) => {
-      this.isAuthenticated = !!user; // Actualiza el estado de autenticación
+      this.isAuthenticated = !!user;
       if (this.isAuthenticated) {
         this.startInactivityTimer();
       } else {
-        this.clearInactivityTimer(); // Limpia el temporizador si no hay usuario autenticado
+        this.clearInactivityTimer();
       }
     });
 
-    // Configurar eventos para detectar actividad del usuario
+    // Añadir eventos de actividad del usuario
     document.addEventListener('click', this.resetInactivityTimer);
     document.addEventListener('mousemove', this.resetInactivityTimer);
     document.addEventListener('keydown', this.resetInactivityTimer);
+    document.addEventListener('scroll', this.resetInactivityTimer, true); // True para capturar el evento más ampliamente
   }
 
   ngOnDestroy(): void {
-    // Elimina los eventos de escucha al destruir el componente
+    // Remover todos los event listeners cuando el componente se destruya
     document.removeEventListener('click', this.resetInactivityTimer);
     document.removeEventListener('mousemove', this.resetInactivityTimer);
     document.removeEventListener('keydown', this.resetInactivityTimer);
-
-    // Verifica si userSubscription no es nulo antes de llamar a unsubscribe
+    document.removeEventListener('scroll', this.resetInactivityTimer);
     if (this.userSubscription) {
         this.userSubscription.unsubscribe();
     }
-}
+    this.clearInactivityTimer();
+    clearTimeout(this.sessionClosureTimeout); // Asegurarse de limpiar el nuevo temporizador también
+  }
 
+  private startInactivityTimer(): void {
+    this.clearInactivityTimer();
+    this.inactivityTimeout = setTimeout(() => this.showSessionTimeoutWarning(), this.inactivityLimit);
+  }
 
-private startInactivityTimer(): void {
-  // Establecer un temporizador para mostrar el toastr cuando la sesión esté a punto de caducar
-  this.inactivityTimeout = setTimeout(() => {
-      if (this.isAuthenticated) {
-          // Mostrar toastr con opción de extender la sesión
-          const toastrRef = this.toastr.warning('Tu sesión está a punto de caducar por inactividad.', 'Advertencia', {
-              timeOut: 10000, // Duración de la notificación en milisegundos (1 minuto)
-              closeButton: true, // Muestra un botón de cierre
-              progressBar: true, // Muestra una barra de progreso
-              tapToDismiss: false // Deshabilita el cierre al hacer clic fuera de la notificación
-          });
+  private showSessionTimeoutWarning(): void {
+    if (!this.isAuthenticated) return;
 
-          // Agregar un botón de acción personalizado para extender la sesión
-          toastrRef.onAction.subscribe(() => {
-              // Extender la sesión
-              this.resetInactivityTimer();
-              this.toastr.clear(toastrRef.toastId); // Cerrar la notificación
-          });
+    const toastrRef = this.toastr.info('Tu sesión está a punto de caducar por inactividad. Clic aquí para extender.', 'Aviso', {
+        timeOut: 60000,
+        closeButton: true,
+        progressBar: true,
+        tapToDismiss: false
+    });
 
-          // Si el usuario no extiende la sesión, llamar a la función de logout después de un minuto
-          setTimeout(() => {
-              if (toastrRef.toastId) {
-                  // Cerrar la sesión si la notificación aún está activa y no se ha interactuado con ella
-                  this.authService.logout().then(() => {
-                      console.log('Sesión caducada por inactividad');
-                  });
-              }
-          }, 60000); // Espera 1 minuto para cerrar sesión si no se extiende la sesión
-      }
-  }, this.inactivityLimit);
-}
+    let extendSessionClicked = false;
 
+    toastrRef.onTap.subscribe(() => {
+        extendSessionClicked = true;
+        this.toastr.clear(toastrRef.toastId);
+        this.resetInactivityTimer();
+    });
 
+    toastrRef.onHidden.subscribe(() => {
+        if (!extendSessionClicked) {
+            // Esperar 10 segundos adicionales antes de cerrar la sesión.
+            this.sessionClosureTimeout = setTimeout(() => {
+                this.authService.logout().then(() => {
+                    this.toastr.error('Tu sesión ha sido cerrada por inactividad.', 'Sesión Cerrada', {
+                        closeButton: true,
+                        timeOut: 50000
+                    });
+                    console.log('Sesión caducada por inactividad.');
+                });
+            }, 60000);
+        }
+    });
+  }
 
   private resetInactivityTimer = (): void => {
     if (this.isAuthenticated) {
-      // Limpiar el temporizador actual
-      clearTimeout(this.inactivityTimeout);
-      // Iniciar un nuevo temporizador
       this.startInactivityTimer();
     }
   };
 
   private clearInactivityTimer(): void {
     clearTimeout(this.inactivityTimeout);
+    clearTimeout(this.sessionClosureTimeout); // Limpia el temporizador de cierre de sesión también
   }
 }
