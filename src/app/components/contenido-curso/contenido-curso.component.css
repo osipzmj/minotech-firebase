@@ -1,37 +1,83 @@
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    margin-top: 10px;
+  max-width: 800px;
+  margin: 50px auto 100px auto; /* Aumenta el margen inferior para bajar más el contenido */
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffaff7, #dc3bee);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding-top: 20px;
+  margin-top: 6%;
+  font-family: 'Poppins', sans-serif;
+}
+
+.curso-info {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.curso-info:hover {
+  transform: translateY(5px);
+}
+
+.titulo {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.descripcion, .contenido, .temas {
+  color: #666;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: justify; /* Alinea el texto justificado */
+}
+
+.curso-info strong {
+  color: #555;
+  font-weight: bold;
+}
+
+.informacion {
+  font-size: 20px;
+}
+
+#inscribirButton {
+  background-color: #16b6df;
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 0 auto 20px auto; /* Aumenta el margen inferior para bajar el botón */
+}
+
+#inscribirButton:hover {
+  background-color: #074455;
+}
+
+.mensaje {
+  text-align: center;
+  padding: 20px;
+  background-color: #ffcccc;
+  border-radius: 8px;
+}
+
+.mensaje p {
+  color: #660000;
+}
+
+@media screen and (max-width: 768px) {
+  .container{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
   }
-  
-  .curso-info {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .curso-info h2 {
-    color: #333;
-  }
-  
-  .curso-info p {
-    color: #666;
-  }
-  
-  .curso-info strong {
-    color: #555;
-  }
-  
-  .mensaje {
-    text-align: center;
-    padding: 20px;
-    background-color: #ffcccc;
-    border-radius: 8px;
-  }
-  
-  .mensaje p {
-    color: #660000;
-  }
-  
+}

@@ -8,23 +8,40 @@
 }
 
 .tarjeta {
-    width: 100%;
-    padding: 10%;
-    font-family: Poppins;
+    width: 300px;
+    height: 420px; /* Altura fija para todas las tarjetas */
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 20px;
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #9e9e9e;
-    border-radius: 5px;
-    margin: 10px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #ddd; /* Cambia el color del borde */
+    border-radius: 10px; /* Aumenta el radio de borde para que sea más suave */
+    margin: 20px;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Agrega transición suave al hacer hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .tarjeta:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Escala ligeramente al hacer hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al hacer hover */
 }
+
+.tarjeta h4 {
+    font-size: 24px; /* Aumenta el tamaño del título */
+    margin-bottom: 10px;
+    color: #57216a; /* Cambia el color del título */
+}
+
+.tarjeta p {
+    color: #333; /* Cambia el color del texto */
+    overflow: hidden; /* Evita que el texto sobresalga si es muy largo */
+}
+
 
 label {
     padding: 10px;

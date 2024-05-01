@@ -1,0 +1,122 @@
+body {
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: justify;
+    margin-top: 6%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.curso-info {
+    background-color: #ebe6ff; /* Color de fondo del encabezado */
+    padding: 30px; /* Aumenta el espacio alrededor del encabezado */
+    margin-bottom: 20px;
+    border-radius: 15px; /* Aumenta la redondez de los bordes */
+    text-align: center; /* Centra el contenido del encabezado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una ligera sombra */
+}
+
+.curso-info h2 {
+    margin: 0;
+    color: #7b68ee; /* Cambia el color del título */
+    font-size: 32px; /* Aumenta el tamaño del título */
+}
+
+p {
+    line-height: 1.6;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333; /* Cambia el color de las etiquetas */
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.5);
+}
+
+button {
+    background-color: #16b6df; /* Cambia el color de fondo del botón */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una ligera sombra */
+}
+
+button:hover {
+    background-color: #074455; /* Cambia el color de fondo al pasar el mouse */
+}
+
+.mensaje {
+    background-color: #f0f8ff; /* Cambia el color de fondo del mensaje */
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #4682b4; /* Cambia el color del texto del mensaje */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una ligera sombra */
+}
+
+/* Asegúrate de que estos estilos estén cargados después de los estilos generales */
+
+.formulario-pregunta {
+    background-color: #f9f9f9; /* Color de fondo del contenedor de preguntas */
+    padding: 20px; /* Aumenta el espacio alrededor de las preguntas */
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una ligera sombra */
+}
+
+.pregunta {
+    font-size: 20px; /* Aumenta el tamaño del texto de la pregunta */
+    color: #691576; /* Cambia el color del texto de la pregunta */
+    margin-bottom: 10px;
+}
+
+.respuesta {
+    margin-bottom: 10px;
+}
+
+.respuesta label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px; /* Aumenta el tamaño del texto de las respuestas */
+    color: #333; /* Cambia el color del texto de las respuestas */
+}
+
+.respuesta input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2); /* Aumenta el tamaño de los botones de opción */
+}
+
+.respuesta input[type="radio"]:checked + label {
+    font-weight: bold; /* Hace que la respuesta seleccionada sea más llamativa */
+    color: #16b6df; /* Cambia el color del texto de la respuesta seleccionada */
+}
+
+@media screen and (max-width: 768px) {
+    .container{
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 20%;
+    }
+}

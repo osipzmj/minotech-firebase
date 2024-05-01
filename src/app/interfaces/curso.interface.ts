@@ -12,4 +12,24 @@ export default interface Curso {
     contenido: String;
     temas: String;
     lectura: String;
+    pregunta1: String;
+    p1res1: String;
+    p1res2: String;
+    p1res3: String;
+    pregunta2: String;
+    p2res1: String;
+    p2res2: String;
+    p2res3: String;
+    pregunta3: String;
+    p3res1: String;
+    p3res2: String;
+    p3res3: String;
+    pregunta4: String;
+    p4res1: String;
+    p4res2: String;
+    p4res3: String;
+    pregunta5: String;
+    p5res1: String;
+    p5res2: String;
+    p5res3: String;
 }
