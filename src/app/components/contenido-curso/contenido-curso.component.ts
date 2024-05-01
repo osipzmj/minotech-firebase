@@ -50,7 +50,7 @@ export class ContenidoCursoComponent implements OnInit {
 }
 
   onInscribir(curso: Curso) {
-    if (this.isUserLoggedIn) {
+    if (this.isUserLoggedIn = true) {
       // Aquí puedes agregar la lógica para inscribir al usuario en el curso
       const cursoUid = curso.id; // Asumiendo que cada curso tiene un UID
       const url = `/examen/${cursoUid}`;
