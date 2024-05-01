@@ -12,6 +12,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AdminGuard } from './admin.guard';
 import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
+import { ExamenComponent } from './components/examen/examen.component';
+import { RealizaCursoComponent } from './components/realiza-curso/realiza-curso.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/home',pathMatch:'full'},
@@ -24,6 +26,8 @@ const routes: Routes = [
   {path: 'mapa', component: MapaSitioComponent},
   {path: 'usuarios', component: ListaUsuariosComponent,  canActivate: [AdminGuard]},
   { path: 'contenido-curso/:cursoUid', component: ContenidoCursoComponent },
+  {path: 'examen/:cursoUid', component: ExamenComponent},
+  {path: 'realiza-curso/:cursoUid', component: RealizaCursoComponent},
  // { path: 'cursos/:_id', component: CursoDetalleComponent },
   { path: '**', component:PaginaErrorComponent },
   

@@ -1,0 +1,13 @@
+<div class="container">
+    <div *ngIf="curso" class="curso-info">
+      <h2 style="text-align: center;">{{ curso.nombreCurso }}</h2>
+      <h2 style="text-align: center;">FELICIDADES ACREDITASTE EL CURSO: <br><br>{{ curso.nombreCurso }}</h2>
+    </div>
+
+    
+
+    <div *ngIf="!curso" class="mensaje">
+      <p>No se ha encontrado el curso seleccionado.</p>
+    </div>
+  </div>
+  

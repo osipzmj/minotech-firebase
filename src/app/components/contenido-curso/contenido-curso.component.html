@@ -6,10 +6,10 @@
     <p>{{ curso.contenido }}</p>
     <p><strong>Temas a tratar:</strong><br>{{ curso.temas }}</p>
     <!-- Aquí puedes agregar cualquier otro detalle del curso que desees mostrar -->
-    <p><strong>EXAMEN FINAL</strong></p>
-    <P>Lee cuidadosamente el siguiente texto...</P>
-    <p>{{ curso.lectura }}</p><br>
-    <h2 style="text-align: center;">FELICIDADES ACREDITASTE EL CURSO: <br><br>{{ curso.nombreCurso }}</h2>
+
+    <button id="inscribirButton" [disabled]="isInscrito" (click)="onInscribir(curso)">
+      {{ isInscrito ? 'Inscrito' : 'Inscribirse' }}
+    </button>
   </div>
   <div *ngIf="!curso" class="mensaje">
     <p>No se ha encontrado el curso seleccionado.</p>

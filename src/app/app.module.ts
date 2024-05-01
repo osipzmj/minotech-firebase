@@ -30,6 +30,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
 import { AuthModule } from '@auth0/auth0-angular';
+import { ExamenComponent } from './components/examen/examen.component';
+import { RealizaCursoComponent } from './components/realiza-curso/realiza-curso.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { AuthModule } from '@auth0/auth0-angular';
     PreguntasComponent,
     MapaSitioComponent,
     ListaUsuariosComponent,
-    ContenidoCursoComponent
+    ContenidoCursoComponent,
+    ExamenComponent,
+    RealizaCursoComponent
       //  CursoDetalleComponent,
   ],
   imports: [

@@ -5,7 +5,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cursos',
@@ -26,7 +26,8 @@ export class CursosComponent implements OnInit {
     private route: ActivatedRoute,
     private cursoService: CursosService,
     private authService: UsuariosService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -108,15 +109,8 @@ export class CursosComponent implements OnInit {
     }
   }
 
-  onInscribir(curso: Curso) {
-    if (this.isUserLoggedIn) {
-      // Aquí puedes agregar la lógica para inscribir al usuario en el curso
-      this.isInscrito = true;
-      const cursoUid = curso.id; // Asumiendo que cada curso tiene un UID
-      const url = `/contenido-curso/${cursoUid}`;
-      window.open(url, '_blank'); // Abre una nueva pestaña con la URL del curso específico
-    } else {
-      this.toastr.info('Debes iniciar sesión para inscribirte.');
-    }
+  verInfo(curso: Curso) {
+    const cursoUid = curso.id;
+    this.router.navigate([`/contenido-curso/${cursoUid}`]);
   }
 }

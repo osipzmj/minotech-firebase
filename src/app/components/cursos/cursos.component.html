@@ -38,7 +38,7 @@
       <!--tarjeta-->
       <div class="container-tarjetas">
         <div *ngFor="let curso of cursos">
-        <div class="tarjeta" (click)="abrirModal('miModal' + curso.id)">
+        <div class="tarjeta" (click)="verInfo(curso)">
           <h4>{{curso.nombreCurso}}</h4>
           <p>{{curso.descripcion}}</p>
           <p><strong>Precio: $</strong> {{curso.precio}}</p>
@@ -46,22 +46,11 @@
           <p><strong>Tipo: </strong> {{curso.tipoCurso}}</p>
           <p><strong>Idioma: </strong> {{curso.idioma}}</p>
           <p><strong>País: </strong> {{curso.pais}}</p>
-          <p>{{curso.img}}</p>
         </div>
       </div>
       </div>
 
-      <div id="miModal{{curso.id}}" class="modal" *ngFor="let curso of cursos">
-        <div class="modal-content">
-          <span class="close" (click)="cerrarModal('miModal' + curso.id)">&times;</span>
-          <h2>{{ curso.nombreCurso }}</h2>
-          <p>{{curso.contenido}}</p>
-          <p><strong>Temas a tratar:</strong><br>{{curso.temas}}</p>
-          <button id="inscribirButton" [disabled]="isInscrito" (click)="onInscribir(curso)">
-            {{ isInscrito ? 'Inscrito' : 'Inscribirse' }}
-          </button>
-        </div>
-      </div>
+      
     </div>
 </body>
 

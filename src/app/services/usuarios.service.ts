@@ -17,7 +17,7 @@ import {
 } from '@angular/fire/auth';
 import { AuthService } from '@auth0/auth0-angular';
 import { Usuario } from '../interfaces/usuario';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 
 @Injectable({
@@ -27,10 +27,19 @@ export class UsuariosService {
     // adminUid: ;
     telefono: any;
     reCaptchaVerifier: any;
-
+    private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(private auth: Auth , private firestore: Firestore ) { }
 
+    // Método para verificar si el usuario está autenticado
+  isLoggedIn(): Observable<boolean> {
+    return this.loggedInSubject.asObservable();
+  }
+
+  // Método para actualizar el estado de inicio de sesión
+  setLoggedIn(value: boolean) {
+    this.loggedInSubject.next(value);
+  }
 
     async cambiarEstadoVerificacion(uid: string, estadoVerificacion: boolean): Promise<void> {
         try {
