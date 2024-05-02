@@ -13,7 +13,6 @@ const idiomasValidos = ['Español', 'Inglés', 'Portugués', 'Frances'];
 })
 export class AgregarCursoComponent implements OnInit {
   cursoForm: FormGroup;
-  images: string[];
   formTouched: boolean = false;
 
   constructor(
@@ -32,9 +31,28 @@ export class AgregarCursoComponent implements OnInit {
       precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
       contenido: new FormControl('', Validators.required),
       temas: new FormControl('', Validators.required),
-      lectura: new FormControl('', Validators.required)
+      lectura: new FormControl('', Validators.required),
+      pregunta1: new FormControl('', Validators.required),
+      p1res1: new FormControl('', Validators.required),
+      p1res2: new FormControl('', Validators.required),
+      p1res3: new FormControl('', Validators.required),
+      pregunta2: new FormControl('', Validators.required),
+      p2res1: new FormControl('', Validators.required),
+      p2res2: new FormControl('', Validators.required),
+      p2res3: new FormControl('', Validators.required),
+      pregunta3: new FormControl('', Validators.required),
+      p3res1: new FormControl('', Validators.required),
+      p3res2: new FormControl('', Validators.required),
+      p3res3: new FormControl('', Validators.required),
+      pregunta4: new FormControl('', Validators.required),
+      p4res1: new FormControl('', Validators.required),
+      p4res2: new FormControl('', Validators.required),
+      p4res3: new FormControl('', Validators.required),
+      pregunta5: new FormControl('', Validators.required),
+      p5res1: new FormControl('', Validators.required),
+      p5res2: new FormControl('', Validators.required),
+      p5res3: new FormControl('', Validators.required)
     });
-    this.images = [];
   }
 
   ngOnInit(): void {}

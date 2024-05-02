@@ -81,7 +81,10 @@ export class ExamenComponent implements OnInit{
           const firmaWidth = doc.getStringUnitWidth('ATENTAMENTE MINOTECH') * 12; 
           const firmaOffset = (doc.internal.pageSize.getWidth() - firmaWidth) / 2; 
           doc.text('ATENTAMENTE MINOTECH', firmaOffset, 160, { align: 'left' });
+
           doc.save(`Certificado_${nombreEstudiante}_${nombreCurso}.pdf`);
       };
   }
+  
+
 }

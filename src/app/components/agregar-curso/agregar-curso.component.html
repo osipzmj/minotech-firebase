@@ -1,4 +1,3 @@
-<!-- Breadcrumbs-->
 <div class="breadcrumb">
     <a href="/" class="breadcrumb-link">Inicio</a>/
     <span class="breadcrumb-current">Crear Curso</span>
@@ -8,6 +7,7 @@
 <div class="container">
     <div class="form-box">
         <form [formGroup]="cursoForm" (ngSubmit)="enviarDatos()">
+            <h2>DATOS GENERALES DEL CURSO</h2>
             <div class="form-grid">
             <div class="form-column">
                 <div class="form-group">
@@ -89,13 +89,158 @@
         <div *ngIf="formTouched && cursoForm.get('temas')?.invalid" class="error-message" style="padding-bottom: 3%;">
             Por favor, complete este campo.
         </div>
-        <div class="form-group">
-            <label class="form-label">Lectura</label>
-            <textarea type="text" class="form-control" formControlName="lectura" style="height: 500px;"></textarea>
-        </div>
-        <div *ngIf="formTouched && cursoForm.get('lectura')?.invalid" class="error-message" style="padding-bottom: 3%;">
-            Por favor, complete este campo.
-        </div>
+        <h2>EXAMEN DEL CURSO</h2>
+            <div class="form-group">
+                <label class="form-label">Lectura del examen</label>
+                <textarea type="text" class="form-control" formControlName="lectura" style="height: 500px;"></textarea>
+            </div>
+            <div *ngIf="formTouched && cursoForm.get('lectura')?.invalid" class="error-message" style="padding-bottom: 3%;">
+                Por favor, complete este campo.
+            </div>
+            <div class="form-group">
+                <label class="form-label">Pregunta 1</label>
+                <input type="text" class="form-control" formControlName="pregunta1">
+                <div *ngIf="formTouched && cursoForm.get('pregunta1')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 1 - Pregunta 1</label>
+                <input type="text" class="form-control" formControlName="p1res1">
+                <div *ngIf="formTouched && cursoForm.get('p1res1')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 2 - Pregunta 1</label>
+                <input type="text" class="form-control" formControlName="p1res2">
+                <div *ngIf="formTouched && cursoForm.get('p1res2')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 3 - Pregunta 1</label>
+                <input type="text" class="form-control" formControlName="p1res3">
+                <div *ngIf="formTouched && cursoForm.get('p1res3')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Pregunta 2</label>
+                <input type="text" class="form-control" formControlName="pregunta2">
+                <div *ngIf="formTouched && cursoForm.get('pregunta2')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 1 - Pregunta 2</label>
+                <input type="text" class="form-control" formControlName="p2res1">
+                <div *ngIf="formTouched && cursoForm.get('p2res1')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 2 - Pregunta 2</label>
+                <input type="text" class="form-control" formControlName="p2res2">
+                <div *ngIf="formTouched && cursoForm.get('p2res2')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 3 - Pregunta 2</label>
+                <input type="text" class="form-control" formControlName="p2res3">
+                <div *ngIf="formTouched && cursoForm.get('p2res3')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Pregunta 3</label>
+                <input type="text" class="form-control" formControlName="pregunta3">
+                <div *ngIf="formTouched && cursoForm.get('pregunta3')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 1 - Pregunta 3</label>
+                <input type="text" class="form-control" formControlName="p3res1">
+                <div *ngIf="formTouched && cursoForm.get('p3res1')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 2 - Pregunta 3</label>
+                <input type="text" class="form-control" formControlName="p3res2">
+                <div *ngIf="formTouched && cursoForm.get('p3res2')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 3 - Pregunta 3</label>
+                <input type="text" class="form-control" formControlName="p3res3">
+                <div *ngIf="formTouched && cursoForm.get('p3res3')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Pregunta 4</label>
+                <input type="text" class="form-control" formControlName="pregunta4">
+                <div *ngIf="formTouched && cursoForm.get('pregunta4')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 1 - Pregunta 4</label>
+                <input type="text" class="form-control" formControlName="p4res1">
+                <div *ngIf="formTouched && cursoForm.get('p4res1')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 2 - Pregunta 4</label>
+                <input type="text" class="form-control" formControlName="p4res2">
+                <div *ngIf="formTouched && cursoForm.get('p4res2')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 3 - Pregunta 4</label>
+                <input type="text" class="form-control" formControlName="p4res3">
+                <div *ngIf="formTouched && cursoForm.get('p4res3')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Pregunta 5</label>
+                <input type="text" class="form-control" formControlName="pregunta5">
+                <div *ngIf="formTouched && cursoForm.get('pregunta5')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 1 - Pregunta 5</label>
+                <input type="text" class="form-control" formControlName="p5res1">
+                <div *ngIf="formTouched && cursoForm.get('p5res1')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 2 - Pregunta 5</label>
+                <input type="text" class="form-control" formControlName="p5res2">
+                <div *ngIf="formTouched && cursoForm.get('p5res2')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Respuesta 3 - Pregunta 5</label>
+                <input type="text" class="form-control" formControlName="p5res3">
+                <div *ngIf="formTouched && cursoForm.get('p5res3')?.invalid" class="error-message">
+                    Por favor, complete este campo.
+                </div>
+            </div>
         <input type="submit" value="Enviar" class="btn btn-info">
         </form>
     </div>

@@ -38,7 +38,7 @@ export class RegistroComponent {
     email: '',
     telefono: '',
     rol: 'estandar',
-    password: '',
+    password: ''
   };
   passwordType: string = 'password';
   validationErrors: {
