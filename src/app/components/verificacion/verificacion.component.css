@@ -1,7 +1,51 @@
-.otp{
-    margin-left: auto;
-    margin-right: auto;
-    width: 25em;
-    width: 25em;
-    padding-top: 20%;
-}
+/* Estilos generales para el div con clase "otp" */
+.otp {
+    display: flex;
+    flex-direction: column; /* Colocar elementos en columna */
+    align-items: center; /* Centrar los elementos */
+    justify-content: center; /* Centrar verticalmente */
+    padding: 20px; /* Espaciado interior */
+    border: 1px solid black;
+    background-color: #f9f9f9;; /* Bordes verdes */
+    border-radius: 10px; /* Bordes redondeados */
+    width: 90%; /* Ancho del div adaptado a la mayoría de las pantallas */
+    max-width: 400px; /* Ancho máximo */
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Centra el div en la página */
+  }
+  
+  /* Estilos para el componente ng-otp-input */
+  .otp ng-otp-input {
+    margin-bottom: 15px; /* Espaciado inferior */
+    width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+  }
+  
+  /* Estilos para el botón de verificar código */
+  .otp .btn {
+    background-color: #007bff; /* Color de fondo verde */
+    color: white; /* Color del texto blanco */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Relleno */
+    border: none; /* Sin bordes */
+    cursor: pointer; /* Cursor de puntero */
+    transition: background-color 0.3s; /* Transición suave de color de fondo */
+    width: 100%; /* Botón ocupa todo el ancho del contenedor */
+  }
+  
+  /* Cambia el color de fondo al pasar el ratón sobre el botón */
+  .otp .btn:hover {
+    background-color: #007bff;
+  }
+  
+  /* Consultas de medios para ajustar el diseño a diferentes tamaños de pantalla */
+  @media (max-width: 768px) {
+    .otp {
+      padding: 15px; /* Reducir el padding en pantallas más pequeñas */
+    }
+    
+    .otp .btn {
+      padding: 8px 16px; /* Reducir el padding del botón en pantallas más pequeñas */
+    }
+  }
+  

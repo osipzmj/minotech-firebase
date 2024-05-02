@@ -1,25 +1,28 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
-import { ApplicationVerifier, Auth, RecaptchaVerifier, User, signInWithPhoneNumber } from '@angular/fire/auth';
-import { BehaviorSubject } from 'rxjs';
+import { CursosService } from 'src/app/services/cursos.service';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
+  templateUrl:  './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent  implements OnInit{
   formulario: FormGroup;
   passwordType: string = 'password';
   router = inject(Router);
   phoneNumber: any;
-  private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private recaptchaVerifier: ApplicationVerifier | null = null;
-  
-  constructor( private usuarioService: UsuariosService, private fb: FormBuilder,private toastr: ToastrService, private auth: Auth) {
+  rol: 'estandar' | 'admin' | 'profesor' | null = null;
+  isUserLoggedIn: boolean = false;
+  nombre = '';
+  isUserEnrolledInMFA: boolean = false;
+
+  constructor( private usuarioService: UsuariosService, private fb: FormBuilder,private toastr: ToastrService, private _cursosService: CursosService) {
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -28,39 +31,83 @@ export class LoginComponent {
   });
   }
 
+  ngOnInit(): void {
+   this.usuarioService.stateUser().subscribe(async user => {
+        if (user) {
+            this.isUserLoggedIn = true;
+            await this.getDatosUser(user.uid);
+        } else {
+            this.isUserLoggedIn = false;
+            this.rol = null;
+        }
+    });
+  }
+
+  async getDatosUser(uid: string) {
+    const path = 'Usuarios';
+    const fieldName = 'uid';
+    const id = uid;
+    try {
+        const usuario = await this._cursosService.getDocumentByName<Usuario>(path,fieldName, id);
+        if (usuario) {
+            this.rol = usuario.rol;
+            console.log(this.rol)
+            this.nombre = usuario.nombre;
+        } else {
+            console.log("Usuario no encontrado");
+            this.rol = null;
+        }
+    } catch (error) {
+        console.error("Error al obtener los datos del usuario:", error);
+        this.rol = null;
+    }
+  }
 
   togglePasswordVisibility(): void {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
   }
 
-  onSubmit(): void {
-    if (!this.formulario.valid) {
-        this.formulario.markAllAsTouched();
-        this.toastr.warning('phoneNumber: stringPor favor, completa todos los campos correctamente.');
-        return;
+ async onSubmit(): Promise<void> {
+        if (!this.formulario.valid) {
+            this.formulario.markAllAsTouched();
+            this.toastr.warning('Por favor, completa todos los campos correctamente.');
+            return;
+        }
+
+        try {
+            const response = await this.usuarioService.login(this.formulario.value);
+            const usuario = response.user;
+
+            // Verifica si el correo electrónico está verificado
+            if (!usuario.emailVerified) {
+                this.toastr.info('Por favor, verifica tu correo electrónico.');
+                return;
+            }
+
+            // El inicio de sesión por correo electrónico es exitoso
+            // Llama a la función para autenticar mediante OTP
+            await this.loginTel(this.formulario.value.phoneNumber);
+        } catch (error) {
+            console.error('Error durante el inicio de sesión:', error);
+            this.toastr.warning('Error durante el inicio de sesión.');
+        }
     }
 
-    this.usuarioService.login(this.formulario.value)
-        .then(async (response) => {
-            console.log(response);
-            const usuario: User = response.user;
-            try {
-                await this.usuarioService.verificarCorreoElectronico(usuario)
-                this.router.navigate(['/home']);
-                this.toastr.success("Bienvenido de nuevo " + this.formulario.value.email);
-            } catch (error) {
-                console.error('Error durante la verificación de correo electrónico:', error);
-                this.toastr.info('Por favor verifica tu correo electrónico para continuar.');
-                await this.usuarioService.logout();
-                this.router.navigate(['/login']);
-            }
-        })
-        .catch(error => {
-            console.error('Error durante el inicio de sesión:', error);
-            this.toastr.warning('Ups... Parece que algo salió mal. Revisa que tu correo o tu contraseña sean correctos.');
-        });
-  }
+    async loginTel(phoneNumber: string): Promise<void> {
+        try {
+            // Inicia la autenticación por SMS
+            await this.usuarioService.obtenerOTP(phoneNumber);
+            this.toastr.info('Código OTP enviado. Por favor, verifica tu número de teléfono.');
+        } catch (error) {
+            console.error('Error en loginTel:', error);
+            this.toastr.warning('Error al enviar el código OTP.');
+        }
+    }
 
+  async checkUserMFAStatus(user: User) {
+    // Verifica si el usuario está inscrito en MFA
+    this.isUserEnrolledInMFA = await this.usuarioService.verifyIsUserIsEnrolled(user);
+  }
 
   resetPassword(event: Event) {
     event.preventDefault();
@@ -86,21 +133,9 @@ export class LoginComponent {
     } else {
         this.toastr.warning('Por favor ingresa un correo electrónico válido.');
     }
-}
+  }
 
-obtenerOTP(phoneNumber: string){
-  this.recaptchaVerifier = new RecaptchaVerifier(this.auth,'recaptcha-container', {'size': 'invisible'} )
-  console.log("puto2")
-  return signInWithPhoneNumber(this.auth, phoneNumber, this.recaptchaVerifier)
-  .then((confirmationResult) => {
-    localStorage.setItem('verificationId', JSON.stringify(confirmationResult.verificationId))
-    this.router.navigate(['/verificacion'])
-  }).catch((error) => {
-      setTimeout(() => {
-          window.location.reload();
-      }, 10000); 
-    console.error('Error en signInWithPhoneNumber:', error);
-  });
-}
+
+
 
 }

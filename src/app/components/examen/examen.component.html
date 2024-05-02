@@ -1,3 +1,8 @@
+<div class="breadcrumb">
+    <a href="/" class="breadcrumb-link">Inicio</a>/
+    <a [routerLink]="['/contenido-curso', curso?.id]" class="breadcrumb-link">{{curso?.nombreCurso}}</a>/
+    <span class="breadcrumb-current">Examen {{curso?.nombreCurso}}</span>
+  </div> 
 <div class="container">
     <div *ngIf="curso" class="curso-info">
         <h2 style="text-align: center;">{{ curso.nombreCurso }}</h2>
