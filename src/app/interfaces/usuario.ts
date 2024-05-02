@@ -3,7 +3,7 @@ export interface Usuario {
     nombre: any;
     edad:any;
     email: any;
-    telefono: any;
+    phoneNumber: any;
     password: any;
     rol: 'estandar' | 'admin' | 'profesor' | null;
 }

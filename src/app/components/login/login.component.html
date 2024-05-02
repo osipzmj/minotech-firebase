@@ -2,7 +2,7 @@
   <a href="/" class="breadcrumb-link">Inicio</a>/
   <span class="breadcrumb-current">Iniciar Sesión</span>
 </div> 
-<form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="login-form">
+<form [formGroup]="formulario" (ngSubmit)="obtenerOTP(phoneNumber)" class="login-form">
   <div class="form-group">
     <label for="email">E-mail</label>
     <input id="email" class="form-control" type="email" formControlName="email" placeholder="Ingresa tu email">
@@ -34,19 +34,20 @@
   <div class="form-group">
     <label for="password">Teléfono</label>
     <div class="input-container">
-      <input [(ngModel)]="telefono"
-          id="tel"
+      <input [(ngModel)]="phoneNumber" min="10" max="15"
           class="form-control"
-          type="tel"
-          formControlName="tel"
+          type="text"
+          formControlName="phoneNumber"
           placeholder="Ingresa tu número teléfonico">
   </div>
-  <button (click)="loginTel()">Obtener CODIGO</button>
-  <div *ngIf="formulario?.get('telefono')?.invalid && formulario?.get('telefono')?.touched">
+  <button (click)="obtenerOTP(phoneNumber)">Obtener CODIGO</button>
+  <div *ngIf="formulario?.get('phoneNumber')?.invalid && formulario?.get('phoneNumber')?.touched">
     <small class="text-danger" *ngIf="formulario?.get('telefono')?.errors?.['required']">La contraseña es obligatoria.</small>
     <small class="text-danger" *ngIf="formulario?.get('telefono')?.errors?.['minLength']">El número teléfonico debe tener al menos 10 caracteres.</small>
   </div>
   </div>
+  <div id="recaptcha-container"></div>
+  <!-- <button id="sign-in-button" class="btn btn-primary btn-block" type="submit">Activar verificación en dos</button> -->
   <button id="sign-in-button" class="btn btn-primary btn-block" type="submit">Enviar</button>
   <div class="fpass">
     <br>

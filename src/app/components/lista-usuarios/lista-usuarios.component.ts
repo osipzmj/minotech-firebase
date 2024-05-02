@@ -44,7 +44,7 @@ constructor( private cursoService: CursosService, private authService: UsuariosS
       const datosActualizados = {
         nombre: usuario.nombre,
         email: usuario.email,
-        telefono: usuario.telefono,
+        phoneNumber: usuario.phoneNumber,
         edad: usuario.edad,
         rol: usuario.rol
       };

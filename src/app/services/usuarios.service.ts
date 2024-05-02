@@ -13,40 +13,52 @@ import {
     UserCredential,
     RecaptchaVerifier,
     signInWithPhoneNumber,
+    getAuth,
+    multiFactor,
+    ApplicationVerifier,
+    MultiFactorResolver
 } from '@angular/fire/auth';
 import { Usuario } from '../interfaces/usuario';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
+import { switchMap } from 'rxjs'; 
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UsuariosService {
-    telefono: any;
-    reCaptchaVerifier: any;
+    phoneNumber: any;
     private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    private recaptchaVerifier: ApplicationVerifier | null = null;
+    verificationId: string | null = null;
+    resolver: MultiFactorResolver | null = null;
 
-    constructor(private auth: Auth , private firestore: Firestore ) { }
+    constructor(private auth: Auth , private firestore: Firestore, private router: Router ) { }
 
   isLoggedIn(): Observable<boolean> {
     return this.loggedInSubject.asObservable();
   }
 
+    obtenerOTP(phoneNumber: string){
+        this.recaptchaVerifier = new RecaptchaVerifier(this.auth,'recaptcha-container', {'size': 'invisible'} )
+
+        return signInWithPhoneNumber(this.auth, phoneNumber, this.recaptchaVerifier)
+        .then((confirmationResult) => {
+          localStorage.setItem('verificationId', JSON.stringify(confirmationResult.verificationId))
+          console.log("puto")
+        }).catch((error) => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 5000); 
+          console.error('Error en signInWithPhoneNumber:', error);
+        });
+    }
+
+
   setLoggedIn(value: boolean) {
     this.loggedInSubject.next(value);
   }
-
-    async cambiarEstadoVerificacion(uid: string, estadoVerificacion: boolean): Promise<void> {
-        try {
-            const usuarioDoc = doc(this.firestore, 'Usuarios', uid);
-            console.log('Actualizando documento con UID:', uid, 'y estadoVerificacion:', estadoVerificacion);
-            
-            await updateDoc(usuarioDoc, { verificadoPersonalizado: estadoVerificacion });
-        } catch (error) {
-            console.log('Error al cambiar el estado de verificación del correo electrónico:', error);
-            throw error;
-        }
-    }
 
     async login(datosU: Usuario): Promise<UserCredential> {
         return signInWithEmailAndPassword(this.auth, datosU.email, datosU.password);
@@ -54,15 +66,7 @@ export class UsuariosService {
     async logout(): Promise<void> {
             await this.auth.signOut();
     }
-    
-    obtenerOTP(){
-        this.reCaptchaVerifier = new RecaptchaVerifier(this.auth,'recaptcha-container', {'size': 'invisible'} )
 
-        return signInWithPhoneNumber(this.auth, this.telefono, this.reCaptchaVerifier).then((confirmationResult) => {
-            console.log(confirmationResult)
-        })
-    }
-    
     async verificarCorreoElectronico(usuario: User): Promise<void> {
         if (!usuario.emailVerified) {
             await sendEmailVerification(usuario);
@@ -70,6 +74,11 @@ export class UsuariosService {
         }
     }
 
+    verifyIsUserIsEnrolled(user: User){
+        const enrolledFactors = multiFactor(user).enrolledFactors;
+        return enrolledFactors.length > 0;
+    }
+    
     async loginWithGoogle(): Promise<UserCredential> {
         const provider = new GoogleAuthProvider();
         return signInWithPopup(this.auth, provider);
@@ -125,4 +134,40 @@ export class UsuariosService {
             throw error;
         }
     }
+
+    // initializeRecaptcha(componentId: string): void {
+    //     this.recaptchaVerifier = new RecaptchaVerifier(componentId, {
+    //       size: 'invisible',
+    //       callback: () => {
+    //         // Aquí puedes manejar el callback si es necesario.
+    //       },
+    //     }, this.auth);
+    //   }
+    
+    //   getRecaptchaVerifier(): ApplicationVerifier | null {
+    //     return this.recaptchaVerifier;
+    //   }
+    
+    //   clearRecaptcha(): void {
+    //     if (this.recaptchaVerifier) {
+    //       this.recaptchaVerifier.clear();
+    //       this.recaptchaVerifier = null;
+    //     }
+    //   }
+
+    //   async handleMFA(response: any): Promise<void> {
+    //     const recaptchaVerifier = this.getRecaptchaVerifier();
+    //     if (response.code === 'auth/multi-factor-auth-required' && recaptchaVerifier) {
+    //       const data = await this.auth.verifyUserMFA(response, recaptchaVerifier);
+    //       if (!data) {
+    //         // Notifica al usuario sobre un error.
+    //       } else {
+    //         this.verificationId = data.verificationId;
+    //         this.resolver = data.resolver;
+    //       }
+    //     } else {
+    //       // Maneja el error
+    //     }
+    //   }
+      
 }

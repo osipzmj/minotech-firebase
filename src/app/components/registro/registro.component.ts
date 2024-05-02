@@ -36,7 +36,7 @@ export class RegistroComponent {
     nombre:'',
     edad: '',
     email: '',
-    telefono: '',
+    phoneNumber: '',
     rol: 'estandar',
     password: ''
   };
@@ -97,11 +97,11 @@ export class RegistroComponent {
     if (this.datosU.edad === null || this.datosU.edad < 18) {
         this.validationErrors.edad = 'Debes ser mayor de edad.';
     }
-    if (!this.datosU.telefono) {
+    if (!this.datosU.phoneNumber) {
         this.validationErrors.telefono = 'El teléfono es obligatorio.';
     } else {
         const phoneRegex = /^\d{10,}$/;
-        if (!phoneRegex.test(this.datosU.telefono)) {
+        if (!phoneRegex.test(this.datosU.phoneNumber)) {
             this.validationErrors.telefono = 'Ingresa un número de teléfono válido con al menos 10 dígitos.';
         }
     }
