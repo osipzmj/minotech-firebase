@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import Curso from 'src/app/interfaces/curso.interface';
 import { CursosService } from 'src/app/services/cursos.service';
 import { jsPDF } from 'jspdf';
+import { Usuario } from 'src/app/interfaces/usuario';
 
 @Component({
   selector: 'app-examen',
@@ -12,6 +13,8 @@ import { jsPDF } from 'jspdf';
 export class ExamenComponent implements OnInit{
   curso: Curso | null = null;
   todasRespuestasContestadas = false;
+  rol: 'estandar' | 'admin' | 'profesor' | null = null;
+  nombre = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +47,26 @@ export class ExamenComponent implements OnInit{
   }
   }
 
+  async getDatosUser(uid: string) {
+    const path = 'Usuarios';
+    const fieldName = 'uid';
+    const id = uid;
+    try {
+        const usuario = await this.cursoService.getDocumentByName<Usuario>(path,fieldName, id);
+        if (usuario) {
+            this.rol = usuario.rol;
+            console.log(this.rol)
+            this.nombre = usuario.nombre;
+        } else {
+            console.log("Usuario no encontrado");
+            this.rol = null;
+        }
+    } catch (error) {
+        console.error("Error al obtener los datos del usuario:", error);
+        this.rol = null;
+    }
+  }
+
   generarCertificado() {
       const doc = new jsPDF({
           orientation: 'landscape',
@@ -59,7 +82,7 @@ export class ExamenComponent implements OnInit{
       logo.src = 'assets/logo3.png'; 
       logo.onload = () => {
           doc.addImage(logo, 'PNG', 20, 30, 50, 20); 
-          const nombreEstudiante = "Juan Pérez"; 
+          const nombreEstudiante = this.nombre; 
           const nombreCurso = this.curso?.nombreCurso || "Nombre del Curso";
           const fecha = new Date().toLocaleDateString();
           doc.setFont('times', 'bold');
