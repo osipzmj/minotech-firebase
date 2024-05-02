@@ -26,7 +26,7 @@ export class LoginComponent  implements OnInit{
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+      // phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
       
   });
   }
@@ -67,42 +67,30 @@ export class LoginComponent  implements OnInit{
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
   }
 
- async onSubmit(): Promise<void> {
-        if (!this.formulario.valid) {
-            this.formulario.markAllAsTouched();
-            this.toastr.warning('Por favor, completa todos los campos correctamente.');
-            return;
-        }
-
-        try {
-            const response = await this.usuarioService.login(this.formulario.value);
-            const usuario = response.user;
-
-            // Verifica si el correo electrónico está verificado
-            if (!usuario.emailVerified) {
-                this.toastr.info('Por favor, verifica tu correo electrónico.');
-                return;
-            }
-
-            // El inicio de sesión por correo electrónico es exitoso
-            // Llama a la función para autenticar mediante OTP
-            await this.loginTel(this.formulario.value.phoneNumber);
-        } catch (error) {
-            console.error('Error durante el inicio de sesión:', error);
-            this.toastr.warning('Error durante el inicio de sesión.');
-        }
+  async onSubmit(): Promise<void> {
+    if (!this.formulario.valid) {
+        this.formulario.markAllAsTouched();
+        this.toastr.warning('Por favor, completa todos los campos correctamente.');
+        return;
     }
 
-    async loginTel(phoneNumber: string): Promise<void> {
-        try {
-            // Inicia la autenticación por SMS
-            await this.usuarioService.obtenerOTP(phoneNumber);
-            this.toastr.info('Código OTP enviado. Por favor, verifica tu número de teléfono.');
-        } catch (error) {
-            console.error('Error en loginTel:', error);
-            this.toastr.warning('Error al enviar el código OTP.');
-        }
+    try {
+        const response = await this.usuarioService.login(this.formulario.value);
+        const usuario = response.user;
+
+        // Verifica si el correo electrónico está verificado
+        await this.usuarioService.verificarCorreoElectronico(usuario);
+
+        // Después de un inicio de sesión exitoso, redirige a la página de verificación
+        this.router.navigate(['/home']);
+        this.toastr.success('Hola... Bienvenido' +' '+ usuario.email);
+    } catch (error) {
+        console.error('Error durante el inicio de sesión:', error);
+        this.toastr.warning('Error durante el inicio de sesión.');
     }
+  }
+
+
 
   async checkUserMFAStatus(user: User) {
     // Verifica si el usuario está inscrito en MFA
@@ -135,7 +123,10 @@ export class LoginComponent  implements OnInit{
     }
   }
 
-
+  // loginTel(phoneNumber: string){
+  //   this.usuarioService.obtenerOTP(phoneNumber)
+  //   console.log("ENTRANDO A CÓDIGO")
+  // }
 
 
 }

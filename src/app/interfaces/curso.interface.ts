@@ -32,4 +32,9 @@ export default interface Curso {
     p5res1: String;
     p5res2: String;
     p5res3: String;
+    res1: String ;
+    res2: String;
+    res3: String;
+    res4: String;
+    res5: String;
 }
