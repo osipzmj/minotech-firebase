@@ -6,7 +6,6 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navegacion',
