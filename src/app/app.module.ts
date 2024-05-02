@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
@@ -30,6 +30,8 @@ import { ContenidoCursoComponent } from './components/contenido-curso/contenido-
 import { AuthModule } from '@auth0/auth0-angular';
 import { ExamenComponent } from './components/examen/examen.component';
 import { RealizaCursoComponent } from './components/realiza-curso/realiza-curso.component';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { VerificacionComponent } from './components/verificacion/verificacion.component'; 
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { RealizaCursoComponent } from './components/realiza-curso/realiza-curso.
     ListaUsuariosComponent,
     ContenidoCursoComponent,
     ExamenComponent,
-    RealizaCursoComponent
+    RealizaCursoComponent,
+    VerificacionComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { RealizaCursoComponent } from './components/realiza-curso/realiza-curso.
     ToastrModule.forRoot(),
     ReactiveFormsModule,  
     RecaptchaModule,
+    NgOtpInputModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
@@ -68,6 +72,7 @@ import { RealizaCursoComponent } from './components/realiza-curso/realiza-curso.
   ],
   providers: [FilterPipe, AdminGuard],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
   
 })
 export class AppModule { }

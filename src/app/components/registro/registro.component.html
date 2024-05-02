@@ -8,7 +8,7 @@
       <input
         type="text"
         [(ngModel)]="datosU.nombre"
-        placeholder="Nombre de usuario"/>
+        placeholder= "&#xF4E1; Nombre de usuario"/>
       <div *ngIf="validationErrors.nombre">
         <small class="text-danger">{{ validationErrors.nombre }}</small>
       </div>
@@ -27,7 +27,7 @@
         type="tel"
         pattern="\d{3}-\d{3}-\d{4}"
         maxlength="12"
-        [(ngModel)]="datosU.telefono"
+        [(ngModel)]="datosU.phoneNumber"
         placeholder="Número telefónico (123-456-7890)"
         class="form-control"
         title="Ingresa un número telefónico en el formato 123-456-7890"/>

@@ -13,6 +13,7 @@ import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuari
 import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
 import { ExamenComponent } from './components/examen/examen.component';
 import { RealizaCursoComponent } from './components/realiza-curso/realiza-curso.component';
+import { VerificacionComponent } from './components/verificacion/verificacion.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/home',pathMatch:'full'},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'contenido-curso/:cursoUid', component: ContenidoCursoComponent },
   {path: 'examen/:cursoUid', component: ExamenComponent},
   {path: 'realiza-curso/:cursoUid', component: RealizaCursoComponent},
+  {path: 'verificacion', component: VerificacionComponent},
   {path: '**', component:PaginaErrorComponent },
   
 ];

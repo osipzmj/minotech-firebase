@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '@angular/fire/auth';
+import { ApplicationVerifier, Auth, RecaptchaVerifier, User, signInWithPhoneNumber } from '@angular/fire/auth';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,18 +14,20 @@ import { User } from '@angular/fire/auth';
 export class LoginComponent {
   formulario: FormGroup;
   passwordType: string = 'password';
-  telefono: any
   router = inject(Router);
-
+  phoneNumber: any;
+  private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private recaptchaVerifier: ApplicationVerifier | null = null;
   
-  constructor( private usuarioService: UsuariosService, private fb: FormBuilder,private toastr: ToastrService) {
+  constructor( private usuarioService: UsuariosService, private fb: FormBuilder,private toastr: ToastrService, private auth: Auth) {
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      tel: ['', [Validators.required, Validators.minLength(10)]],
+      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
       
   });
   }
+
 
   togglePasswordVisibility(): void {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
@@ -33,7 +36,7 @@ export class LoginComponent {
   onSubmit(): void {
     if (!this.formulario.valid) {
         this.formulario.markAllAsTouched();
-        this.toastr.warning('Por favor, completa todos los campos correctamente.');
+        this.toastr.warning('phoneNumber: stringPor favor, completa todos los campos correctamente.');
         return;
     }
 
@@ -42,7 +45,7 @@ export class LoginComponent {
             console.log(response);
             const usuario: User = response.user;
             try {
-                await this.usuarioService.verificarCorreoElectronico(usuario);
+                await this.usuarioService.verificarCorreoElectronico(usuario)
                 this.router.navigate(['/home']);
                 this.toastr.success("Bienvenido de nuevo " + this.formulario.value.email);
             } catch (error) {
@@ -69,7 +72,7 @@ export class LoginComponent {
           uid: undefined,
           nombre: undefined,
           edad: undefined,
-          telefono: undefined,
+          phoneNumber: undefined,
           password: undefined,
           rol: 'estandar' || 'admin' || null
         })
@@ -85,7 +88,19 @@ export class LoginComponent {
     }
 }
 
-loginTel(){
-  this.usuarioService.obtenerOTP()
+obtenerOTP(phoneNumber: string){
+  this.recaptchaVerifier = new RecaptchaVerifier(this.auth,'recaptcha-container', {'size': 'invisible'} )
+  console.log("puto2")
+  return signInWithPhoneNumber(this.auth, phoneNumber, this.recaptchaVerifier)
+  .then((confirmationResult) => {
+    localStorage.setItem('verificationId', JSON.stringify(confirmationResult.verificationId))
+    this.router.navigate(['/verificacion'])
+  }).catch((error) => {
+      setTimeout(() => {
+          window.location.reload();
+      }, 10000); 
+    console.error('Error en signInWithPhoneNumber:', error);
+  });
 }
+
 }

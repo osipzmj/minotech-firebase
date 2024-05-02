@@ -45,7 +45,7 @@ export class CursosService {
     return updateDoc(usuarioDocRef, {
       nombre: datos.nombre,
       email: datos.email,
-      telefono: datos.telefono,
+      phoneNumber: datos.phoneNumber,
       edad: datos.edad,
       rol: datos.rol
     });
