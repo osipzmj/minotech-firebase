@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
@@ -31,7 +31,8 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { ExamenComponent } from './components/examen/examen.component';
 import { RealizaCursoComponent } from './components/realiza-curso/realiza-curso.component';
 import { NgOtpInputModule } from 'ng-otp-input';
-import { VerificacionComponent } from './components/verificacion/verificacion.component'; 
+import { VerificacionComponent } from './components/verificacion/verificacion.component';
+import { ServiceWorkerModule } from '@angular/service-worker'; 
 
 @NgModule({
   declarations: [
@@ -67,7 +68,13 @@ import { VerificacionComponent } from './components/verificacion/verificacion.co
     AuthModule.forRoot(environment.auth),
     NgbModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
     
   ],
   providers: [FilterPipe, AdminGuard],
