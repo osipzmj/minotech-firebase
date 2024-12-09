@@ -12,6 +12,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CursosComponent implements OnInit {
   @ViewChild('paypal', { static: true }) paypalElement!: ElementRef;
+  @ViewChild('btnCompartir', { static: false }) btnCompartir!: ElementRef;
+  @ViewChild('mensaje', { static: false }) mensaje!: ElementRef;
+  
   cursos: Curso[] = [];
   searchTerm = '';
   isUserLoggedIn = false;
@@ -56,6 +59,31 @@ export class CursosComponent implements OnInit {
         this.rol = null;
       }
     });
+
+    this.initWebShare();
+  }
+
+  initWebShare(): void {
+    if (navigator.share) {
+      const btnCompartir = this.btnCompartir.nativeElement;
+      btnCompartir.addEventListener('click', () => {
+        const opciones = {
+          title: 'Conociendo el API Web Share',
+          text: 'Compartiendo contenido a través de la API',
+          url: 'https://minotech-bf654.firebaseapp.com/'
+        };
+
+        navigator
+          .share(opciones)
+          .then(() => console.log('¡Compartido exitosamente!'))
+          .catch(error => console.log('Error al compartir:', error));
+      });
+    } else {
+      const mensaje = this.mensaje.nativeElement;
+      this.btnCompartir.nativeElement.style.display = 'none';
+      mensaje.textContent =
+        'Este navegador no tiene soporte para el API Web Share';
+    }
   }
 
   abrirModal(modalId: string): void {

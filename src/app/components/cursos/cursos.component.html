@@ -32,6 +32,9 @@
       </div>
       <br>
     </nav>
+    <br>
+    <button id="btnCompartir" #btnCompartir>Compartir Cursos</button>
+    <p id="mensaje" #mensaje></p>
       <div class="container-tarjetas">
         <div *ngFor="let curso of cursos">
         <div class="tarjeta" (click)="verInfo(curso)">
