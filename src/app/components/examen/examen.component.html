@@ -1,0 +1,79 @@
+<div class="breadcrumb">
+    <a href="/" class="breadcrumb-link">Inicio</a>/
+    <a href="/" class="breadcrumb-link">Cursos</a>/
+    <a [routerLink]="['/contenido-curso', curso?.id]" class="breadcrumb-link">{{curso?.nombreCurso}}</a>/
+    <span class="breadcrumb-current">Examen {{curso?.nombreCurso}}</span>
+  </div> 
+<div class="container">
+    <div *ngIf="curso" class="curso-info">
+        <h2 style="text-align: center;">{{ curso.nombreCurso }}</h2>
+    </div>
+    <p>¡Hola aprendiz! Estamos contentos de que seas parte de <strong>MINOTECH</strong> en el curso "{{curso?.nombreCurso}}"
+    conseguiras en {{ curso?.horas }} horas adquirir nuevas y jugosos conocimientos que te llevarán a conseguir grandes cosas
+    ¡LA AVENTURA NOS ESPERA!</p>    
+    <p>¡Bienvenidos al examen final del curso "{{ curso?.nombreCurso }}"! En este examen, pondremos a prueba 
+        sus conocimientos sobre los conceptos clave y habilidades aprendidas a lo largo del curso. Por favor, lea atentamente 
+        cada pregunta y seleccione la respuesta que considere correcta. ¡Buena suerte!</p>
+    <p><strong>Para comenzar, lee cuidadosamente el siguiente texto:</strong></p>
+    {{ curso?.lectura }}<br><br>
+    <p><strong>De acuerdo con la lectua, responde las siguientes preguntas:</strong></p>
+    <form class="formulario-pregunta">
+        <p class="pregunta"><strong>1. {{ curso?.pregunta1 }}</strong></p>
+        <label class="respuesta">
+            <input type="radio" name="respuesta1" value="{{ curso?.p1res1 }}"> {{ curso?.p1res1 }}
+        </label><br>
+        <label class="respuesta">
+            <input type="radio" name="respuesta1" value="{{ curso?.p1res2 }}"> {{ curso?.p1res2 }}
+        </label><br>
+        <label class="respuesta">
+            <input type="radio" name="respuesta1" value="{{ curso?.p1res3 }}"> {{ curso?.p1res3 }}
+        </label><br><br>
+        <p class="pregunta"><strong>2. {{ curso?.pregunta2 }}</strong></p>
+        <label class="respuesta">
+            <input type="radio" name="respuesta2" value="{{ curso?.p2res1 }}"> {{ curso?.p2res1 }}
+        </label><br>
+        <label class="respuesta">
+            <input type="radio" name="respuesta2" value="{{ curso?.p2res2 }}"> {{ curso?.p2res2 }}
+        </label><br>
+        <label class="respuesta">
+            <input type="radio" name="respuesta2" value="{{ curso?.p2res3 }}"> {{ curso?.p2res3 }}
+        </label><br><br>
+        <p class="pregunta"><strong>3. {{ curso?.pregunta3 }}</strong></p>
+        <label class="respuesta">
+            <input type="radio" name="respuesta3" value="{{ curso?.p3res1 }}"> {{ curso?.p3res1 }}
+        </label><br>
+        <label class="respuesta">
+            <input type="radio" name="respuesta3" value="{{ curso?.p3res2 }}"> {{ curso?.p3res2 }}
+        </label><br>
+        <label class="respuesta">
+            <input type="radio" name="respuesta3" value="{{ curso?.p3res3 }}"> {{ curso?.p3res3 }}
+        </label><br><br>
+        <p class="pregunta"><strong>4. {{ curso?.pregunta4 }}</strong></p>
+        <label class="respuesta">
+            <input class="respuesta" type="radio" name="respuesta4" value="{{ curso?.p4res1 }}"> {{ curso?.p4res1 }}
+        </label><br>
+        <label class="respuesta">
+            <input class="respuesta" type="radio" name="respuesta4" value="{{ curso?.p4res2 }}"> {{ curso?.p4res2 }}
+        </label><br>
+        <label class="respuesta">
+            <input class="respuesta" type="radio" name="respuesta4" value="{{ curso?.p4res3 }}"> {{ curso?.p4res3 }}
+        </label><br><br>
+        <p class="pregunta"><strong>5. {{ curso?.pregunta5 }}</strong></p>
+        <label class="respuesta">
+            <input type="radio" name="respuesta5" value="{{ curso?.p5res1 }}"> {{ curso?.p5res1 }}
+        </label><br>
+        <label class="respuesta">
+            <input type="radio" name="respuesta5" value="{{ curso?.p5res2 }}"> {{ curso?.p5res2 }}
+        </label><br>
+        <label class="respuesta">
+            <input type="radio" name="respuesta5" value="{{ curso?.p5res3 }}"> {{ curso?.p5res3 }}
+        </label><br><br>
+    </form>
+    <button type="button" (click)="verificarRespuestas()" style="display: block; margin: 0 auto;">Enviar</button>
+    <div *ngIf="todasRespuestasContestadas" class="mensaje">
+        <p>FELICIDADES, ¡Completaste el curso "{{ curso?.nombreCurso }}"!</p>
+    </div>
+    <div *ngIf="!curso" class="mensaje">
+        <p>No se ha encontrado el curso seleccionado.</p>
+    </div>
+</div>

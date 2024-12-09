@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="breadcrumb">
+        <a href="/" class="breadcrumb-link">Inicio</a>/
+        <span class="breadcrumb-current">Usuarios</span>
+    </div>
+    <br>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <input class="form-control me-2" type="search" placeholder="Buscar Usuario" aria-label="search" [(ngModel)]="searchTerm" (input)="applyFilter()">
+        </div>
+        <br>
+    </nav>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>E-mail</th>
+                    <th>Teléfono</th>
+                    <th>Edad</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usr of usuarios">
+                    <td>{{ usr.nombre }}</td>
+                    <td>{{ usr.email }}</td>
+                    <td>{{ usr.phoneNumber }}</td>
+                    <td>{{ usr.edad }}</td>
+                    <td>
+                        <select [(ngModel)]="usr.rol">
+                            <option [value]="usr.rol">{{ usr.rol }}</option>
+                            <option *ngIf="usr.rol !== 'admin'" value="admin">Admin</option>
+                            <option *ngIf="usr.rol !== 'profesor'" value="profesor">Profesor</option>
+                            <option *ngIf="usr.rol !== 'estandar'" value="estandar">Estándar</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-block" (click)="actualizarRolUsuario(usr)">Actualizar</button>
+                        &nbsp;
+                        <button class="btn btn-danger btn-block" (click)="confirmarEliminacion(usr)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

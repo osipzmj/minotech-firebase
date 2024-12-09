@@ -112,7 +112,7 @@ body {
   }
   
   .content {
-    transition: margin-left 0.4s ease-in-out; /* Agregado para suavizar la transición al abrir/cerrar el menú */
+    transition: margin-left 0.4s ease-in-out;
   }
   
   @media screen and (max-width: 768px) {
@@ -125,62 +125,182 @@ body {
       max-width: 100%;
       margin-bottom: 20px;
     }
+
+    #t1 {
+      font-size: 180%;
+    }
+    
+    #p1 {
+      font-size: 125%;
+      text-align: left;
+    }
+    
+    #p2 {
+      font-size: 125%;
+      text-align: left;
+    }
+    
+    .text-container {
+      text-align: left; 
+      margin: 2% auto;
+    }
+
+    .ver-cursos-btn {
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+      transition: .5s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
   
-  
-  
-  /* ESTILOS DEL CARRUSEL */
-  
-  .carrusel{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+  swiper-container {
+    width: 60%;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
   }
   
-  .swiper-container {
-    width: 100%;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    display: flex;
-  }
-  
-  .swiper-slide {
-    margin-right: 20px;
+  swiper-slide {
+    margin-right: 2%; 
     background-position: center;
     background-size: cover;
-    width: 320px;
+    width: 45%; 
     background-color: #c079d9;
     overflow: hidden;
     border-radius: 8px;
+    display: inline-block; 
   }
   
-  .carrusel .picture {
-    width: 320px;
-    height: 320px;
+  .picture {
+    width: 100%;
+    padding-top: 80%;
+    position: relative;
     overflow: hidden;
-    
-     img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
   }
   
-  .carrusel .detail {
-    padding: 25px 20px;
+  .picture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150%;
+    object-fit: cover;
+  }
+  
+  .detail {
+    padding: 1rem;
     font-weight: 600;
     text-align: center;
-    
-    h3 {
-      margin: 0;
-      font-size: 20px;
-    }
-    
-    span {
-      display: block;
-      font-size: 16px;
-      color: #fff;
-    }
   }
+  
+  .detail h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  
+  .detail span {
+    display: block;
+    font-size: 1rem;
+    color: #fff;
+  }
+  
+.scroll-to-top-bottom {
+  position: fixed;
+  bottom: 20px;
+  right: 7px;
+  background-color: #4b155f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.scroll-to-top-bottom:hover {
+  background-color: #7f5b8c;
+}
+
+.scroll-to-bottom-bottom {
+  position: fixed;
+  bottom: 92%;
+  right: 7px;
+  background-color: #4b155f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.scroll-to-bottom-bottom:hover {
+  background-color: #7f5b8c;
+}
+
+.hide {
+  display: none;
+}
+
+.course-link {
+  text-decoration: none;
+  color: inherit; 
+}
+
+.course-link:hover .featured-card {
+  transform: translateY(-5px);
+}
+
+.featured-card {
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+
+.featured-card img {
+  width: 80%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+} 
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3 {
+  margin-top: 0;
+}
+
+.card-content p {
+  margin-bottom: 20px;
+}
+
+.featured-courses {
+  display: flex;
+  justify-content: space-around; 
+  flex-wrap: wrap;
+}
+
+.ver-cursos-btn {
+  background-color: #c079d9; 
+  color: white; 
+  padding: 10px 20px; 
+  font-size: 20px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.ver-cursos-btn:hover {
+  background-color: #4b155f;
+}

@@ -1,0 +1,130 @@
+.container {
+  max-width: 800px;
+  margin: 50px auto 100px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffaff7, #dc3bee);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding-top: 20px;
+  margin-top: 6%;
+  font-family: 'Poppins', sans-serif;
+}
+
+.curso-info {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.curso-info:hover {
+  transform: translateY(5px);
+}
+
+.titulo {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.descripcion, .contenido, .temas {
+  color: #666;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.curso-info strong {
+  color: #555;
+  font-weight: bold;
+}
+
+.informacion {
+  font-size: 20px;
+}
+
+#inscribirButton {
+  background-color: #16b6df;
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+#inscribirButton:hover {
+  background-color: #074455;
+}
+
+.mensaje {
+  text-align: center;
+  padding: 20px;
+  background-color: #ffcccc;
+  border-radius: 8px;
+}
+
+.mensaje p {
+  color: #660000;
+}
+
+.breadcrumb {
+  padding: 25px 35px;
+  font-size: 18px;
+  display: flex;
+}
+
+.breadcrumb-link {
+  color: #57216a; 
+  text-decoration: none; 
+}
+
+.breadcrumb-link:hover {
+  color: #57216a; 
+  text-decoration: underline; 
+}
+
+.breadcrumb-current {
+  color: #c37ed4; 
+  font-weight: bold; 
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.breadcrumb {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+  }
+}

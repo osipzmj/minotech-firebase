@@ -1,41 +1,118 @@
+<div class="breadcrumb">
+  <a href="/" class="breadcrumb-link">Inicio</a>/
+  <span class="breadcrumb-current">Registrarse</span>
+</div>
 <div class="formRegistro">
-  <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="register-form">
-    <div class="form-group">
-      <label for="username">Nombre de usuario</label>
-      <input id="username" class="form-control" type="text" formControlName="username" />
+  <div class="register-form">
+    <div class="registro">
+      <input
+        type="text"
+        [(ngModel)]="datosU.nombre"
+        placeholder= "Nombre de usuario"/>
+      <div *ngIf="validationErrors.nombre">
+        <small class="text-danger">{{ validationErrors.nombre }}</small>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="email">E-mail</label>
-      <input id="email" class="form-control" type="email" formControlName="email" />
+    <div class="registro">
+      <input
+        type="number"
+        [(ngModel)]="datosU.edad"
+        placeholder="Ingresa tu edad"/>
+      <div *ngIf="validationErrors.edad">
+        <small class="text-danger">{{ validationErrors.edad }}</small>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="password">Contraseña</label>
-      <input id="password" class="form-control" type="password" formControlName="password" />
+    <div class="registro">
+      <input
+        type="tel"
+        pattern="\d{3}-\d{3}-\d{4}"
+        maxlength="12"
+        [(ngModel)]="datosU.phoneNumber"
+        placeholder="Número telefónico (123-456-7890)"
+        class="form-control"
+        title="Ingresa un número telefónico en el formato 123-456-7890"/>
+      <div *ngIf="validationErrors.telefono">
+        <small class="text-danger">{{ validationErrors.telefono }}</small>
+      </div>
     </div>
-    <button class="btn btn-primary btn-block" type="submit">Enviar</button>
-    <br>
-    <br>
-    <label for="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ó</label>
+  <div class="registro">
+      <input
+        type="email"
+        [(ngModel)]="datosU.email"
+        placeholder="Ingresa tu email"/>
+      <div *ngIf="validationErrors.email">
+        <small class="text-danger">{{ validationErrors.email }}</small>
+      </div>
+    </div>
+    <div class="registro">
+      <div class="input-container">
+        <input
+          type="{{ passwordType }}"
+          [(ngModel)]="datosU.password"
+          (ngModelChange)="updatePasswordStrengthIndicator(datosU.password)"
+          placeholder="Ingresa una contraseña"
+          class="form-control"/>
+        <i
+          (click)="togglePasswordVisibility()"
+          [class]="passwordType === 'password' ? 'bi bi-eye-slash' : 'bi bi-eye'"
+          class="eye-icon"
+        ></i>
+      </div>
+      <div *ngIf="validationErrors.password">
+        <small class="text-danger">{{ validationErrors.password }}</small>
+      </div>
+      <div class="password-strength-indicator">
+        <progress [value]="passwordStrengthScore" max="100"></progress>
+        </div>
+        <div>
+        <span id="passS">{{ passwordStrengthLevel }}</span>
+      </div>
+    </div>
+    <button
+      (click)="onSubmit()"
+      class="btn btn-primary btn-block"
+      type="submit">Enviar</button>
+    <br />
+    <div *ngIf="captchaVisible" @fadeInOut>
+      <re-captcha 
+          #reCaptcha
+          (resolved)="onCaptchaResolved($event)"
+          siteKey="6Lej1KApAAAAANfm2iDyUR1Sd-Gk3s9xhnxI5HQK"></re-captcha>
+      </div>
+    <br />
     <div class="google">
       <button class="google-login" (click)="signInWithGoogle()">
-          <img src="../../../assets/google-icon-logo.svg" alt="Google Icon" class="icon">
-          Iniciar sesión con Google
-        </button>
-  </div>
-  <div class="facebook">
+        <img
+          src="../../../assets/google-icon-logo.svg"
+          alt="Google Icon"
+          class="icon"
+        />
+        Iniciar sesión con Google
+      </button>
+    </div>
+    <div class="facebook">
       <button class="google-login" (click)="signInWithFacebook()">
-          <img src="../../../assets/facebook-icon-logo.svg" alt="Google Icon" class="icon">
-          Iniciar sesión con Facebook
-        </button>
+        <img
+          src="../../../assets/facebook-icon-logo.svg"
+          alt="Google Icon"
+          class="icon"
+        />
+        Iniciar sesión con Facebook
+      </button>
+    </div>
   </div>
-  </form>
 </div>
 <div class="modal" *ngIf="showModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Verifica tu cuenta</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

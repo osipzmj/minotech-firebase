@@ -1,0 +1,28 @@
+<div class="breadcrumb">
+  <a href="/" class="breadcrumb-link">Inicio</a>/
+  <a [routerLink]="['/cursos']" class="breadcrumb-link">Cursos</a>/
+  <span class="breadcrumb-current">{{curso?.nombreCurso}}</span>
+</div> 
+<div class="container">
+  <div *ngIf="curso" class="curso-info">
+    <h2 class="titulo">{{ curso.nombreCurso }}</h2><br>
+    <p class="descripcion">{{ curso.descripcion }}</p><br>  
+    <p><strong>Contenido del curso:</strong></p>
+    <p class="contenido">{{ curso.contenido }}</p><br>
+    <p><strong>Temas a tratar:</strong></p>
+    <p class="temas">{{ curso.temas }}</p><br>
+    <div class="informacion">
+    <p><i class="fas fa-dollar-sign"></i> Precio: ${{curso.precio}}</p>
+    <p><i class="fas fa-clock"></i> Horas: {{curso.horas}}</p>
+    <p><i class="fas fa-tag"></i> Tipo: {{curso.tipoCurso}}</p>
+    <p><i class="fas fa-language"></i> Idioma: {{curso.idioma}}</p>
+    <p><i class="fas fa-globe"></i> País: {{curso.pais}}</p>
+    </div><br>
+    <button id="inscribirButton" [disabled]="isInscrito" (click)="onInscribir(curso)">
+      {{ isInscrito ? 'Inscrito' : 'Inscribirse' }}
+    </button>
+  </div>
+  <div *ngIf="!curso" class="mensaje">
+    <p>No se ha encontrado el curso seleccionado.</p>
+  </div> 
+</div>

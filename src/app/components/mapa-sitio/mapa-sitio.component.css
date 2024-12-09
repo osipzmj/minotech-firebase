@@ -1,0 +1,103 @@
+.mapa-sitio-container {
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background: linear-gradient(135deg, #9010ac, #d09ee4); 
+    padding: 30px; 
+    border-radius: 15px; 
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.mapa-sitio-container h3 {
+    font-size: 42px; 
+    margin-bottom: 30px;
+    color: #fff; 
+    text-transform: uppercase; 
+    font-family: 'Poppins', sans-serif; 
+}
+
+.sitio-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.sitio-links li {
+    margin: 0 15px;
+}
+
+.sitio-links li a {
+    text-decoration: none;
+    color: #fff; 
+    padding: 15px 30px; 
+    border-radius: 8px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-size: 20px; 
+    background-color: #000000; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+}
+
+.sitio-links li a:hover {
+    background-color: #4a4949;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); 
+    transform: translateY(-2px); 
+}
+
+@media screen and (max-width: 768px) {
+    .sitio-links li a {
+      padding: 15px 14%; 
+      margin: 1 10px;
+      font-size: 16px; 
+    }
+  }
+
+.breadcrumb {
+    padding: 25px 35px;
+    font-size: 18px;
+    display: flex;
+  }
+  
+  .breadcrumb-link {
+    color: #57216a; 
+    text-decoration: none; 
+  }
+  
+  .breadcrumb-link:hover {
+    color: #57216a; 
+    text-decoration: underline; 
+  }
+  
+  .breadcrumb-current {
+    color: #c37ed4; 
+    font-weight: bold; 
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .breadcrumb {
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }

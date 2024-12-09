@@ -1,11 +1,12 @@
 .login-form {
     max-width: 520px;
-    margin: 50px auto; /* Centra el formulario con un margen superior */
+    margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 10px; /* Aumenta el radio de los bordes para un aspecto más suave */
-    background-color: #f9f9f9; /* Cambia el color de fondo para que contraste mejor */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+    border-radius: 10px; 
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+    font-family: 'Poppins', sans-serif;
   }
   
   .form-group {
@@ -14,21 +15,22 @@
   
   label {
     font-weight: bold;
+
   }
   
   input[type="email"],
   input[type="password"] {
-    width: calc(100% - 20px); /* Resta el padding para que el ancho total sea el deseado */
+    width: calc(100% - 20px); 
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 10px; /* Agrega un pequeño espacio entre los campos */
-    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    margin-bottom: 10px; 
+    box-sizing: border-box; 
   }
   
   .btn {
-    width: 100%; /* Ocupa todo el ancho disponible */
+    width: 100%; 
     padding: 10px;
     font-size: 16px;
     text-align: center;
@@ -37,10 +39,101 @@
     border-radius: 5px;
     background-color: #007bff;
     color: #fff;
-    transition: background-color 0.3s; /* Agrega una transición suave al color de fondo */
+    transition: background-color 0.3s;
   }
   
   .btn:hover {
     background-color: #0056b3;
   }
+
+  .fpass{
+    text-align: center;
+  }
   
+
+  .input-container {
+    position: relative; 
+}
+
+.eye-icon {
+    position: absolute; 
+    top: 50%; 
+    right: 30px; 
+    transform: translateY(-50%); 
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .login-form {
+    max-width: 90%; 
+    margin: 50px auto; 
+    padding: 10px;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: calc(100% - 20px); 
+    padding: 8px; 
+    font-size: 14px; 
+    margin-bottom: 8px;
+  }
+
+  .btn {
+    padding: 8px;
+    font-size: 14px; 
+  }
+}
+
+.breadcrumb {
+  padding: 25px 35px;
+  font-size: 18px;
+  display: flex;
+  
+}
+
+.breadcrumb-link {
+  color: #57216a; 
+  text-decoration: none;
+
+}
+
+.breadcrumb-link:hover {
+  color: #57216a; 
+  text-decoration: underline; 
+}
+
+.breadcrumb-current {
+  color: #c37ed4; 
+  font-weight: bold; 
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.breadcrumb {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.registro{
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}

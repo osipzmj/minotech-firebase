@@ -1,0 +1,167 @@
+body {
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: justify;
+    margin-top: 6%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.curso-info {
+    background-color: #ebe6ff;
+    padding: 30px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.curso-info h2 {
+    margin: 0;
+    color: #7b68ee;
+    font-size: 32px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.5);
+}
+
+button {
+    background-color: #16b6df;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #074455;
+}
+
+.mensaje {
+    background-color: #f0f8ff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #4682b4;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-pregunta {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pregunta {
+    font-size: 20px;
+    color: #691576;
+    margin-bottom: 10px;
+}
+
+.respuesta {
+    margin-bottom: 10px;
+}
+
+.respuesta label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.respuesta input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.respuesta input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: #16b6df;
+}
+
+.breadcrumb {
+    padding: 25px 35px;
+    font-size: 18px;
+    display: flex;
+  }
+  
+  .breadcrumb-link {
+    color: #57216a; 
+    text-decoration: none; 
+  }
+  
+  .breadcrumb-link:hover {
+    color: #57216a; 
+    text-decoration: underline; 
+  }
+  
+  .breadcrumb-current {
+    color: #c37ed4; 
+    font-weight: bold; 
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .breadcrumb {
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+@media screen and (max-width: 768px) {
+    .container{
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 20%;
+    }
+}

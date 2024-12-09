@@ -1,11 +1,9 @@
 export interface Usuario {
-    id?: number;
-    nombre: string;
-    apPaterno: string;
-    apMaterno: string;
-    edad: number;
-    genero: string;
-    email: string;
-    telefono: string;
-    fechaCreacionUsuario: Date;
+    uid: any;
+    nombre: any;
+    edad:any;
+    email: any;
+    phoneNumber: any;
+    password: any;
+    rol: 'estandar' | 'admin' | 'profesor' | null;
 }

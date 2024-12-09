@@ -1,5 +1,22 @@
+<div class="breadcrumb">
+  <a href="/" class="breadcrumb-link">Inicio</a>/
+  <a href="cursos" class="breadcrumb-link">Cursos</a>/
+  <span class="breadcrumb-current">Preguntas</span>
+</div> 
 <body>
 <div class="container">
+    <ul class="nav nav-tabs">
+        <li style="font-size: 15px;font-weight: 400;font-family: 'Poppins',sans-serif;" class="nav-item">
+          <a class="nav-link" href="home">Inicio</a>
+        </li>
+        <li style="font-size: 15px;font-weight: 400;font-family: 'Poppins', sans-serif;" class="nav-item">
+          <a class="nav-link " href="cursos">Cursos</a>
+        </li>
+        <li style="font-size: 15px;font-weight: 400;font-family: 'Poppins', sans-serif;" class="nav-item">
+          <a class="nav-link active" href="preguntas">Preguntas</a>
+        </li>
+  
+      </ul>
 <div class="accordion">
     <div class="accordion-item" *ngFor="let pregunta of preguntas; let i = index">
         <h2 class="accordion-header">

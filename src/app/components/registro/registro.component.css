@@ -1,14 +1,27 @@
 .register-form {
-  max-width: 320px;
+  max-width: 420px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
+  font-family: 'Poppins', sans-serif; 
 }
 
-.form-group {
+.registro {
   margin-bottom: 20px;
+}
+
+.input-container {
+  position: relative; 
+}
+
+.eye-icon {
+  position: absolute; 
+  top: 50%;
+  right: 10px; 
+  transform: translateY(-50%); 
+  cursor: pointer;
 }
 
 label {
@@ -17,14 +30,14 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type = "number"] {
   width: 100%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
 
 .btn {
   display: inline-block;
@@ -50,10 +63,10 @@ input[type="password"] {
 
 .google-login {
   display: flex;
-  margin: 20px;
+  margin-bottom: 20px;
   align-items: center;
   justify-content: center;
-  width: 250px;
+  width: 100%;
   height: 40px;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -71,4 +84,56 @@ input[type="password"] {
   width: 24px;
   height: 24px;
   margin-right: 10px;
+}
+
+.breadcrumb {
+  padding: 25px 35px;
+  font-size: 18px;
+  display: flex;
+}
+
+.breadcrumb-link {
+  color: #57216a; 
+  text-decoration: none; 
+}
+
+.breadcrumb-link:hover {
+  color: #57216a; 
+  text-decoration: underline; 
+}
+
+.breadcrumb-current {
+  color: #c37ed4; 
+  font-weight: bold; 
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.breadcrumb {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+progress{
+  width: 100%;
+  margin-top: 10px;
 }

@@ -4,28 +4,44 @@
     align-items: flex-start;
     margin-left: -30px;
     justify-content: space-between;
+    margin: 20px;
 }
 
 .tarjeta {
-    width: 30%;
-    padding: 10%;
-    font-family: Poppins;
+    width: 300px;
+    height: 420px;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 20px;
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #9e9e9e;
-    border-radius: 5px;
-    margin: 10px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 20px;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-    width: calc(33.33% - 20px); /* Establece el ancho de cada tarjeta */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-/* Efecto al pasar el cursor */
 .tarjeta:hover {
     transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
+.tarjeta h4 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #57216a;
+}
+
+.tarjeta p {
+    color: #333;
+    overflow: hidden;
+}
+
 
 label {
     padding: 10px;
@@ -36,6 +52,15 @@ h3 {
     font-family: Poppins;
     font-weight: 600;
     padding: 5%;  
+}
+
+h4 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
 }
 
 p {
@@ -57,8 +82,6 @@ li {
     padding: 10px;  
 }
 
-/* Estilos para el modal */
-/* Estilos para el modal */
 .modal {
     display: none;
     position: fixed;
@@ -69,13 +92,12 @@ li {
     height: 100%;
     overflow: auto;
     background-color: rgba(0,0,0,0.5);
-    opacity: 0; /* Inicialmente, el modal está oculto */ /* Agregamos una transición suave para la opacidad */
+    opacity: 0; 
 }
-
 
 .modal.show {
     display: block;
-    opacity: 1; /* Cuando se muestra el modal, la opacidad se establece en 1 */
+    opacity: 1; 
 }
 
 
@@ -101,28 +123,31 @@ li {
     cursor: pointer;
 }
 
-/* Consulta de medios para pantallas de hasta 768px */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 748px) {
     .modal-content {
-        width: 90%; /* Ajusta el ancho del modal para pantallas más pequeñas */
-    }
-}
-
-/* Consulta de medios para pantallas de hasta 768px */
-@media screen and (max-width: 768px) {
-    .container-tarjetas {
-        flex-direction: column; /* Cambia a una disposición de columna */
-        align-items: center; /* Alinea las tarjetas al centro */
-        margin-left: 0; /* Elimina el margen izquierdo negativo */
+        width: 80%;
     }
 
     .tarjeta {
-        width: 100%; /* Ocupa todo el ancho disponible */
+        align-items: center;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .container-tarjetas {
+        flex-direction: column; 
+        align-items: center; 
+        padding-left: 5px;
+        padding-right: 15px;
+    }
+
+    p{
+        text-align: left;
     }
 }
 
 .curso-img-container {
-    text-align: center; /* Alinea el contenido al centro */
+    text-align: center;
 }
 .curso-img{
     width: 60%;
@@ -143,3 +168,80 @@ li {
     font-weight: 700;
     padding: 1%;
 }
+
+.breadcrumb {
+    padding: 25px 35px;
+    font-size: 18px;
+    display: flex;
+  }
+  
+  .breadcrumb-link {
+    color: #57216a; 
+    text-decoration: none; 
+  }
+  
+  .breadcrumb-link:hover {
+    color: #57216a; 
+    text-decoration: underline; 
+  }
+  
+  .breadcrumb-current {
+    color: #c37ed4; 
+    font-weight: bold; 
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .breadcrumb {
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  #btnCompartir {
+    background-color: #6a0dad; /* Color de fondo morado */
+    color: #ffffff; /* Texto blanco */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    padding: 12px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 8px; /* Esquinas redondeadas */
+    cursor: pointer; /* Cursor de mano al pasar por encima */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+  }
+  
+  #btnCompartir:hover {
+    background-color: #7b1fa2; /* Color morado más claro al pasar el cursor */
+    transform: scale(1.05); /* Efecto de zoom */
+  }
+  
+  #btnCompartir:active {
+    background-color: #4a0072; /* Color morado más oscuro al hacer clic */
+    transform: scale(0.95); /* Reducir ligeramente al hacer clic */
+  }
+  
+  #mensaje {
+    margin-top: 10px; /* Espaciado superior */
+    font-size: 14px; /* Tamaño de fuente del mensaje */
+    color: #6a0dad; /* Color del texto morado */
+    font-style: italic; /* Texto en cursiva */
+  }
